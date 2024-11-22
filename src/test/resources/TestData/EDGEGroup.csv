@@ -1,0 +1,10 @@
+"Group Name","App Group","Server Host Address","Server Port","Type","Organization","Status","Configuration Status","Auto Deploy Network Status","Delink Edge Device","Max Application","Max Server Node","Max Edge Node","Configuration Key","Last Alarm Time","Last Heartbeat Time","Description","Location"
+"LatestGroup20","Grouphai","120.120.120",8088,,,"Active",,true,,,1,,,"2023-12-18T11:38:52.729Z","2023-12-18T11:38:52.729Z",,
+"LatestGroup19","Grouphai","120.120.120",8088,,,"Active",,true,,,1,,,"2023-12-18T11:36:59.954Z","2023-12-18T11:36:59.954Z",,
+"LatestGroup18","rBox_control_EDGE","100.100.100",13,"",,"Active",,true,,,1,,,"2023-12-18T10:34:00.000Z","2023-12-18T10:34:00.000Z",,
+"LatestGroup17","rBox_control_EDGE","100.100.100",12,,,"Active",,true,,,1,,,"2023-12-18T10:34:12.737Z","2023-12-18T10:34:12.737Z",,
+"LatestGroup16","Grouphai","121.123.234",100,,,"Active",,true,,,1,,,"2023-12-15T07:22:49.257Z","2023-12-15T07:22:49.257Z",,
+"EdgeGrp_0001","appgroup3","20.127.21.109",20127,"",,"Active",,true,,,1,,,"2023-12-10T10:18:00.000Z","2023-12-10T10:18:00.000Z",,
+"100","rBox_Device","120.123.120",8088,,,"Active",,true,,,2,,,"2023-12-08T06:26:09.722Z","2023-12-08T06:26:09.722Z","Testing",
+"EdgeGRP_Test01","AppGRP_TEST01","20.127.21.109",10,,,"Active",,true,,,10,,,"2023-12-04T12:24:08.008Z","2023-12-04T12:24:08.008Z",,
+"EDGE_rBox_Devices","Pranav_app_group","20.127.21.109",8080,"",,"Active",,true,,,1,,,"2023-09-06T08:18:00.000Z","2023-09-06T08:18:00.000Z",,

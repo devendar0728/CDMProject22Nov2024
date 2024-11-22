@@ -1,0 +1,2 @@
+Well Name,Device Type,Port Number,RTU Address,IP Address,Password,UserGroup,Action
+WellName002_tobeDeleted,RPOC,8080,123.100.199,171.172.124.21,Test@123,AddTest,Add
