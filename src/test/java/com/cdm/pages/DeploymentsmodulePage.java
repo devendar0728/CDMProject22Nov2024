@@ -1,15 +1,24 @@
 package com.cdm.pages;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.cdm.common.CommonActions;
@@ -22,6 +31,9 @@ public class DeploymentsmodulePage extends CommonActions {
 
 		PageFactory.initElements(driver, this);
 	}
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement infoIconToolTip;
 
 	@FindBy(css = ".cdk-overlay-container")
 	WebElement edgeIDToolTip;
@@ -146,7 +158,7 @@ public class DeploymentsmodulePage extends CommonActions {
 	@FindBy(xpath = "//body/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-deployement-app[1]/div[1]/div[1]/div[1]/img[1]")
 	WebElement refresh_Button;
 
-	@FindBy(xpath = "//body/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-deployement-app[1]/div[1]/div[1]/div[1]/img[1]")
+	@FindBy(xpath = "//body/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-deployement-app[1]/div[1]/div[1]/div[1]/img[2]")
 	WebElement bulkDownloadButton;
 
 	@FindBy(xpath = "//span[contains(text(),'Deployments')]")
@@ -173,10 +185,8 @@ public class DeploymentsmodulePage extends CommonActions {
 	@FindBy(xpath = "//app-filter[@name='volumename']/div/a/mat-icon")
 	WebElement volumeNameThreeDot;
 
-
 	@FindBy(xpath = "//span[contains(text(),'Reset')]")
 	WebElement resetButton;
-
 
 	@FindBy(xpath = "//body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/app-deploy-volume[1]/div[1]/div[2]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
 	WebElement statusThreeDot;
@@ -464,7 +474,7 @@ public class DeploymentsmodulePage extends CommonActions {
 
 	public String removalofEnteredTextForvolumeDetailsError() {
 
-		return removalofEneredText(inputExpectedVersionDeploy);
+		return removalofEneredText(inputVolumeErrorNameDeploy);
 
 	}
 
@@ -492,7 +502,6 @@ public class DeploymentsmodulePage extends CommonActions {
 
 	public void volumeNamePopUpThreeDot() {
 
-		wait(volumeNamePopUpThreeDot, logger);
 		clickElement(volumeNamePopUpThreeDot, "");
 
 	}
@@ -548,31 +557,36 @@ public class DeploymentsmodulePage extends CommonActions {
 	}
 
 	public void volumepageRecord() {
+
 		List<String> records = Arrays.asList("Record 1", "Record 2", "Record 3", "Record 4");
 
-// Assuming you want to display 5 records per page
+		// Assuming you want to display 4 records per page
 		int recordsPerPage = 4;
 
-// Calculate the number of pages required
+		// Calculate the number of pages required
 		int totalPages = (records.size() + recordsPerPage - 1) / recordsPerPage;
 
 		for (int page = 1; page <= totalPages; page++) {
-// Navigate to the desired page
-// You need to implement this part according to your specific webpage
-// For example:
-// driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
+			// Simulate navigating to the desired page
+			// For example:
+			// driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
 
-// Extract records for the current page
+			// Extract expected records for the current page
 			int startIndex = (page - 1) * recordsPerPage;
 			int endIndex = Math.min(page * recordsPerPage, records.size());
-			List<String> currentPageRecords = records.subList(startIndex, endIndex);
+			List<String> expectedPageRecords = records.subList(startIndex, endIndex);
 
-// Process the records on the current page
-			for (String record : currentPageRecords) {
-				System.out.println(record);
-			}
+			// Simulate fetching displayed records on the current page
+			// Replace the below line with actual records fetched from the web page
+			List<String> displayedRecords = expectedPageRecords; // Simulate correct display
+
+			// Assert that the displayed records match the expected records
+			assert expectedPageRecords.equals(displayedRecords)
+					: "Displayed records do not match the expected records for page " + page;
+
+			// Print the records on the current page for verification
+			System.out.println("Page " + page + ": " + displayedRecords);
 		}
-
 	}
 
 	public void applybuttoncalender() {
@@ -592,19 +606,17 @@ public class DeploymentsmodulePage extends CommonActions {
 	}
 
 	public void runningStatusunchecked() {
-		if (runningstatus.getAttribute("checked") != null)
-		 { // if Checked
+		if (runningstatus.getAttribute("checked") != null) { // if Checked
 			clickElement(runningstatus, "");
-					// runningstatus.click();
+			// runningstatus.click();
 		}
 
 	}
 
 	public void runningStatuschecked() {
-		if (!runningstatus.isSelected())
-		 {
+		if (!runningstatus.isSelected()) {
 			clickElement(runningstatus, "");
-		// runningstatus.click();
+			// runningstatus.click();
 		}
 
 	}
@@ -690,7 +702,8 @@ public class DeploymentsmodulePage extends CommonActions {
 
 	}
 
-	public String get_Text_ToolTipforDeploymentDate() {
+	public String get_Text_ToolTipforDeploymentDate() throws InterruptedException {
+		Thread.sleep(3000);
 		mouseHover(deploymentDateLabel);
 
 		String deploymentDateToolTipText = deploymentDateToolTip.getText();
@@ -774,5 +787,1009 @@ public class DeploymentsmodulePage extends CommonActions {
 
 		clickElement(resetButton, "");
 
+	}
+
+	@FindBy(xpath = "//h3[@class='titleHeading']")
+	WebElement deploymentLabel;
+
+	public boolean isAssertionAddedSuccessfully() {
+		return deploymentLabel.isDisplayed();
+	}
+
+	@FindBy(xpath = "(//div[@id='toast-container'])")
+	WebElement bulkdownloadsuccessmessage;
+
+	public WebElement downloadSuccessMessage() {
+		return bulkdownloadsuccessmessage;
+	}
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement outerlayerclick;
+
+	public void outerlayerclick() {
+		clickElement(outerlayerclick, "");
+
+	}
+
+	@FindBy(xpath = "//tbody/tr")
+	List<WebElement> gridRows;
+
+	public List<String> getRowData() {
+
+		List<String> rowData = new ArrayList<>();
+		for (WebElement row : gridRows) {
+			rowData.add(row.getText());
+		}
+		return rowData;
+	}
+
+	WebElement infoiconTooltipText;
+
+	public String get_Text_ToolTipforinfo() {
+		mouseHover(infoicon);
+
+		String infoiconTooltipText = infoIconToolTip.getText();
+
+		infoiconTooltipText.trim();
+
+		return infoiconTooltipText;
+
+	}
+
+	@FindBy(xpath = "//table[@id='matTable']/tbody/tr/td")
+	List<WebElement> tableDataCells;
+
+	@FindBy(xpath = "//input[@name='devicename']")
+	WebElement inputEdgeIDListDeploy;
+
+	public void inputEdgeIDDeploy(String value) {
+
+		SetInputENterKey(inputEdgeIDListDeploy, value);
+		SetInput(inputEdgeIDListDeploy, value, value);
+
+	}
+
+	@FindBy(xpath = "//table[@id='matTable']/tbody/tr")
+	List<WebElement> tableRows;
+	@FindBy(xpath = "//table/tbody/tr/td[1]")
+	WebElement ListDeploy;
+
+	public String resultTable() {
+		return ListDeploy.getText();
+
+	}
+
+	public int getRowCount() {
+
+		return gridRows.size();
+	}
+
+	public int areSearchResultsDisplayed() {
+		List<WebElement> rows = tableRows;
+		return rows.size();
+	}
+
+	public List<String> getRowDataAfterremoval() {
+		List<WebElement> cells = tableDataCells;
+		List<String> rowData = new ArrayList<>();
+		for (WebElement cell : cells) {
+			rowData.add(cell.getText()); // Collect text data from each cell
+		}
+		return rowData;
+	}
+
+	public String removalofEnteredTextForEdgeID() {
+		return removalofEneredText(inputEdgeIDListDeploy);
+
+	}
+
+	public String get_Text_ToolTipforRefresh() {
+		mouseHover(refresh_Button);
+
+		String refreshToolTipText = refreshToolTip.getText();
+
+		refreshToolTipText.trim();
+
+		return refreshToolTipText;
+	}
+
+	public String get_Text_ToolTipforBulkDownload() {
+		mouseHover(bulkDownloadButton);
+
+		String bulkDownloadToolTipText = bulkDownloadToolTip.getText();
+
+		bulkDownloadToolTipText.trim();
+
+		return bulkDownloadToolTipText;
+	}
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement refreshToolTip;
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement currentViewButtonToolTip;
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement bulkDownloadToolTip;
+
+	@FindBy(xpath = "//body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/app-deploy-volume[1]/div[1]/div[2]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
+	WebElement DeployedVolumeDetailStatusThreeDot;
+
+	public void DeployedVolumeDetailStatusThreeDot() {
+
+		clickElement(DeployedVolumeDetailStatusThreeDot, "Clicking on Status on volume Deployed ");
+
+	}
+
+	public String get_Text_ToolTipforHistoryView() {
+		mouseHover(currentViewButton);
+
+		String currentViewButtonToolTipText = currentViewButtonToolTip.getText();
+
+		currentViewButtonToolTipText.trim();
+
+		return currentViewButtonToolTipText;
+	}
+
+	@FindBy(xpath = "//input[@name='errortrace']")
+	WebElement inputVolumeErrorNameDeploy;
+
+	public void inputVolumeErrorNameDeploy(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", inputVolumeErrorNameDeploy);
+		SetInputENterKey(inputVolumeErrorNameDeploy, "");
+		SetInput(inputVolumeErrorNameDeploy, value, value);
+
+	}
+
+	@FindBy(xpath = "mat-date-range-input-container")
+	WebElement selectedDate;
+
+	public boolean isDateSelected() {
+		return selectedDate.isDisplayed();
+	}
+
+	public void verifysortingonDeploymentEdgeID() throws InterruptedException {
+		{
+
+			// Click the sorting icon for ascending order
+			driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+			Thread.sleep(2000);
+			try {
+				// Wait for table to load
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[1]")));
+
+				// Fetch column data before sorting
+				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+				List<String> beforeSort = new ArrayList<String>();
+				List<String> afterSort = new ArrayList<String>();
+				for (int i = 0; i < columns.size(); i++) {
+					beforeSort.add(columns.get(i).getText().trim());
+					afterSort.add(columns.get(i).getText().trim());
+				}
+
+				afterSort.sort((a, b) -> a.compareTo(b));
+
+				for (int i = 0; i < afterSort.size(); i++) {
+					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+							beforeSort.get(i));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail("Test failed due to exception: " + e.getMessage());
+			}
+
+		}
+	}
+
+	@FindBy(xpath = "//div[@id='matTable']/table/thead/tr/th[2]/div/span/div/div[contains(text(),'App Name')][1]")
+	WebElement sortinonAppName;
+
+	public void verifysortingonAppName() throws InterruptedException {
+		Thread.sleep(2000);
+		clickElement(sortinonAppName, "Clicking on sort Arrow of AppName");
+		Thread.sleep(2000);
+		try {
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortingonError() throws InterruptedException {
+		// Click the sorting icon for ascending order
+		driver.findElement(
+				By.xpath("//div[@id='matTable']/table/thead/tr/th[4]/div/span/div/div[contains(text(),'Error')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			// Wait for table to load
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[4]")));
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortingonStatus() throws InterruptedException {
+		driver.findElement(By.xpath("//thead/tr[1]/th[3]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			// Wait for table to load
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[3]")));
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortingonRunningVersion() throws InterruptedException {
+		driver.findElement(By.xpath(
+				"//div[@id='matTable']/table/thead/tr/th[5]/div/span/div/div[contains(text(),'Running Version')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			// Wait for table to load
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[5]")));
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[5]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortingonExpectedVersion() throws InterruptedException {
+		driver.findElement(By.xpath(
+				"//div[@id='matTable']/table/thead/tr/th[6]/div/span/div/div[contains(text(),'Expected Version')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			// Wait for table to load
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[6]")));
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[6]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortingonDeploymentDate() throws InterruptedException {
+		driver.findElement(By.xpath(
+				"//div[@id='matTable']/table/thead/tr/th[7]/div/span/div/div[contains(text(),'Deployment Date')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			// Wait for table to load
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[7]")));
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[7]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortingonLastUpdated() throws InterruptedException {
+		driver.findElement(By.xpath(
+				"//div[@id='matTable']/table/thead/tr/th[8]/div/span/div/div[contains(text(),'Last Updated')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[8]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifySortOnPopupVolumename() throws InterruptedException {
+		driver.findElement(By.xpath(
+				"//div[@id='matTable']/table/thead/tr/th[1]/div/span/div/div[contains(text(),'Volume Name')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//div[@id='matTable']/table/thead/tr/th[1]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifySortOnPopupStatusVolume() throws InterruptedException {
+		driver.findElement(
+				By.xpath("//div[@id='matTable']/table/thead/tr/th[2]/div/span/div/div[contains(text(),'Status')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//div[@id='matTable']/table/thead/tr/th[2]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifySortiOnPopupCreatedDateVolume() {
+		driver.findElement(By.xpath(
+				"//div[@id='matTable']/table/thead/tr/th[4]/div/span/div/div[contains(text(),'Create Date')][1]"))
+				.click();
+
+		try {
+			Thread.sleep(2000);
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//div[@id='matTable']/table/thead/tr/td[4]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifySortOnErrorVolumename() {
+		driver.findElement(
+				By.xpath("//div[@id='matTable']/table/thead/tr/th[3]/div/span/div/div[contains(text(),'Error')][1]"))
+				.click();
+
+		try {
+			Thread.sleep(2000);
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//div[@id='matTable']/table/thead/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifycloseButton() {
+		clickElement(closevolume, "Clicking on close button");
+
+	}
+
+	@FindBy(xpath = "//div[@id='matTable']/table/tbody/tr/td[5]/progress-bar/div")
+	WebElement progressBar;
+
+	public boolean progressbarText() {
+
+		String progressText = progressBar.getText();
+		return progressText != null;
+
+	}
+
+	public boolean isStatusVisible(String statusName) {
+
+		try {
+			// Dynamically fetch the list of status elements every time
+			List<WebElement> statuses = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+
+			// Check if the status name is visible in the statuses
+			return statuses.stream().anyMatch(status -> status.getText().equalsIgnoreCase(statusName));
+		} catch (StaleElementReferenceException e) {
+			// Handle the exception gracefully by re-checking the DOM
+			List<WebElement> statuses = driver.findElements(By.xpath("//div[@class='status-column']"));
+			return statuses.stream().anyMatch(status -> status.getText().equalsIgnoreCase(statusName));
+		}
+
+	}
+
+	@FindBy(xpath = "//input[@value='INITIAL']")
+	WebElement initialCheckbox;
+
+	public void uncheckCheckboxInitial() {
+		WebElement checkbox = initialCheckbox;
+		if (checkbox.isSelected()) {
+			checkbox.click();
+		} else {
+			checkbox.click();
+		}
+
+	}
+
+	@FindBy(xpath = "//input[@value='RESOLVING_TAG']")
+	WebElement resolvingTagCheckbox;
+
+	@FindBy(xpath = "//input[@value='RESOLVED_TAG']")
+	WebElement resolvedTagCheckbox;
+
+	@FindBy(xpath = "//input[@value='DOWNLOADING']")
+	WebElement downloadingCheckbox;
+
+	@FindBy(xpath = "//input[@value='DOWNLOADED']")
+	WebElement downloadedCheckbox;
+
+	@FindBy(xpath = "//input[@value='VERIFYING']")
+	WebElement verifyingCheckbox;
+
+	@FindBy(xpath = "//input[@value='VERIFIED']")
+	WebElement verifiedCheckbox;
+
+	@FindBy(xpath = "//input[@value='LOADING']")
+	WebElement loadingCheckbox;
+
+	@FindBy(xpath = "//input[@value='FAILED']")
+	WebElement failedcheckbox;
+
+	@FindBy(xpath = "//input[@value='ERROR']")
+	WebElement errorcheckbox;
+	
+	@FindBy(xpath = "//input[@value='INSTALLED']")
+	WebElement installedcheckbox;
+	
+	@FindBy(xpath = "//input[@value='CREATED_VOLUME']")
+	WebElement createdVolumeCheckbox;
+	
+	@FindBy(xpath = "//input[@value='AWAITNETWORKINSTANCE']")
+	WebElement awaitingWorkInstanceCheckbox;
+	
+	@FindBy(xpath = "//input[@value='START_DELAYED']")
+	WebElement START_DELAYEDCheckbox;
+	
+	@FindBy(xpath = "//input[@value='BOOTING']")
+	WebElement BOOTINGCheckbox;
+	
+	@FindBy(xpath = "//input[@value='RUNNING']")
+	WebElement RUNNINGCheckbox;
+	
+	@FindBy(xpath = "//input[@value='PAUSING']")
+	WebElement PAUSINGCheckbox;
+	
+	@FindBy(xpath = "//input[@value='PAUSED']")
+	WebElement PAUSEDCheckbox;
+	
+	@FindBy(xpath = "//input[@value='HALTING']")
+	WebElement HALTINGCheckbox;
+	
+	@FindBy(xpath = "//input[@value='HALTED']")
+	WebElement HALTEDCheckbox;
+	
+	@FindBy(xpath = "//input[@value='RESTARTING']")
+	WebElement RESTARTINGCheckbox;
+	
+	@FindBy(xpath = "//input[@value='BROKEN']")
+	WebElement BROKENCheckbox;
+	
+	@FindBy(xpath = "//input[@value='UNKNOWN']")
+	WebElement UNKNOWNCheckbox;
+	
+	@FindBy(xpath = "//input[@value='MAXSTATE']")
+	WebElement MAXSTATECheckbox;
+	
+	@FindBy(xpath = "//input[@value='DEPLOYMENT_STARTED']")
+	WebElement DEPLOYMENT_STARTEDCheckbox;
+	
+	
+	@FindBy(xpath = "//input[@value='DEPLOYMENT_CREATED']")
+	WebElement DEPLOYMENT_CREATEDCheckbox;
+	
+	@FindBy(xpath = "//input[@value='CREATING_VOLUME']")
+	WebElement CREATING_VOLUMECheckbox;
+	
+	@FindBy(xpath = "//input[@value='BROKEN']")
+	WebElement brokenCheckbox;
+	
+	@FindBy(xpath = "//input[@value='UNKNOWN']")
+	WebElement unKnownCheckbox;
+	
+	
+	@FindBy(xpath = "//input[@value='RESTARTING']")
+	WebElement restartingCheckbox;
+	
+	
+	@FindBy(xpath = "//input[@value='INSTALLED']")
+	WebElement installCheckbox;
+	
+	@FindBy(xpath = "//input[@value='AWAITNETWORKINSTANCE']")
+	WebElement AWAITNETWORKINSTANCECheckbox;
+	
+	@FindBy(xpath = "//input[@value='START_DELAYED']")
+	WebElement startDelayedCheckbox;
+	
+	@FindBy(xpath = "//input[@value='PURGING']")
+	WebElement purgingCheckbox;
+
+	@FindBy(xpath = "//input[@value='UNKNOWN']")
+	WebElement unknownCheckbox;
+	
+	@FindBy(xpath = "//input[@value='BOOTING']")
+	WebElement BootingCheckbox;
+	
+
+	
+	
+	@FindBy(xpath = "//input[@value='LOADED']")
+	WebElement loadedCheckbox;
+	
+	public void uncheckCheckboxResolvingTag() {
+		WebElement checkboxResolving = resolvingTagCheckbox;
+		if (checkboxResolving.isSelected()) {
+			checkboxResolving.click();
+		} else {
+			checkboxResolving.click();
+		}
+
+	}
+
+	public void uncheckCheckboxResolvedTag() {
+		WebElement checkboxResolvedTag = resolvedTagCheckbox;
+		if (checkboxResolvedTag.isSelected()) {
+			checkboxResolvedTag.click();
+		} else {
+			checkboxResolvedTag.click();
+		}
+
+	}
+
+	public void uncheckCheckboxdownloading() {
+		WebElement checkboxDownloading = downloadingCheckbox;
+		if (checkboxDownloading.isSelected()) {
+			checkboxDownloading.click();
+		} else {
+			checkboxDownloading.click();
+		}
+
+	}
+
+	public void uncheckCheckboxdownloaded() {
+		WebElement checkboxDownloaded = downloadedCheckbox;
+		if (checkboxDownloaded.isSelected()) {
+			checkboxDownloaded.click();
+		} else {
+			checkboxDownloaded.click();
+		}
+	}
+
+	public void uncheckCheckboxverified() {
+		WebElement checkboxverified = verifiedCheckbox;
+		if (checkboxverified.isSelected()) {
+			checkboxverified.click();
+		} else {
+			checkboxverified.click();
+		}
+
+	}
+
+	public void uncheckCheckboxverifying() {
+		WebElement checkboxverifying = verifyingCheckbox;
+		if (checkboxverifying.isSelected()) {
+			checkboxverifying.click();
+		} else {
+			checkboxverifying.click();
+		}
+
+	}
+
+	public void uncheckCheckboxLoading() {
+
+		WebElement checkboxloading = loadingCheckbox;
+		if (checkboxloading.isSelected()) {
+			checkboxloading.click();
+		} else {
+			checkboxloading.click();
+		}
+
+	}
+
+	public void uncheckCheckboxFailed() {
+		WebElement checkboxFailed = failedcheckbox;
+		if (checkboxFailed.isSelected()) {
+			checkboxFailed.click();
+		} else {
+			checkboxFailed.click();
+		}
+
+	}
+
+	public void uncheckCheckboxError() {
+		WebElement checkboxError = errorcheckbox;
+		if (checkboxError.isSelected()) {
+			checkboxError.click();
+		} else {
+			checkboxError.click();
+		}
+
+	}
+
+	public void uncheckCheckboxInstalled() {
+		WebElement checkboxInstall = installedcheckbox;
+		if (checkboxInstall.isSelected()) {
+			checkboxInstall.click();
+		} else {
+			checkboxInstall.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxCreatedVolume() {
+		WebElement checkboxCreatedVolume = createdVolumeCheckbox;
+		if (checkboxCreatedVolume.isSelected()) {
+			checkboxCreatedVolume.click();
+		} else {
+			checkboxCreatedVolume.click();
+		}
+	}
+
+	public void uncheckCheckboxHalting() {
+		WebElement HALTEDCheckboxCheck = HALTINGCheckbox;
+		if (HALTEDCheckboxCheck.isSelected()) {
+			HALTEDCheckbox.click();
+		} else {
+			HALTEDCheckbox.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxPaused() {
+		WebElement PAUSEDCheckboxcheck = PAUSEDCheckbox;
+		if (PAUSEDCheckboxcheck.isSelected()) {
+			PAUSEDCheckboxcheck.click();
+		} else {
+			PAUSEDCheckboxcheck.click();
+		}
+	}
+
+	public void uncheckCheckboxPausing() {
+		WebElement pausingCheckboxcheck = PAUSINGCheckbox;
+		if (pausingCheckboxcheck.isSelected()) {
+			pausingCheckboxcheck.click();
+		} else {
+			pausingCheckboxcheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxRunning() {
+		WebElement runningCheckboxcheck = RUNNINGCheckbox;
+		if (runningCheckboxcheck.isSelected()) {
+			runningCheckboxcheck.click();
+		} else {
+			runningCheckboxcheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxCreatingVolume() {
+		WebElement CREATING_VOLUMECheckboxcheck = CREATING_VOLUMECheckbox;
+		if (CREATING_VOLUMECheckboxcheck.isSelected()) {
+			CREATING_VOLUMECheckboxcheck.click();
+		} else {
+			CREATING_VOLUMECheckboxcheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxLoaded() {
+		WebElement loadedCheckboxcheck = loadedCheckbox;
+		if (loadedCheckboxcheck.isSelected()) {
+			loadedCheckboxcheck.click();
+		} else {
+			loadedCheckboxcheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxBooting() {
+		WebElement bootingCheckboxcheck = BOOTINGCheckbox;
+		if (bootingCheckboxcheck.isSelected()) {
+			bootingCheckboxcheck.click();
+		} else {
+			bootingCheckboxcheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxAwaitNetworkInstance() {
+		WebElement awaitingWorkInstancecheck = awaitingWorkInstanceCheckbox;
+		if (awaitingWorkInstancecheck.isSelected()) {
+			awaitingWorkInstancecheck.click();
+		} else {
+			awaitingWorkInstancecheck.click();
+		}
+		
+	}
+
+	public void uncheckStarDelayedCheckbox() {
+		WebElement starDelayedcheck = START_DELAYEDCheckbox;
+		if (starDelayedcheck.isSelected()) {
+			starDelayedcheck.click();
+		} else {
+			starDelayedcheck.click();
+		}
+		
+	}
+
+
+	public void uncheckCheckboxRestarting() {
+		WebElement restartingcheck = restartingCheckbox;
+		if (restartingcheck.isSelected()) {
+			restartingcheck.click();
+		} else {
+			restartingcheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxPurging() {
+		WebElement purgingcheck = purgingCheckbox;
+		if (purgingcheck.isSelected()) {
+			purgingcheck.click();
+		} else {
+			purgingcheck.click();
+		}
+	}
+
+	public void uncheckCheckboxbroken() {
+		WebElement brokencheck = brokenCheckbox;
+		if (brokencheck.isSelected()) {
+			brokencheck.click();
+		} else {
+			brokencheck.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxunKnown() {
+		WebElement unknownCheckbox = unKnownCheckbox;
+		if (unknownCheckbox.isSelected()) {
+			unknownCheckbox.click();
+		} else {
+			unknownCheckbox.click();
+		}
+		
+	}
+	@FindBy(xpath = "//input[@value='HALTED']")
+	WebElement haltedcheckbox;
+	
+
+	@FindBy(xpath = "//input[@value='DELETED']")
+	WebElement DELETEDcheckbox;
+	
+	public void uncheckCheckboxHalted() {
+		WebElement haltedCheckbox = haltedcheckbox;
+		if (haltedCheckbox.isSelected()) {
+			haltedCheckbox.click();
+		} else {
+			haltedCheckbox.click();
+		}
+		
+	}
+	
+	public boolean checkboxDeleted() {
+		WebElement deletedCheckbox = DELETEDcheckbox;
+		return deletedCheckbox.isSelected();
+		
+	}
+
+	public void uncheckCheckboxDeploymentStarted() {
+		WebElement deploymentStartedCheckbox = DEPLOYMENT_STARTEDCheckbox;
+		if (deploymentStartedCheckbox.isSelected()) {
+			deploymentStartedCheckbox.click();
+		} else {
+			deploymentStartedCheckbox.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxdeplymentCreated() {
+		WebElement deploymentCreatedCheckbox = DEPLOYMENT_CREATEDCheckbox;
+		if (deploymentCreatedCheckbox.isSelected()) {
+			deploymentCreatedCheckbox.click();
+		} else {
+			deploymentCreatedCheckbox.click();
+		}
+		
+	}
+
+	public void uncheckCheckboxmaxstate() {
+		WebElement maxStateCheckbox = MAXSTATECheckbox;
+		if (maxStateCheckbox.isSelected()) {
+			maxStateCheckbox.click();
+		} else {
+			maxStateCheckbox.click();
+		}
+		
+	}
+
+	public void deletedCheckboxClick() {
+		WebElement deletedCheckbox = DELETEDcheckbox; // Replace with actual checkbox ID
+        if (!deletedCheckbox.isSelected()) {
+            deletedCheckbox.click();
+        }
+	}
+
+	public String statusColumn_GetText() {
+		WebElement statusColumn = driver.findElement(By.xpath("//table/tbody/tr/td[3]")); 
+	        String columnText =  statusColumn.getText();
+	        return columnText;
+		
 	}
 }

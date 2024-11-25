@@ -1,4 +1,4 @@
-package com.cdm.Stepdefinations;
+package com.cdm.StepDefinations;
 
 import java.io.FileInputStream;
 import java.text.DateFormat;
@@ -43,8 +43,8 @@ public class BaseTest {
 		if (prop == null) {
 			prop = readproperties();
 
-			alldata = readdata(System.getProperty("user.dir") + "/src/test/resources/NewTestData/DataAman.xlsx", tagName);
-			// System.out.println(alldata);
+			alldata = readdata(System.getProperty("user.dir") + "/src/test/resources/TestData/DataAman.xlsx", tagName);
+			
 			createExtentReport();
 		}
 		launchApp();

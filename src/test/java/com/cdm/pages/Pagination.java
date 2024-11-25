@@ -3,6 +3,7 @@ package com.cdm.pages;
 import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -204,29 +205,99 @@ public class Pagination extends CommonActions {
 	}
 
 	public boolean firstPageFullBackwardArrow(int rowPerPage) throws Exception {
-		String displayedCountString = paginationRecordLabel.getText().split(" ")[4];
+		  try {
+		        // Extract the total record count from the pagination label
+		        String displayedCountString = paginationRecordLabel.getText().split(" ")[4];
+		        int displayedCount = Integer.parseInt(displayedCountString);
 
-		int displayedCount = Integer.parseInt(displayedCountString);
-		int pageMove = displayedCount % rowPerPage == 0 ? displayedCount / rowPerPage : displayedCount / rowPerPage + 1;
+		        // Calculate the number of pages and last page row count
+		        int pageMove = displayedCount % rowPerPage == 0 ? displayedCount / rowPerPage : displayedCount / rowPerPage + 1;
+		        int lastPageRowCount = displayedCount % rowPerPage;
+		        if (displayedCount > rowPerPage && lastPageRowCount == 0) {
+		            lastPageRowCount = rowPerPage;
+		        }
 
-		int lastPageRowCount = displayedCount % rowPerPage;
-		if (displayedCount > rowPerPage && lastPageRowCount == 0) {
-			lastPageRowCount = rowPerPage;
-		}
+		        // Ensure the first-page button is present and enabled
+		        if (paginationFirstPageButton != null && paginationFirstPageButton.isEnabled()) {
+		            paginationFirstPageButton.click();
 
-		if (paginationFirstPageButton != null && paginationFirstPageButton.isEnabled()) {
-			paginationFirstPageButton.click();
+		           Thread.sleep(5000);
 
-			// Wait for the page to load or for elements to become stable
-			// You may replace the sleep with a more reliable wait strategy
-			Thread.sleep(2000);
-		}
+		            // Get the number of rows displayed on the first page
+		            List<WebElement> rows = driver.findElements(By.xpath("//div[@class='mat-paginator-range-label'"));
+		            int firstPageRowCount = rows.size();
 
-		// Assuming allRowsInTable is updated after moving to the first page
-		if (allRowsInTable.size() == lastPageRowCount) {
-			return true;
-		} else {
-			return false;
-		}
+		            // Log for debugging
+		            logger.info("Expected row count: " + rowPerPage + ", Actual row count: " + firstPageRowCount);
+
+		            // Verify the row count matches the expected value
+		            return firstPageRowCount == rowPerPage;
+		        } else {
+		            throw new Exception("First Page button is either not visible or not enabled.");
+		        }
+		    } catch (Exception e) {
+		        logger.error("Error in firstPageFullBackwardArrow method: " + e.getMessage());
+		        throw e;
+		    }
+
 	}
-}
+
+	public boolean clickNextAndVerifyRows(int rowPerPage) throws InterruptedException {
+		boolean isNextButtonFunctional = true;
+
+	    // Get the total number of records from a UI element
+	    int totalRecords = Integer.parseInt(driver.findElement(By.id("totalRecords")).getText());
+
+	    // Calculate the total number of pages
+	    int totalPages = (totalRecords + rowPerPage - 1) / rowPerPage;
+
+	    // Iterate through each page
+	    for (int currentPage = 1; currentPage < totalPages; currentPage++) {
+	        // Click the Next button (Forward Arrow)
+	        driver.findElement(By.cssSelector(".pagination-next-arrow")).click();
+	        Thread.sleep(3000);
+
+	        // Count the number of rows displayed on the current page
+	        List<WebElement> rows = driver.findElements(By.cssSelector(".table-row"));
+	        int displayedRows = rows.size();
+
+	        // Validate that the number of rows matches the expected value
+	        if (currentPage < totalPages - 1) {
+	            if (displayedRows != rowPerPage) {
+	                isNextButtonFunctional = false;
+	                break;
+	            }
+	        } else { 
+	            // Last page can have fewer records
+	            if (displayedRows <= 0 || displayedRows > rowPerPage) {
+	                isNextButtonFunctional = false;
+	                break;
+	            }
+	        }
+	    }
+	    return isNextButtonFunctional;
+	}
+
+	public boolean navigateToLastPageAndVerify(int rowPerPage) throws InterruptedException {
+		 // Click on the Full Forward Arrow to navigate to the last page
+	    driver.findElement(By.xpath("//button[@aria-label='Last page']")).click();
+	    Thread.sleep(3000);
+	    // Extract the total records from the text (e.g., "96 – 96 of 96")
+	    String totalRecordsText = driver.findElement(By.xpath("//div[@class='mat-paginator-range-label']")).getText(); // Replace with the actual locator
+	    String totalRecordsNumber = totalRecordsText.replaceAll("[^0-9]", ""); // Removes all non-numeric characters
+	    
+	 // Parse the numeric part
+	    int totalRecords = Integer.parseInt(totalRecordsNumber);
+
+	    // Calculate the expected number of rows on the last page
+	    int totalPages = (totalRecords + rowPerPage - 1) / rowPerPage;
+	    int expectedRowsOnLastPage = totalRecords % rowPerPage == 0 ? rowPerPage : totalRecords % rowPerPage;
+
+	    // Count the number of rows displayed on the last page
+	    List<WebElement> rows = driver.findElements(By.xpath("//table[@row='table']"));
+	    int displayedRows = rows.size();
+
+	    // Validate that the number of displayed rows matches the expected number
+	    return displayedRows == expectedRowsOnLastPage && displayedRows > 0;
+	}
+	}

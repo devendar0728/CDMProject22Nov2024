@@ -1,4 +1,4 @@
-package com.cdm.Stepdefinations;
+package com.cdm.StepDefinations;
 
 import org.junit.Assume;
 import org.openqa.selenium.Point;
