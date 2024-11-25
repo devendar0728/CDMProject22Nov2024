@@ -1,14 +1,12 @@
 package com.cdm.pages;
 
-import java.text.SimpleDateFormat;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 
 import com.aventstack.extentreports.ExtentTest;
 import com.cdm.common.CommonActions;
@@ -75,8 +73,7 @@ public class ReportsPage extends CommonActions {
 	WebElement validationmessage;
 
 	public String verifyValidationMessageforReports() {
-		clickElement(validationmessage,"");
-		//validationmessage.click();
+		
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -91,7 +88,11 @@ public class ReportsPage extends CommonActions {
 		return message.trim();
 
 	}
-	
+	public boolean isReportTypeSelected(String expectedReportType) {
+        
+        String selectedOption = reportTypeSelect.getText();
+        return selectedOption.equals(expectedReportType);
+	}
 	
 	public void reportsTab() {
 		try {
@@ -203,7 +204,18 @@ public class ReportsPage extends CommonActions {
 		return startDateToolTipText;
 		
 	}
+
+	@FindBy(xpath = "//div[@id='toast-container']")
+
+	WebElement toasterSuccess;
+
 	
+public void ToasterMessageShouldBeDisplayed(String expectedMessage) {
+        
+        String actualMessage = toasterSuccess.getText();
+        assert actualMessage.equals(expectedMessage) : "Expected: " + expectedMessage + ", but got: " + actualMessage;
+    }
+
 	
 	public String get_Text_ToolTipforEndDate() {
 		
@@ -215,5 +227,37 @@ public class ReportsPage extends CommonActions {
 
 		return endDateToolTipText;
 		
+	}
+	
+	public String getTextReportTypeLabel() {
+		clickElement(reportTypeSelect, "");
+		return getText(reportTypeLabel);
+	}
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement outerlayerclick;
+	
+	@FindBy(xpath = "//label[@id='mat-form-field-label-1']")
+	WebElement reportTypeLabel;
+	
+	@FindBy(xpath = "//label[@id='mat-form-field-label-5']")
+	WebElement endDateLabel;
+	
+	@FindBy(xpath = "//label[@id='mat-form-field-label-3']")
+	WebElement startDateLabel;
+	
+	public String getTextStartDate() {
+		clickElement(startDate, "");
+		return getText(startDateLabel);
+	}
+	
+	public void outerlayerclick() {
+		clickElement(outerlayerclick, "");
+
+	}
+
+	
+	public String getTextReportEndDate() {
+		clickElement(endDate, "");
+		return getText(endDateLabel);
 	}
 }

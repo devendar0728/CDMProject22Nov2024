@@ -1,418 +1,258 @@
 @SheetDASHBOARD
 Feature: DASHBOARD
 
+#@Test
+#Scenario: TC001_Verify the main dashboard overview with test data from Excel
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of EDGE groups in CDM on card widget
+#Then verify total number of EDGE Devices in CDM on card widget
+#Then verify total number of Active App Groups in CDM on card widget
+#Then verify total number of Active Repositories in CDM on card widget
+#Then verify total number of Active Edge Groups in CDM on card widget
+#Then verify total number of Active Edge Devices in CDM on card widget
+#Then verify total number of Active Applications in CDM on card widget
+#Then verify total number of Active Volumes in CDM on card widget
+
+#
 @Test
-Scenario: TC01_Verification of Default Dashboard functionality in the Dashboard screen by Super admin/Admin User
+Scenario: TC002_Verify the total number of deployments that occurred in the last 24 hours
 Given User launch application in chrome browser
 Then click on login button on home page
 When user enters credentials and click on login button
-And Successfull login should be happen 
-
-@Test
-Scenario: TC02_Verification of Expand button functionality in the Dashboard screen by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-And click on the expand button 
-
-
-@Test
-Scenario: TC03_Verification of Collapse button functionality in the Dashboard screen by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then click on expand button from navigation menu
-
-@Test
-Scenario: TC04_Verification of the display of English (US) Tooltip and other available Language options in Dashboard screen
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on US Icon on the top of the Right side
-
-@Test
-Scenario: TC05_Verification of tooltip functionality for Bell icon in Title bar by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Bell icon on the top of the Right side
-
-@Test
-Scenario: TC06_Verification of tooltip functionality for Profile icon in Title bar by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Human icon on the top of the Right side
-
-
-@Test
-Scenario: TC07_Verification of redirection functionality for Bell icon in Title bar (Alerts record)
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Bell icon on the top of the Right side
-
-@Test
-Scenario: TC08_Verification of dropdown functionality for Profile icon in Title bar by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Profile icon on the top of the Right side.& click on Update Password from drop down
-
-
-@Test
-Scenario: TC09_Verification of Password change functionality in Profile icon dropdown in Title bar by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Profile icon on the top of the Right side.& click on password from drop down
-
-@Test
-Scenario: TC10_Verification of Update profile functionality in Profile icon dropdown in Title bar by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Profile icon on the top of the Right side.& click on Update Password from drop down
-
-@Test
-Scenario: TC11_Verification of Logout functionality in Profile icon dropdown in Title bar by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Profile icon on the top of the Right side.& click on Log out from drop down
-
-@Test
-Scenario: TC12_Verification of Browser Compatibility of Dashboard module of the application
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-
-@Test
-Scenario: TC13_Verification of resizing the Dashboard module as per different zoom levels
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click on Zoom from browser
-
-@Test
-Scenario: TC14_Verification of displaying the default details of Dashboard after login by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then Click oncard board boxes in dashboard
-
-
-@Test
-Scenario: TC15_Verification of tool tip functionality for Help icon on the top of the right side by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then  Click on Help icon on the top of the right side
-
-@Test
-Scenario: TC16_Verification of Refreshing button functionality in the Dashborad screen by Super admin/Admin
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then After landing on Dashboard screen, Click on Refresh button (top right side)
-
-
-@Test
-Scenario: TC17_Verification of EDIT button functionality in the Dashboard screen by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then verify Edit button functionality
-
-
-
-
-
-@Test
-Scenario: TC18_Verification of ADD Icon button functionality in the EDIT Dashboard screen by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify add button functionality
-
-
-
-@Test
-Scenario: TC19_Verification of redirection functionality for Cancel button for New create dashboard screen by Super admin/Admin
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify cancel button functionality
-
-
-
-@Test
-Scenario: TC20_Verification of Alphanumeric with special characters in the Create Dashboard text field  by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify Alphanumeric with special characters in the Create Dashboard
-
-
-
-@Test
-Scenario: TC21_Verification of Save  button functionality in the New Create Dashboard screen by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify save button functionality
-
- 
-
-@Test
-Scenario: TC22_Verification of Mandatory text field in the Create Dashboard screen  by Super admin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify mandatory text field in the create dashboard screen
-
- 
-
-@Test
-Scenario: TC23_Verification if user without enter any inputs into the textfield & click on save button
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify save button functionality
-
-
-
-
-@Test
-Scenario: TC24_Verification of Save icon button functionality beside the add icon in the screen by Superadmin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify save button functionality
-
- 
-
-@Test
-Scenario: TC25_Verification of Add Card icon button functionality in the screen by Superadmin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify add button functionality
-
-@Test
-Scenario: TC26_Verification of all the textfield details after creating new card
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify add button functionality
-
-@Test
-Scenario: TC27_Verification of Delete Icon button functionality in Edit dashboard screen by Super admin/admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify delete icon button functionality
-
-
-@Test
-Scenario: TC28_Verification of Add icon button functionality for the Nav filter newly created card by Superadmin/Admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify add button functionality
- 
- 
-@Test
-Scenario: TC29_Verification of Remove button functionality in newly card  screen by Super admin/admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify remove button functionality
-
-
-
-@Test
-Scenario: TC30_Verification of navigating to the particular active devices by clicking on total active devices card by Superadmin/admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify add button functionality
-
-
-@Test
-Scenario: TC31_Verification of navigating to the particular inactive devices by clicking on total inactive devices card by Superadmin/admin user
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify inactive device functionality
-
-
-@Test
-Scenario: TC32_Verification of error message verbaige for Cards
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then verify error message verbaige for cards
-
-
-
-@Test
-Scenario: TC33_Verification of error message verbaige for reports
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify error message verbaige for reports
-
-
-@Test
-Scenario: TC34_Verification of standarize text format for success message in toaster
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify success message verbaige in toaster
-
-
-
-
-@Test
-Scenario: TC35_Verification of standarize text format for error message in toaster
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then verify error message verbaige in toaster
-
-
-
-@Test
-Scenario: TC36_Verification of standarize text format for error message below  text field
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then verify error message verbaige in toaster
-
-
-@Test
-Scenario: TC37_Verification of standarize text format for error message below text field
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen
-Then verify error message below text field
-
-
-
-@Test
-Scenario: TC38_Verification of switching between inputs fields using TAB
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to verify switching between inputs fields using TAB
-
-
-@Test
-Scenario: TC39_Verification of visibilty duration to load the application
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to verify visibilty duration to load the application
-
-@Test
-Scenario: TC40_Verification of visibilty the input field format
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to verify visibilty the input field format
-
-
-@Test
-Scenario: TC41_Verification of alignment  show icon into the text field
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to check alignment show icon into the text field
-
-
-@Test
-Scenario: TC42_Verification of visualization of background picture
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to check visualization of background picture
-
-
-
-@Test
-Scenario: TC43_Verification of loading proper in slow network
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to check page is loading in slow network
-
-
-
-@Test
-Scenario: TC44_Verification of the accessible by using mobile network
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to check Verification of the accessible by using mobile network
-
-
-
-@Test
-Scenario: TC45_Verification of the accessible by using wi-fi network
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then to check page is accessible by using wi-fi network
-
-@Test
-Scenario: TC46_Verification of without login into browser copy & paste the url
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-And Successfull login should be happen 
-Then verify login into browser copy & paste the url
+Given the user am on the dashboard page
+Then verify total number of deployments that occurred in the last 24 hours
+#
+#
+#@Test
+#Scenario: TC003_Verify the total number of deployments that occurred in the last 7 days
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "deployments" that occurred in the last 7 days
+#
+#
+#
+#@Test
+#Scenario: TC004_Verify the ongoing deployments that occurred in the last 24 hours
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "ongoing" deployments that occurred in the last 24 hours
+#
+#@Test
+#Scenario: TC005_Verify the ongoing deployments that occurred in the last 7 days
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "ongoing" deployments that occurred in the last 7 days
+#
+#@Test
+#Scenario: TC006_Verify the successful deployments that occurred in the last 24 hours
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "successful" deployments that occurred in the last 24 hours
+#
+#
+#@Test
+#Scenario: TC007_Verify the successful deployments that occurred in the last 7 days
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "successful" deployments that occurred in the last 7 days
+#
+#
+#@Test
+#Scenario: TC008_Verify the failed deployments that occurred in the last 24 hours
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "failed" deployments that occurred in the last 24 hours
+#
+#
+#@Test    
+#Scenario: TC009_Redirect to Total Edge Group page when clicking on the image of Total Edge Groups
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Edge Group List page with both Active and Inactive staus
+#
+#
+#@Test
+#Scenario: TC010_Redirect to Total Edge Devices page when clicking on the image of Total Edge Devices
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Edge Devices list page with both Active and Inactive staus
+#
+#@Test    
+#Scenario: TC011_Redirect to Total Edge Group page when clicking on the number of Total Edge Groups
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Edge Group List page with both Active and Inactive staus
+#
+#
+#@Test    
+#Scenario: TC012_Redirect to Total Edge Group page when clicking on the number of Edge Devices
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Edge Devices List page with both Active and Inactive staus
+#
+#@Test    
+#Scenario: TC013_Redirect to Active Edge Groups page when clicking on the image of Active Edge Groups
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Edge Groups List page with both Active and Inactive staus
+#
+#
+#@Test    
+#Scenario: TC014_Redirect to Active Edge Devices page when clicking on the image of Active Edge Devices
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Edge Devices List page with both Active and Inactive staus
+#
+#@Test    
+#Scenario: TC015_Redirect to Active Edge Device clicking on the number of Edge Devices
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Edge Devices List page with both Active and Inactive staus
+#
+#
+#@Test    
+#Scenario: TC016_Redirect to Active App Groups page when clicking on the image of Active App Groups
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active App Groups List page
+#
+#@Test    
+#Scenario: TC017_Redirect to Active App Groups clicking on the number of Edge Devices
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active App Groups List page
+#
+#
+#@Test    
+#Scenario: TC018_Redirect to Active Application page when clicking on the image of Active Application
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Application List page
+#
+#@Test    
+#Scenario: TC019_Redirect to Active App Groups clicking on the number of the Active Application
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active App Groups List page
+#
+#@Test    
+#Scenario: TC020_Redirect to Active Application page when clicking on the image of Active Repositories
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Repositories List page
+#
+#@Test    
+#Scenario: TC021_Redirect to Active App Groups clicking on the number of the Active Repositories
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Repositories page
+#
+#@Test    
+#Scenario: TC022_Redirect to Active Application page when clicking on the image of Active Volumes
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Volumes List page
+#
+#@Test    
+#Scenario: TC023_Redirect to Active App Groups clicking on the number of the Active Volumes
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify user should be redirected to the Active Volumes page
+#
+#@Test    
+#Scenario: TC024_Validate styling of statuses
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify the "Ongoing" column should have an orange color
+#Then verify the "Successful" column should have a green color
+#Then verify the "Failed" column should have a red color
+#Then verify the "Deleted" column should have the appropriate color
+#
+#@Test
+#Scenario: TC025_Accessibility testing
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then the "Deployment Report" section should be readable by screen readers
+#Then verify all statuses should include text to assist colorblind users
+#
+#@Test 
+#Scenario: TC026_Deployment Report table should be printed on the console
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify Deployment Report table should be printed on the console
+#
+#@Test 
+#Scenario: TC027_License Report table should be printed on the console
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify License Report table table should be printed on the console
+ #
+#@Test    
+#Scenario: TC028_Validate styling of statuses under License Report table
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify  "will expire" column has title in red color
+#
+#@Test
+#Scenario: TC029_Verify the failed deployments that occurred in the last 7 days
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user am on the dashboard page
+#Then verify total number of "failed" deployments that occurred in the last 7 days
+    

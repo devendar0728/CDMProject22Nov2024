@@ -49,7 +49,18 @@ public class CommonActions {
 		}
 
 	}
-
+	public void verifyButtonVisibility(String buttonId, String buttonName,String msg) {
+		try {
+			WebElement button = driver.findElement(By.id(buttonId));
+		    Assert.assertTrue(buttonName + " is not visible", button.isDisplayed());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.fail("Step failed due to " + e.getMessage() + "<span class='label end-time'><a href="
+					+ getScreenshot() + ">Screenshot</a>" + msg + "</span>");
+		}
+	    
+	    
+	}
 	public void waitElementToVisible(String xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Maximum wait time of 30 seconds
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpath)));
@@ -97,6 +108,7 @@ public class CommonActions {
 
 		return finalUri.toString();
 	}
+     
 
 	public String getText(WebElement elm) {
 
@@ -225,7 +237,7 @@ public class CommonActions {
 		}
 	}
 
-	public void verifyText(WebElement elm, String text, String msg) throws Exception {
+	public void verifyText(WebElement elm, String text, String msg) {
 		for (int i = 0; i < 6; i++) {
 			try {
 				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
@@ -248,8 +260,6 @@ public class CommonActions {
 				}
 			}
 		}
-
-		throw new Exception(msg);
 	}
 
 	public void clickElement(By elm, String msg) {
@@ -263,7 +273,6 @@ public class CommonActions {
 			logger.fail("Step failed due to " + e.getMessage() + "<span class='label end-time'><a href="
 					+ getScreenshot() + ">Screenshot</a>" + msg + "</span>");
 		}
-
 	}
 
 	public void clickElement(String elm, String msg) {
@@ -279,37 +288,20 @@ public class CommonActions {
 		}
 	}
 
-	public boolean ElementExist(WebElement elm, String msg) throws Exception {
-
-		for (int i = 0; i < 5; i++) {
-			try {
-				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-				wait.until(ExpectedConditions.visibilityOf(elm));
-				if (elm == null) {
-					continue;
-				}
-				if (elm.isDisplayed()) {
-					logger.pass("<span class='label end-time'><a href=" + getScreenshot() + ">Screenshot</a></span>");
-					return true;
-				}
-			} catch (Exception e) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				System.out.println(e.getMessage());
-				logger.fail("Step failed due to " + e.getMessage() + "<span class='label end-time'><a href="
-						+ getScreenshot() + ">Screenshot</a>" + msg + "</span>");
-			}
-
+	public void ElementExist(WebElement elm, String msg) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+			wait.until(ExpectedConditions.visibilityOf(elm));
+			elm.isDisplayed();
+			logger.pass("<span class='label end-time'><a href=" + getScreenshot() + ">Screenshot</a></span>");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.fail("Step failed due to " + e.getMessage() + "<span class='label end-time'><a href="
+					+ getScreenshot() + ">Screenshot</a>" + msg + "</span>");
 		}
-		throw new Exception(msg);
-
 	}
 
-	public void verifyTitle(String exp, String msg) throws Exception {
+	public void verifyTitle(String exp, String msg) {
 		try {
 			if (exp.equals(driver.getTitle())) {
 				logger.pass("Title matched");
@@ -319,8 +311,6 @@ public class CommonActions {
 			logger.fail("Step failed due to " + e.getMessage() + "<span class='label end-time'><a href="
 					+ getScreenshot() + ">Screenshot</a>" + msg + "</span>");
 		}
-
-		throw new Exception(msg);
 	}
 
 	public String getScreenshot() {
@@ -409,46 +399,13 @@ public class CommonActions {
 	}
 
 	public void scrollingElementRightBar(String cssSelector, String width) {
-		for (int i = 0; i < 5; i++) {
-
-			try {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("document.querySelector('" + cssSelector + "').scrollLeft=" + width + ";", "");
-
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-
-			}
-		}
-
-	}
-
-
-	public void scrollingElement(WebElement element) throws InterruptedException {
-		for (int i = 0; i < 3; i++) {
-            Thread.sleep(5000);
-			try {
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				//js.executeScript("document.querySelector('" + cssSelector + "').scrollLeft=" + width + ";", "");
-				 js.executeScript("arguments[0].scrollIntoView(true);", element);
-
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-
-
-			}
-		}
-
-	}
-
-	public void scrollingElementLeftBar(String cssSelector, String width) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("document.querySelector('" + cssSelector + "').scrollLeft=" + width + "", "");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 
 			e.printStackTrace();
 		}
@@ -521,6 +478,5 @@ public class CommonActions {
 
 		return dest;
 	}
-
 
 }

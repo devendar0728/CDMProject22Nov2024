@@ -216,16 +216,16 @@ public class LoginPage extends CommonActions {
 		return invalidUserName.getText();
 	}
 
-	public void verifyDashboard() throws Exception {
+	public void verifyDashboard() {
 		ElementExist(dashboard, "Dashboard page displayed successfully");
 
 	}
 
-	public void verifyErrorMsgusername() throws Exception {
+	public void verifyErrorMsgusername() {
 		ElementExist(errmsgusername, "Error message User Name is required validated successfully");
 	}
 
-	public void verifyErrorMsgpwd() throws Exception {
+	public void verifyErrorMsgpwd() {
 		ElementExist(errmsgpassword, "Error message Password is required validated successfully");
 
 	}

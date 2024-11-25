@@ -1,4 +1,4 @@
-package com.cdm.Stepdefinations;
+package com.cdm.StepDefinations;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -65,6 +65,7 @@ public class Common extends BaseTest {
 		lp.checkboxClickTermsandConditions();
 
 		lp.clickLogin();
+		Thread.sleep(2000);
 
 
 	}
