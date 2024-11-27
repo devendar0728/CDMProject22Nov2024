@@ -1,5 +1,5 @@
-@SheetEDGEDEVICESNEW
-Feature: EdgeDevicesNew
+@SheetEDGEDEVICES
+Feature: EDGEDEVICES
 #
 #@Test
 #Scenario: TC001_Verify Add New Edge Device page

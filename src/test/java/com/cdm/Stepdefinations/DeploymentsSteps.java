@@ -82,8 +82,8 @@ public class DeploymentsSteps extends BaseTest {
 		dmp.removalofEnteredTextForStatus();
 	}
 
-	@Then("verify user see download successful message and file should get downloaded for deployemnt")
-	public void verify_user_see_download_successful_message_and_file_should_get_downloaded_for_deployemnt() {
+	@Then("verify user see download successful message and file should get downloaded for deployment")
+	public void verify_user_see_download_successful_message_and_file_should_get_downloaded_for_deployment() {
 		DeploymentsmodulePage dmp = new DeploymentsmodulePage(driver, logger);
 		dmp.outerlayerclick();
 		WebElement bulkDownloadsuccessMessage = dmp.downloadSuccessMessage();
