@@ -17,7 +17,7 @@ Feature: DEPLOYMENTS
 #Then Click on Deployments module from side menu bar
 #Then Click on the Refresh button
 #Then Click on the Bulk Download button
-#Then verify user see download successful message and file should get downloaded for deployemnt
+#Then verify user see download successful message and file should get downloaded for deployment
 #
 #
 #@Test

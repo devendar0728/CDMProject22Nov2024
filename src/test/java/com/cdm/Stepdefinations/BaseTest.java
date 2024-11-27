@@ -44,7 +44,7 @@ public class BaseTest {
 			prop = readproperties();
 
 			alldata = readdata(System.getProperty("user.dir") + "/src/test/resources/TestData/DataAman.xlsx", tagName);
-			
+
 			createExtentReport();
 		}
 		launchApp();
@@ -84,7 +84,7 @@ public class BaseTest {
 //				options.addArguments("start-maximized");
 //				options.setExperimentalOption("credentials_enable_service", false);
 //				options.setExperimentalOption("profile.password_manager_enabled", false);
-				//options.addArguments("--incognito");
+				// options.addArguments("--incognito");
 
 				System.setProperty("webdriver.chrome.drive", chromeDriverpath);
 				try {
