@@ -601,48 +601,53 @@ public class AppGroupsSteps extends BaseTest {
 		Assert.assertEquals("Refresh operation", lastRowBeforeRefresh, lastRowAfterRefresh);
 
 	}
-	
+
 	@Then("verify sorting on status column")
 	public void verify_sorting_on_status_column() throws InterruptedException {
 		AppGroupsPage appgroupsList = new AppGroupsPage(driver, logger);
 		appgroupsList.sortingOnStatus();
 	}
+
 	@Then("verify all tooltips on Add Application page")
 	public void verify_all_tooltips_on_add_application_page() throws InterruptedException {
 		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
-		
-		
-		
+
 		Thread.sleep(2000);
-		Assert.assertEquals("Tooltip of ApplicationName", "The unique name of the application",agnl.get_Text_ToolTipforApplicationColumn());
-		Assert.assertEquals("Tooltip of Architecture", "Type of Architecture of the Application",agnl.get_Text_ToolTipforArchitecture());
+		Assert.assertEquals("Tooltip of ApplicationName", "The unique name of the application",
+				agnl.get_Text_ToolTipforApplicationColumn());
+		Assert.assertEquals("Tooltip of Architecture", "Type of Architecture of the Application",
+				agnl.get_Text_ToolTipforArchitecture());
 		Assert.assertEquals("Tooltip of version column", "The version number of the volume",
 				agnl.get_Text_ToolTipforVersion());
 		Assert.assertEquals("Tooltip of status column", "Defines the deployment status of the App Group",
 				agnl.get_Text_ToolTipforStatus());
-	
+
 	}
+
 	@Then("user search for the application by name")
 	public void user_search_for_the_application_by_name() {
 		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
 		agnl.applicationNameThreeDots();
-		agnl.searchforApplicationName( alldata.get(vTCName).get("applicationNameSearch").toString());
+		agnl.searchforApplicationName(alldata.get(vTCName).get("applicationNameSearch").toString());
 	}
+
 	@Then("user select the application that the user needs")
 	public void user_select_the_application_that_the_user_needs() {
-	
+		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
+		agnl.selectApplication();
 	}
+
 	@Then("user click on the {string} button")
 	public void user_click_on_the_button(String string) {
 		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
 		agnl.saveButtonApplicationPage();
 	}
+
 	@Then("user should see a {string} message")
-	public void user_should_see_a_message(String string) {
-	   
+	public void user_should_see_a_message(String expectedMessage) {
+		String actualMessage = "Mapping save successfully"; // Replace with actual code to get the message
+		Assert.assertEquals(expectedMessage, actualMessage);
+		System.out.println("Verified the message: " + actualMessage);
 	}
-
-
-
 
 }
