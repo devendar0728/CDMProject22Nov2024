@@ -47,6 +47,10 @@ public class AppgroupnewlistPage extends CommonActions {
 	WebElement statusElement;
 	
 
+	@FindBy(xpath = "//label[@for='mat-checkbox-11-input']/span[1]")
+	WebElement selectedCheckboxforApp;
+	
+	
 	public String get_Text_ToolTipforApplicationColumn() {
 		mouseHover(applicationNameElement);
 
@@ -133,9 +137,30 @@ public class AppgroupnewlistPage extends CommonActions {
 		clickElement(savebuttonAddApplication, "Saving data on application");
 	}
 
+	public void selectApplication() {
+			try {
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+				wait.until(ExpectedConditions.elementToBeClickable(selectedCheckboxforApp));
+
+				if (selectedCheckboxforApp != null) {
+					String checked = selectedCheckboxforApp.getDomAttribute("checked");
+					if (checked != "checked") {
+						clickElement(selectedCheckboxforApp, "");
+						
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+		}
+
+		
+	}
+
 	
 	
 
 	
 
-}
+
