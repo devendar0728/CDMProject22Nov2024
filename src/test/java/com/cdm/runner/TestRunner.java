@@ -9,9 +9,10 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 
 //features = "src/test/resources/Features/EDGEDevicesLatest.feature",
-		features = "src/test/resources/Features/Dashboard.feature",
+		//features = "src/test/resources/Features/Dashboard.feature",
 		//features = "src/test/resources/Features/Reports.feature",
 				//features = "src/test/resources/Features/Deployments.feature",	
+				features = "src/test/resources/Features/AppGroups.feature",
 
 		glue = { "com.cdm.StepDefinations" }
 
