@@ -462,7 +462,7 @@ public class AppGroupsSteps extends BaseTest {
 	public void verification_of_click_on_app_groups_pagination_it_will_display_records_will_display() {
 		Pagination edp = new Pagination(driver, logger);
 
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		edp.SelectPageMatOption(value);
 		int rowPerPage = Integer.parseInt(value);
 	}
@@ -472,7 +472,7 @@ public class AppGroupsSteps extends BaseTest {
 		Pagination p = new Pagination(driver, logger);
 
 		// Retrieve the 'Items Per Page' value from test data
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 		Thread.sleep(3000);
 

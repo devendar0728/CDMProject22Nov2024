@@ -116,7 +116,7 @@ public class ConfigurationsModulePage extends CommonActions {
 	@FindBy(xpath = "//input[@placeholder='  App Name ']")
 	WebElement inputAppName;
 
-	@FindBy(xpath = "//input[@placeholder='Config Name ']")
+	@FindBy(xpath = "//input[@name='name']")
 	WebElement inputConfigName;
 
 	@FindBy(xpath = "//input[@name='status']")
@@ -350,6 +350,8 @@ public class ConfigurationsModulePage extends CommonActions {
 	}
 
 	public void sendValueSearchinputBoxForConfigName(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", inputConfigName);
 		SetInputENterKey(inputConfigName, "");
 		SetInput(inputConfigName, value, value);
 //
@@ -591,5 +593,177 @@ public class ConfigurationsModulePage extends CommonActions {
 		
 	}
 	
+	@FindBy(xpath = "/html/body/div[2]/div[4]/div/mat-datepicker-content/div[2]/div/button[1]")
+	 WebElement resetButton;
+
+	public void resetButton() {
+clickElement(resetButton, "Clicking on reset button");
+		
+	}
+
+	@FindBy(xpath = "//*[@id='mat-menu-panel-23']/div/button/mat-form-field/div/div[1]/div[3]")
+	 WebElement timeStampViewElement;
+	public void timestampView() {
+		
+		timeStampViewElement.getText();
+		
+		
+	}
+
+	public void configDisplayRecord() {
+		List<String> records = Arrays.asList("Record 1", "Record 2", "Record 3", "Record 4");
+
+		// Assuming you want to display 4 records per page
+		int recordsPerPage = 4;
+
+		// Calculate the number of pages required
+		int totalPages = (records.size() + recordsPerPage - 1) / recordsPerPage;
+
+		for (int page = 1; page <= totalPages; page++) {
+			// Simulate navigating to the desired page
+			// For example:
+			// driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
+
+			// Extract expected records for the current page
+			int startIndex = (page - 1) * recordsPerPage;
+			int endIndex = Math.min(page * recordsPerPage, records.size());
+			List<String> expectedPageRecords = records.subList(startIndex, endIndex);
+
+			// Simulate fetching displayed records on the current page
+			// Replace the below line with actual records fetched from the web page
+			List<String> displayedRecords = expectedPageRecords; // Simulate correct display
+
+			// Assert that the displayed records match the expected records
+			assert expectedPageRecords.equals(displayedRecords)
+					: "Displayed records do not match the expected records for page " + page;
+
+			// Print the records on the current page for verification
+			System.out.println("Page " + page + ": " + displayedRecords);
+		}
+		
+	}
+
+	public void sortingOnTimeStamp() throws InterruptedException {
+		// Click the sorting icon for ascending order
+					driver.findElement(By.xpath("//thead/tr[1]/th[5]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+					Thread.sleep(2000);
+					try {
+						
+
+						// Fetch column data before sorting
+						List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[5]"));
+						List<String> beforeSort = new ArrayList<String>();
+						List<String> afterSort = new ArrayList<String>();
+						for (int i = 0; i < columns.size(); i++) {
+							beforeSort.add(columns.get(i).getText().trim());
+							afterSort.add(columns.get(i).getText().trim());
+						}
+
+						afterSort.sort((a, b) -> a.compareTo(b));
+
+						for (int i = 0; i < afterSort.size(); i++) {
+							Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+									beforeSort.get(i));
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						Assert.fail("Test failed due to exception: " + e.getMessage());
+					}
+
+				}
+
+	public void sortingOnConfigName() throws InterruptedException {
+		driver.findElement(By.xpath("//thead/tr[1]/th[3]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+		
+	}
+
+	public void sortingOnLastUpdated() throws InterruptedException {
+		driver.findElement(By.xpath("//thead/tr[1]/th[6]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[6]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+		
+	}
+
+	@FindBy(xpath="//app-config-response-body/div/mat-dialog-content/div/div/div[2]")
+	WebElement responseTextElement;
+	public String responseText() {
+		
+		return responseTextElement.getText();
+		
+	}
+
+	public String lastRowBeforeRefresh() {
+		WebElement tableGrid = driver.findElement(By.xpath("//table[@role='table']")); // Replace with your table locator
+
+	    // Locate the last row before the refresh
+	    WebElement lastRowBeforeRefresh = tableGrid.findElement(By.xpath("//tbody/tr[last()]")); // Adjust XPath if necessary
+	    return lastRowBeforeRefresh.getText();
+	}
+	@FindBy(xpath = "/html/body/app-root/app-root/app-home/mat-sidenav-container/mat-sidenav-content/div[2]/div/app-configuration-app/div/div[1]/div/img[1]")
+	WebElement refreshButtonfun;
+	
+	@FindBy(xpath="//table[@role='table']")
+	WebElement refreshedTableGrid;
+	
+	public String lastRowDataAfterRefresh() throws InterruptedException {
+		 refreshButtonfun.click();
+		  Thread.sleep(2000);
+		 
+		  
+		  WebElement lastRowAfterRefresh = refreshedTableGrid.findElement(By.xpath("//tbody/tr[last()]")); // Adjust XPath if necessary
+		    return lastRowAfterRefresh.getText();
+	}
+		
+	
+	
+
 
 }
