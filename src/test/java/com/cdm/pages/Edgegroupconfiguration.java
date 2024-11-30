@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.cdm.common.CommonActions;
+
+import io.cucumber.java.en.Then;
 
 public class Edgegroupconfiguration extends CommonActions {
 
@@ -43,7 +44,7 @@ public class Edgegroupconfiguration extends CommonActions {
 	@FindBy(css = ".cdk-overlay-container")
 	WebElement ActivateTooltip;
 
-	@FindBy(xpath = "//body[1]/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-edgegroup-config[1]/div[1]/div[1]/mat-horizontal-stepper[1]/div[2]/div[4]/form[1]/div[1]/div[1]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
+	@FindBy(xpath = "//app-filter[@name='appname']/div/a/mat-icon[contains(text(),'more_vert')]")
 	WebElement appNameSearchDot;
 
 	@FindBy(xpath = "//input[@formcontrolname='displayname']/../../../../../span[1]/span[1]")
@@ -521,9 +522,6 @@ public class Edgegroupconfiguration extends CommonActions {
 		// EditListpageVerification.click();
 	}
 
-	@FindBy(xpath = "")
-	WebElement selectAppNameCheckbox;
-
 	public void selectCheckboxesForApplications(String value) {
 
 		WebElement checkbox = driver.findElement(By.xpath("//td[contains(text(),'" + value + "')]/../td[1]//label"));
@@ -566,19 +564,6 @@ public class Edgegroupconfiguration extends CommonActions {
 
 		SetInput(appNamesendKeys, value, value);
 
-	}
-
-	public String get_tooltipRestart() {
-		mouseHover(Restartcheckbox);
-
-		if (RestartTooltip != null) {
-			String RestartTooltipText = RestartTooltip.getText();
-
-			System.out.println("toolTipText-->" + RestartTooltipText);
-
-			return RestartTooltipText;
-		}
-		return "";
 	}
 
 	public String get_tooltipPurge() {
@@ -709,7 +694,7 @@ public class Edgegroupconfiguration extends CommonActions {
 	}
 
 	public String verifyjsoncontainerCollapse() {
-		//String displayStyle = jsonContainer.getCssValue("display");
+		// String displayStyle = jsonContainer.getCssValue("display");
 		String heightStyle = jsonContainer.getCssValue("height");
 		return heightStyle;
 	}
@@ -845,71 +830,463 @@ public class Edgegroupconfiguration extends CommonActions {
 		return noResultMessageValidation.getText();
 
 	}
-public List<String> getRowData() {
-		
+
+	public List<String> getRowData() {
+
 		List<String> rowData = new ArrayList<>();
 		for (WebElement row : gridRows) {
 			rowData.add(row.getText());
 		}
 		return rowData;
 	}
+
 	@FindBy(xpath = "//tbody/tr")
 	List<WebElement> gridRows;
+
 	public int getRowCount() {
 
 		return gridRows.size();
 	}
 
-	@FindBy(xpath="//app-edgegroup-config/div/div/mat-horizontal-stepper/div[2]/div[3]/form/div[1]/div/div/div/table/thead/tr/th[2]/div/app-filter/div/a/mat-icon")
+	@FindBy(xpath = "//app-edgegroup-config/div/div/mat-horizontal-stepper/div[2]/div[3]/form/div[1]/div/div/div/table/thead/tr/th[2]/div/app-filter/div/a/mat-icon")
 	WebElement EdgeIDDot;
+
 	public void EdgeIDDot() {
 		clickElement(EdgeIDDot, "Clicking on Edge ID Dot");
-		
+
 	}
 
-	@FindBy(xpath="//input[@name='devicename']")
+	@FindBy(xpath = "//input[@name='devicename']")
 	WebElement edgeNameSendKeys;
+
 	public void sendvalueEdgeName(String value) {
 		SetInputENterKey(edgeNameSendKeys, "");
 		SetInput(edgeNameSendKeys, value, value);
 	}
 
-	@FindBy(xpath="//body[1]/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-edgegroup-config[1]/div[1]/div[1]/mat-horizontal-stepper[1]/div[2]/div[2]/form[1]/div[1]/div[1]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
+	@FindBy(xpath = "//app-edge-appli-config/div/div/mat-horizontal-stepper/div[2]/div[1]/form/div[1]/div/div/div/div/table/thead/tr/th[2]/div/app-filter/div/a/mat-icon")
 	WebElement appGroupNameThreeDot;
-	
+
 	public void appGroupNameDot() {
-		
+
 		clickElement(appGroupNameThreeDot, "Clicking on three dots of GroupName");
-		
+
 	}
 
-	@FindBy(xpath="//input[@name='appgroupname']")
+	@FindBy(xpath = "//input[@name='appgroupname']")
 	WebElement appGroupNameSendKeys;
+
 	public void sendvalueAppGroupName(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", appGroupNameSendKeys);
 		SetInputENterKey(appGroupNameSendKeys, "");
 		SetInput(appGroupNameSendKeys, value, value);
-		
-	}
-	@FindBy(xpath="//body/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-edgegroup-config[1]/div[1]/div[1]/mat-horizontal-stepper[1]/div[2]/div[2]/form[1]/div[2]/button[1]/span[1]")
-	WebElement PreviousTwoButton;
-	public void previousButtonStepTwo() {
-		clickElement(PreviousTwoButton, "Clicking on Previous button");
-		
+
 	}
 
-	@FindBy(xpath="//input[@name='displayname']")
+	@FindBy(xpath = "//body/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-edgegroup-config[1]/div[1]/div[1]/mat-horizontal-stepper[1]/div[2]/div[2]/form[1]/div[2]/button[1]/span[1]")
+	WebElement PreviousTwoButton;
+
+	public void previousButtonStepTwo() {
+		clickElement(PreviousTwoButton, "Clicking on Previous button");
+
+	}
+
+	@FindBy(xpath = "//input[@name='displayname']")
 	WebElement edgeGroupNameSendKeys;
-	
-	@FindBy(xpath="//body[1]/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-edgegroup-config[1]/div[1]/div[1]/mat-horizontal-stepper[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
+
+	@FindBy(xpath = "//body[1]/app-root[1]/app-root[1]/app-home[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/div[2]/div[1]/app-edgegroup-config[1]/div[1]/div[1]/mat-horizontal-stepper[1]/div[2]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
 	WebElement edgeGroupNameThreeDot;
-	
+
 	public void edgeGroupNameDot() {
 		clickElement(edgeGroupNameThreeDot, "Clicking on three dots of EdgeGroupName");
 	}
-	
+
 	public void sendvalueEdgeGroupName(String value) {
 		SetInputENterKey(edgeGroupNameSendKeys, "");
 		SetInput(edgeGroupNameSendKeys, value, value);
+
+	}
+
+	@FindBy(xpath = "//div[@id='cdk-step-content-0-2']/form/div[2]/button[2]")
+	WebElement nextButtonThree;
+
+	public void nextButtonThree() {
+
+		clickElement(nextButtonThree, "Clicking on next button");
+	}
+
+	// div[@id='cdk-step-content-0-3']/form/div[1]/img[2]
+
+	@FindBy(xpath = "//mat-horizontal-stepper/div[2]/div[4]/form/div[1]/img[2]")
+	WebElement uploadconfigurationFile;
+
+	public void addconfigurationFileButton() {
+
+		clickElement(uploadconfigurationFile, "Clicking on upload button on the page of application configuration");
+
+	}
+
+	public String get_tooltipRestart() {
+		mouseHover(Restartcheckbox);
+
+		if (RestartTooltip != null) {
+			String RestartTooltipText = RestartTooltip.getText();
+
+			System.out.println("toolTipText-->" + RestartTooltipText);
+
+			return RestartTooltipText;
+		}
+		return "";
+	}
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement appNameToolTip;
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement selectToolTip;
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement statusToolTip;
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement versionToolTip;
+
+	@FindBy(xpath = "//table[@id='matTable1']/thead/tr/th[3]/div/span/div/div[contains(text(),'Version/Tag')][1]")
+	WebElement versionThreeDot;
+
+	@FindBy(xpath = "//table[@id='matTable1']/thead/tr/th[1]/div/span[contains(text(),'Select')]")
+	WebElement selectDot;
+
+	@FindBy(xpath = "//table[@id='matTable1']/thead/tr/th[4]/div/span/div/div[contains(text(),'Status')][1]")
+	WebElement statusThreeDot;
+
+	@FindBy(xpath = "//table[@id='matTable1']/thead/tr/th[2]/div/span/div/div[contains(text(),'App Name')][1]")
+	WebElement appNameConfigSearchDot;
+
+	public String get_tooltipAppName() {
+		mouseHover(appNameConfigSearchDot);
+
+		if (appNameToolTip != null) {
+			String appNameToolTipText = appNameToolTip.getText();
+
+			return appNameToolTipText;
+		}
+		return "";
+	}
+
+	public String get_tooltipVersion() {
+		mouseHover(versionThreeDot);
+
+		if (versionToolTip != null) {
+			String versionToolTipText = versionToolTip.getText();
+
+			return versionToolTipText;
+		}
+		return "";
+	}
+
+	public String get_tooltipStatus() {
+		mouseHover(statusThreeDot);
+
+		if (statusToolTip != null) {
+			String statusToolTipText = statusToolTip.getText();
+
+			return statusToolTipText;
+		}
+		return "";
+	}
+
+	public Object get_tooltipSelect() {
+		mouseHover(selectDot);
+
+		if (selectToolTip != null) {
+			String selectToolTipText = selectToolTip.getText();
+
+			return selectToolTipText;
+		}
+		return "";
+	}
+
+	public void sortingOnAppName() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//table[@id='matTable1']/thead/tr/th[2]/div/span/div/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+
+		try {
+			Thread.sleep(3000);
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void verifysortinOnVersion() throws InterruptedException {
+
+		driver.findElement(
+				By.xpath("//table[@id='matTable1']/thead/tr/th[3]/div/span/div/div[contains(text(),'Version/Tag')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(3000);
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+	}
+
+	public void verifySortingOnStatus() throws InterruptedException {
+
+		driver.findElement(
+				By.xpath("//table[@id='matTable1']/thead/tr/th[4]/div/span/div/div[contains(text(),'Status')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(3000);
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingonConfigName() throws InterruptedException {
+		driver.findElement(By.xpath("//*[@id='matTable']/thead/tr/th[1]/div/span/div/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(3000);
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingOnProxyApp() throws InterruptedException {
+		driver.findElement(By.xpath("//*[@id= 'matTable']/thead/tr/th[2]/div/span/div/div[2]")).click();
+		Thread.sleep(2000);
+		try {
+			Thread.sleep(3000);
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	@FindBy(xpath = "//*[@id='matTable']/thead/tr/th[1]/div/app-filter/div/a/mat-icon")
+	WebElement searchConfigAppThreeDot;
+
+	public void searchconfigApp() {
+
+		clickElement(searchConfigAppThreeDot, "Clicking on three dots of config name");
+	}
+
+	@FindBy(xpath = "//input[@name='name']")
+	WebElement configNameInput;
+
+	public void sendvalueConfigName(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", configNameInput);
+		SetInputENterKey(configNameInput, "");
+		SetInput(configNameInput, value, value);
+
+	}
+
+	WebElement proxyAppThreeDot;
+	@FindBy(xpath = "//input[@name='proxy_app']")
+	WebElement proxyAppInput;
+
+	public void searchProxyApp() {
+		clickElement(proxyAppThreeDot, "Clicking on three dots of proxyapp");
+
+	}
+
+	public void sendvalueProxyAppName(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", proxyAppInput);
+		SetInputENterKey(proxyAppInput, "");
+		SetInput(proxyAppInput, value, value);
+
+	}
+
+	@FindBy(xpath = "//input[@formcontrolname='fqdn']")
+	WebElement fqdnInput;
+
+	public void sendvalueforfqdn(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", fqdnInput);
+		SetInputENterKey(fqdnInput, "");
+		SetInput(fqdnInput, value, value);
+
+	}
+
+	@FindBy(xpath = "//input[@formcontrolname='proxy_app']")
+	WebElement proxyAppInfo;
+
+	public void enterProxyAppInfo(String value) {
+
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", proxyAppInfo);
+		SetInputENterKey(proxyAppInfo, "");
+		SetInput(proxyAppInfo, value, value);
+	}
+
+	// *[@id="mat-dialog-2"]/app-uploadconfigfile/div[3]/button[2]
+	@FindBy(xpath = "/html/body/div[3]/div[2]/div/mat-dialog-container/app-uploadconfigfile/div[3]/button[2]/span[1]")
+	WebElement SaveButtonforConfigApp;
+
+	public void saveConfigFile() {
+
+		clickElement(SaveButtonforConfigApp, "Clicking on Save Button");
+
+	}
+
+	@FindBy(xpath = "//div[@id='toast-container']")
+
+	WebElement confirmationMessage;
+
+	public String getConfirmationMessage() {
+
+		return confirmationMessage.getText();
+	}
+
+	@FindBy(xpath = "//mat-sidenav-container/mat-sidenav-content/div[2]/div/app-device/div/div[1]/div/img[5]")
+	WebElement bulkApplicationConfigurationIcon;
+
+	public void bulkApplicationConfigurationIcon() {
+		clickElement(bulkApplicationConfigurationIcon, "Clicking on icon of BulkApplication Configuration");
+
+	}
+
+	@FindBy(xpath = "(//button//span[contains(text(),'Next')])[1]/..")
+	WebElement nextButtonOne;
+
+	public void nextButtonOne() {
+		clickElement(nextButtonOne, "Clicking on First next button");
+
+	}
+
+	@FindBy(xpath = "//mat-sidenav-content/div[2]/div/app-edge-appli-config/div/div/mat-horizontal-stepper/div[2]/div[2]/form/div[1]/div/div/div/table/thead/tr/th[1]/mat-checkbox/label")
+	WebElement selectAllEdgeDevices;
+
+	public void selectAllEdgeDevice() {
+		clickElement(selectAllEdgeDevices, "Clicking on all checkboxes of Edge Devices");
+
+	}
+	@FindBy(xpath = "(//button//span[contains(text(),'Next')])[2]/..")
+	WebElement nextButtonTwo;
+	public void nextButtonTwo() {
+		clickElement(nextButtonTwo, "Clicking on Second next button");
 		
 	}
+	@FindBy(xpath="//mat-horizontal-stepper/div[2]/div[1]/form/div[1]/div/div/div/div/table/tbody/tr/td[1]/mat-checkbox/label/span[1]")
+	WebElement selectingAppGroupNameElement;
+	
+	public void selectAppGroupName() {
+		clickElement(selectingAppGroupNameElement, "Selecting App Group Name");
+		
+	}
+
+	@FindBy(xpath ="//app-edge-appli-config/div/div/mat-horizontal-stepper/div[2]/div[3]/form/div[1]/div/div/div/table/tbody/tr/td[1]/mat-checkbox/label")
+	WebElement selectCheckboxesForApplicationsForConfigurationElement;
+	
+		public void selectCheckboxesForApplicationsForConfiguration() {
+			 try {
+			        // Wait for the element to be present and visible
+			        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			        WebElement checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//app-edge-appli-config/div/div/mat-horizontal-stepper/div[2]/div[3]/form/div[1]/div/div/div/table/tbody/tr/td[1]/mat-checkbox/label")));
+			        
+			        if (!checkbox.isSelected()) {
+			            checkbox.click();
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			    }
+			
+		}
+
 }

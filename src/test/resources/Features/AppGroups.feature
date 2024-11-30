@@ -431,17 +431,32 @@ Feature: APPGROUPS
 #Then verify all tooltips on Add Application page
 
 
+#@Test
+#Scenario: TC041_verification of mapping application on App Group page
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Given the user on the App Groups page
+#Then click on Add application icon from the action column
+#Then user search for the application by name
+#Then user select the application that the user needs
+#Then user click on the "Save" button
+#Then user should see a "Mapping save successfully" message
+
+
+
 @Test
-Scenario: TC041_verification of mapping application on App Group page
+Scenario: TC042_verify upload functionality of App Group
 Given User launch application in chrome browser
 Then click on login button on home page
 When user enters credentials and click on login button
 Given the user on the App Groups page
-Then click on Add application icon from the action column
-Then user search for the application by name
-Then user select the application that the user needs
-Then user click on the "Save" button
-Then user should see a "Mapping save successfully" message
+When the user clicks on the App Bulk Upload icon at the top of the screen
+Then the user clicks on the "Choose File" option from the popup
+Then the user clicks on the "Upload" button
+Then verify confirmation message "App Group added successfully" should appear
+
+
 
 
 

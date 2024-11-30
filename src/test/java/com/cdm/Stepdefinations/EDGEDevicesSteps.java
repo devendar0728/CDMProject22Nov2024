@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.cdm.pages.AppgroupnewlistPage;
 import com.cdm.pages.EdgeDeviceAdd;
 import com.cdm.pages.EdgeDeviceEdit;
 import com.cdm.pages.EdgeDevicesPage;
@@ -32,14 +34,14 @@ public class EDGEDevicesSteps extends BaseTest {
 	public void user_enters_valid_values_for_all_required_text_fields_and_selects_right_values_from_dropdown()
 			throws InterruptedException {
 		EdgeDeviceAdd eda = new EdgeDeviceAdd(driver, logger);
-		eda.identityedgeIdInputAdd((alldata.get(vTCName).get("Edge ID Add").toString()));
+		eda.identityedgeIdInputAdd((alldata.get(vTCName).get("EdgeIDAdd").toString()));
 		eda.identityedgeNameAdd((alldata.get(vTCName).get("EdgeNameAdd").toString()));
 		eda.organizationAdd(alldata.get(vTCName).get("OrganizationAdd").toString());
-		eda.edgeGroupNameAdd(alldata.get(vTCName).get("EDGE Group Name Add").toString());
+		eda.edgeGroupNameAdd(alldata.get(vTCName).get("EDGEGroupNameAdd").toString());
 
 		eda.locationAdd((alldata.get(vTCName).get("LocationAdd").toString()));
 
-		eda.hardWareNameAdd((alldata.get(vTCName).get("Hardware Name Add").toString()));
+		eda.hardWareNameAdd((alldata.get(vTCName).get("HardwareNameAdd").toString()));
 
 		eda.descriptionAdd((alldata.get(vTCName).get("DescriptionAdd").toString()));
 
@@ -2243,7 +2245,8 @@ public class EDGEDevicesSteps extends BaseTest {
 	}
 
 	@Then("verify user see download successful message and file should get downloaded")
-	public void verify_user_see_download_successful_message_and_file_should_get_downloaded() throws InterruptedException {
+	public void verify_user_see_download_successful_message_and_file_should_get_downloaded()
+			throws InterruptedException {
 		EdgeDevicesPage edp = new EdgeDevicesPage(driver, logger);
 		Thread.sleep(2000);
 		WebElement bulkDownloadsuccessMessage = edp.downloadSuccessMessage();
@@ -3007,5 +3010,186 @@ public class EDGEDevicesSteps extends BaseTest {
 			// TODO: handle exception
 		}
 	}
+
+	@Then("search Edge Name from existing Edge device and click on config apps button from the action column")
+	public void search_edge_name_from_existing_edge_device_and_click_on_config_apps_button_from_the_action_column()
+			throws InterruptedException {
+		EdgeDevicesPage edp = new EdgeDevicesPage(driver, logger);
+		edp.edgeNameSearch_Button();
+		edp.sendValueSearchIconByEdgeName(alldata.get(vTCName).get("EDGENameSearch").toString());
+		edp.backDropShowing_Div_Click();
+		Thread.sleep(2000);
+		edp.scrollingElementRightBar("div.example-container", "900");
+		edp.configAppButton();
+
+	}
+
+	@Then("select the app which user want to configure")
+	public void select_the_app_which_user_want_to_configure() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+
+		egc.appNameSearchDot();
+
+		egc.sendvalueAppName(alldata.get(vTCName).get("AppnameSearchconfig").toString());
+
+		egc.backDropShowing_Div_Click();
+		
+		Thread.sleep(3000);
+		egc.selectCheckboxesForApplications(alldata.get(vTCName).get("checkApp").toString());
+		Thread.sleep(3000);
+	}
+
+	@Then("click on Next button")
+	public void click_on_next_button() {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.nextButtonThree();
+	}
+
+	@Then("upload configuration file icon at the corner of the page")
+	public void upload_configuration_file_icon_at_the_corner_of_the_page() {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.addconfigurationFileButton();
+	}
+
+
+	@Then("the user clicks on the Choose File option from the popup for ConfiguringApps")
+	public void the_user_clicks_on_the_choose_file_option_from_the_popup_for_configuring_apps() {
+    
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		File uploadFile = new File(alldata.get(vTCName).get("UploadFilePathForConfig").toString());
+		WebElement fileInput = driver.findElement(By.xpath("//input[@type='file']"));
+		fileInput.sendKeys(uploadFile.getAbsolutePath());
+	}
+
+	@Then("add information about fqdn information  and Proxy app details")
+	public void add_information_about_fqdn_information_and_proxy_app_details() {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.sendvalueforfqdn(alldata.get(vTCName).get("fqdninfo").toString());
+		egc.enterProxyAppInfo(alldata.get(vTCName).get("ProxyAppInfo").toString());
+	}
+
+	@Then("click on save button to upload configuration file")
+	public void click_on_save_button_to_upload_configuration_file() {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+egc.saveConfigFile();
+
+
+
+	}
+	@Then("user should see a {string} message on application configuration page")
+	public void user_should_see_a_message_on_application_configuration_page(String expectedmessage) throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+Thread.sleep(3000);
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForBulkAppConfig");
+		if (toasterMessageObj == null) {
+		    throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+ Thread.sleep(2000);
+		
+		// Get the actual message from the page
+		String actualMessage = egc.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
+
+
+
+	@Then("verify tooltips on stepper three\\(application)")
+	public void verify_tooltips_on_stepper_three_application() {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+
+		Assert.assertEquals("Tooltip for Select", "Select", egc.get_tooltipSelect());
+		Assert.assertEquals("Tooltip for AppName", "Unique Name assigned for the Application",
+				egc.get_tooltipAppName());
+		Assert.assertEquals("Tooltip for Version/Tag", "Version number of the Application", egc.get_tooltipVersion());
+		Assert.assertEquals("Tooltip for Status", "Indicates the Status of the Application", egc.get_tooltipStatus());
+	}
+
+	@Then("verify sorting on config App stepper Three")
+	public void verify_sorting_on_config_app_stepper_three() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.sortingOnAppName();
+		egc.outerlayerclick();
+		Thread.sleep(2000);
+		egc.verifysortinOnVersion();
+		egc.verifySortingOnStatus();
+	}
+
+	@Then("verify sorting on config App stepper four")
+	public void verify_sorting_on_config_app_stepper_four() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+
+		egc.sortingonConfigName();
+		egc.outerlayerclick();
+		egc.sortingOnProxyApp();
+		egc.outerlayerclick();
+
+	}
+
+	@Then("verify pagination on Stepper Four")
+	public void verify_pagination_on_stepper_four() throws Exception {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		Pagination edp = new Pagination(driver, logger);
+
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
+		edp.SelectPageMatOption(value);
+		int rowPerPage = Integer.parseInt(value);
+		//Assert.assertTrue("Row count match for last page", edp.LastPageClickAndCount(rowPerPage));
+
+		//Assert.assertTrue("Row count match for last page", edp.nextPageClickAndCountOnLastPage(rowPerPage));
+	}
+	
+	@Then("verify search functionality on config App and proxy App")
+	public void verify_search_functionality_on_config_app_and_proxy_app() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.searchconfigApp();
+		egc.sendvalueConfigName(alldata.get(vTCName).get("ConfigApp").toString());
+		egc.backDropShowing_Div_Click();
+		Thread.sleep(3000);
+		egc.searchProxyApp();
+		egc.sendvalueProxyAppName(alldata.get(vTCName).get("ProxyApp").toString());
+		egc.backDropShowing_Div_Click();
+		
+	}
+
+	@Then("click on icon of Bulk Application configuration which is placed at top corner of the page")
+	public void click_on_icon_of_bulk_application_configuration_which_is_placed_at_top_corner_of_the_page() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.bulkApplicationConfigurationIcon();
+		Thread.sleep(2000);
+	}
+	@Then("select App group and click on Next button")
+	public void select_app_group_and_click_on_next_button() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.appGroupNameDot();
+		egc.sendvalueAppGroupName(alldata.get(vTCName).get("AppGroupNameSearchConfigBulkApplication").toString());
+		egc.backDropShowing_Div_Click();
+		egc.selectAppGroupName();
+		Thread.sleep(3000);
+		egc.nextButtonOne();
+		Thread.sleep(2000);
+	}
+	@Then("select all the Edge Device and click on Next button")
+	public void select_all_the_edge_device_and_click_on_next_button() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.selectAllEdgeDevice();
+		egc.nextButtonTwo();
+		Thread.sleep(3000);
+	}
+	@Then("select application which user want to proceed for configuration")
+	public void select_application_which_user_want_to_proceed_for_configuration() throws InterruptedException {
+		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
+		egc.appNameSearchDot();
+		egc.sendvalueAppName(alldata.get(vTCName).get("selectCheckboxForBulkApplicationConfiguration").toString());
+		egc.backDropShowing_Div_Click();
+		egc.selectCheckboxesForApplicationsForConfiguration();
+		Thread.sleep(3000);
+		egc.nextButtonThree();
+		Thread.sleep(3000);
+	}
+
+
 
 }

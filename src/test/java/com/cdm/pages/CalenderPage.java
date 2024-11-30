@@ -33,7 +33,7 @@ public class CalenderPage extends CommonActions {
 			arrowforyearandmonth();
 			Thread.sleep(2000);
 			yearselection(year);
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			String moValue=Month +" " + year;
 			monthselection(moValue);
 			Thread.sleep(2000);			 

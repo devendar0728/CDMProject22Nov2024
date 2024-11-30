@@ -1,13 +1,18 @@
 package com.cdm.StepDefinations;
 
-import java.time.Duration;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.cdm.pages.AppGroupsAddPage;
 import com.cdm.pages.AppGroupsEditPage;
@@ -629,18 +634,53 @@ public class AppGroupsSteps extends BaseTest {
 		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
 		agnl.applicationNameThreeDots();
 		agnl.searchforApplicationName(alldata.get(vTCName).get("applicationNameSearch").toString());
+		agnl.backDropShowing_Div_Click();
+
 	}
 
-	@Then("user select the application that the user needs")
-	public void user_select_the_application_that_the_user_needs() {
+	@When("the user clicks on the App Bulk Upload icon at the top of the screen")
+	public void the_user_clicks_on_the_app_bulk_upload_icon_at_the_top_of_the_screen() throws InterruptedException {
 		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
-		agnl.selectApplication();
+		agnl.bulkUploadIcon();
+		Thread.sleep(3000);
 	}
 
-	@Then("user click on the {string} button")
-	public void user_click_on_the_button(String string) {
+	@Then("the user clicks on the {string} option from the popup")
+	public void the_user_clicks_on_the_option_from_the_popup(String string) throws InterruptedException {
 		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
-		agnl.saveButtonApplicationPage();
+		File uploadFile = new File(alldata.get(vTCName).get("UploadFilePath").toString());
+		WebElement fileInput = driver.findElement(By.xpath("//input[@formcontrolname='uploadfile']"));
+		fileInput.sendKeys(uploadFile.getAbsolutePath());
+
+		Thread.sleep(3000);
+
+	}
+
+	@Then("the user clicks on the {string} button")
+	public void the_user_clicks_on_the_button(String string) throws InterruptedException {
+		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
+		agnl.uploadButton();
+		Thread.sleep(5000);
+	}
+
+	@Then("verify confirmation message {string} should appear")
+	public void verify_confirmation_message_should_appear(String expectedmessage) throws InterruptedException {
+		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
+
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessage");
+		if (toasterMessageObj == null) {
+		    throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+
+		System.out.println("vTCName: " + vTCName);
+		System.out.println("Test Data: " + alldata.get(vTCName));
+		System.out.println("Expected Toaster Message: " + alldata.get(vTCName).get("toastermessageApp"));
+		// Get the actual message from the page
+		String actualMessage = agnl.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
 	}
 
 	@Then("user should see a {string} message")
@@ -648,6 +688,12 @@ public class AppGroupsSteps extends BaseTest {
 		String actualMessage = "Mapping save successfully"; // Replace with actual code to get the message
 		Assert.assertEquals(expectedMessage, actualMessage);
 		System.out.println("Verified the message: " + actualMessage);
+	}
+
+	@Then("user click on the {string} button")
+	public void user_click_on_the_button(String string) {
+		AppgroupnewlistPage agnl = new AppgroupnewlistPage(driver, logger);
+		agnl.saveButtonApplicationPage();
 	}
 
 }
