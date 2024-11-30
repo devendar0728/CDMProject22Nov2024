@@ -709,5 +709,93 @@ Feature: EDGEDEVICES
 #When user click on the kebab menu next to the Edge Groups
 #And user type valid search query in the search bar of Edge Groups
 #Then verify user should see a message saying "No results found"
+#
+#@Test
+#Scenario: TC056_Verify specific edge device configured with applications
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device and click on config apps button from the action column
+#Then select the app which user want to configure
+#Then click on Next button
+#Then upload configuration file icon at the corner of the page 
+#Then the user clicks on the Choose File option from the popup for ConfiguringApps
+#Then add information about fqdn information  and Proxy app details
+#Then click on save button to upload configuration file
+#Then user should see a "Bulk configuration save successfully" message on application configuration page
+
+#@Test
+#Scenario: TC057_Verify tooltip on Application Configuration page
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device and click on config apps button from the action column
+#Then verify tooltips on stepper three(application)
+
+
+#@Test
+#Scenario: TC058_Verify sorting on config App stepper three
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device and click on config apps button from the action column
+#Then verify sorting on config App stepper Three
+
+
+#@Test
+#Scenario: TC059_Verify sorting on config App and config value on stepper four
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device and click on config apps button from the action column
+#Then select the app which user want to configure
+#Then click on Next button
+#Then verify sorting on config App stepper four
+
+#
+#@Test
+#Scenario: TC060_Verify search functionality on Config Name and Proxy App
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device and click on config apps button from the action column
+#Then select the app which user want to configure
+#Then click on Next button
+#Then verify search functionality on config App and proxy App
+
+
+#@Test
+#Scenario: TC061_Verify pagination on Stepper four
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device and click on config apps button from the action column
+#Then select the app which user want to configure
+#Then click on Next button
+#Then verify pagination on Stepper Four
+
+@Test
+Scenario: TC062_Verify bulk application configuration functionality
+Given User launch application in chrome browser
+Then click on login button on home page
+When user enters credentials and click on login button
+Then Click on EDGE Device module from side menu bar
+Then click on icon of Bulk Application configuration which is placed at top corner of the page
+Then select App group and click on Next button
+Then select all the Edge Device and click on Next button
+Then select application which user want to proceed for configuration
+Then upload configuration file icon at the corner of the page
+Then the user clicks on the Choose File option from the popup for ConfiguringApps
+Then add information about fqdn information  and Proxy app details
+Then click on save button to upload configuration file
+Then user should see a "Bulk configuration save successfully" message on application configuration page
+
+
 
 

@@ -1,0 +1,167 @@
+{
+  "components": {
+    "schemas": {
+      "start_type": {
+        "type": "string",
+        "enum": [
+          "automatic"
+        ]
+      },
+      "torf": {
+        "type": "string",
+        "enum": [
+          "true",
+          "false"
+        ]
+      },
+      "bridge_protocol_version": {
+        "type": "string",
+        "enum": [
+          "mqttv50",
+          "mqttv311"
+        ]
+      },
+	  "qos": {
+        "type": "string",
+        "enum": [
+		  "0",
+          "1",
+		  "2"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "ADD": {
+      "BRIDGE": {
+        "parameters": [
+          {
+            "name": "connection",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address:port",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "remote_username",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "remote_password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+		  {
+            "name": "qosIn",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/qos"
+            }
+          },
+		  {
+            "name": "qosOut",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/qos"
+            }
+          },
+          {
+            "name": "topicIn",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "topicOut",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/start_type"
+            }
+          },
+          {
+            "name": "bridge_attempt_unsubscribe",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/torf"
+            }
+          },
+          {
+            "name": "bridge_protocol_version",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/bridge_protocol_version"
+            }
+          },
+          {
+            "name": "cleansession",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/torf"
+            }
+          },
+		  {
+            "name": "require_certificate",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/torf"
+            }
+          },
+		  {
+            "name": "cafile",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+		  {
+            "name": "certfile",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+		  {
+            "name": "keyfile",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "REMOVE": {
+      "BRIDGE": {
+        "parameters": [
+          {
+            "name": "connection_name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

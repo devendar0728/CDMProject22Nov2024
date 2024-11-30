@@ -1851,6 +1851,12 @@ public class EdgeDevicesPage extends CommonActions {
 		
 	}
 
+	public void configAppButton() {
+		
+		clickElement(configurationIcon, "clicking on config app button");
+		
+	}
+
 	
 	}
 
