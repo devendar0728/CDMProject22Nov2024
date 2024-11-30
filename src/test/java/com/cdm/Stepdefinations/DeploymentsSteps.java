@@ -152,7 +152,7 @@ public class DeploymentsSteps extends BaseTest {
 	public void click_on_deployment_pagination_it_will_display_default_records_will_display() throws Exception {
 		Pagination edp = new Pagination(driver, logger);
 
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		edp.SelectPageMatOption(value);
 		int rowPerPage = Integer.parseInt(value);
 		Assert.assertTrue("Row count match for last page", edp.LastPageClickAndCount(rowPerPage));
@@ -603,7 +603,7 @@ public class DeploymentsSteps extends BaseTest {
 	@Then("Click on pagination part it will display default records will display")
 	public void click_on_pagination_part_it_will_display_default_records_will_display() throws Exception {
 		Pagination p = new Pagination(driver, logger);
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 
 		int rowPerPage = Integer.parseInt(value);
@@ -615,7 +615,7 @@ public class DeploymentsSteps extends BaseTest {
 	@Then("verify to Click on pagination to check functionality of Full Backward arrow")
 	public void verify_to_click_on_pagination_to_check_functionality_of_full_backward_arrow() throws Exception {
 		Pagination p = new Pagination(driver, logger);
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 		Thread.sleep(5000);
 		int rowPerPage = Integer.parseInt(value);
@@ -635,7 +635,7 @@ public class DeploymentsSteps extends BaseTest {
 		Pagination p = new Pagination(driver, logger);
 
 		// Retrieve the 'Items Per Page' value from test data
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 		Thread.sleep(5000);
 
@@ -659,7 +659,7 @@ public class DeploymentsSteps extends BaseTest {
 		Pagination p = new Pagination(driver, logger);
 
 		// Retrieve the 'Items Per Page' value from test data
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 		Thread.sleep(3000);
 
@@ -679,7 +679,7 @@ public class DeploymentsSteps extends BaseTest {
 	@Then("Click on pagination to check Previous Page button\\(Backward arrow) functionality")
 	public void click_on_pagination_to_check_previous_page_button_backward_arrow_functionality() throws Exception {
 		Pagination p = new Pagination(driver, logger);
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 		Thread.sleep(5000);
 		int rowPerPage = Integer.parseInt(value);
@@ -784,7 +784,7 @@ public class DeploymentsSteps extends BaseTest {
 	public void verifacation_of_click_on_deployment_pagination_it_will_display_records_will_display() {
 		Pagination edp = new Pagination(driver, logger);
 
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		edp.SelectPageMatOption(value);
 		int rowPerPage = Integer.parseInt(value);
 		// Assert.assertTrue("Row count match for last page",
@@ -799,7 +799,7 @@ public class DeploymentsSteps extends BaseTest {
 		Pagination p = new Pagination(driver, logger);
 
 		// Retrieve the 'Items Per Page' value from test data
-		String value = alldata.get(vTCName).get("ItemPerPage").toString();
+		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		p.SelectPageMatOption(value);
 		Thread.sleep(3000);
 
