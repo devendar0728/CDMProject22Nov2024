@@ -110,7 +110,7 @@ public class EdgeGroupAddPage extends CommonActions {
 	@FindBy(xpath = "//input[@formcontrolname='location']")
 	WebElement locationAdd;
 
-	@FindBy(xpath = "//textarea[@formcontraolname='description']")
+	@FindBy(xpath = "//textarea[@formcontrolname='description']")
 	WebElement descriptionAdd;
 
 
@@ -149,7 +149,7 @@ public class EdgeGroupAddPage extends CommonActions {
 	@FindBy(xpath = "//input[@formcontrolname='displayname']")
 	WebElement edgeGroupNameAdd;
 
-	@FindBy(xpath = "(//input[@formcontrolname='displayname']/../../../../div/../../span[1])")
+	@FindBy(xpath = "//input[@formcontrolname='displayname']/../../../../div/../../span[1]")
 	WebElement validationMessageGroupName;
 
 	@FindBy(xpath = "(//input[@formcontrolname='displayname']/../../../../div/../../span[2])")
@@ -377,7 +377,8 @@ public class EdgeGroupAddPage extends CommonActions {
 		edgeGroupNameAdd.sendKeys(Keys.TAB);
 	}
 
-	public String get_Text_ToolTipedgeGroupId() {
+	public String get_Text_ToolTipedgeGroupId() throws InterruptedException {
+		Thread.sleep(2000);
 		mouseHover(edgeGroupIdAdd);
 
 		String edgeGroupIdAddNameText = groupIDToolTip.getText();
@@ -388,7 +389,7 @@ public class EdgeGroupAddPage extends CommonActions {
 	}
 
 	public String get_Text_ToolTipedgeGroupName() {
-		mouseHover(groupNameLabel);
+		mouseHover(edgeGroupNameAdd);
 
 		String GroupNameAddText = groupNameToolTip.getText();
 
@@ -498,5 +499,68 @@ public class EdgeGroupAddPage extends CommonActions {
 	public void minimizeScreen() {
 		driver.manage().window().minimize();
 
+	}
+
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement locationAddToolTip;
+	
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement descriptionAddToolTip;
+	
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement healthToolTip;
+	
+	
+	public String get_Text_tooltipLocation() {
+		mouseHover(locationAdd);
+
+		String locationAddTipText = locationAddToolTip.getText();
+
+		locationAddTipText.trim();
+
+		return locationAddTipText;
+	}
+
+	public String get_Text_ToolTipedgeDescription() {
+		mouseHover(descriptionAdd);
+
+		String descriptionAddToolTipText = descriptionAddToolTip.getText();
+
+		descriptionAddToolTipText.trim();
+
+		return descriptionAddToolTipText;
+	}
+
+	public String get_Text_ToolTipedgeHealth() {
+		mouseHover(healthstatus);
+
+		String healthToolTipText = healthToolTip.getText();
+
+		healthToolTipText.trim();
+
+		return healthToolTipText;
+	}
+
+	@FindBy(xpath = "//input[@formcontrolname='maxservernode']")
+	WebElement serverNodeElement;
+	
+	public String get_Text_ToolTipMaximumServerNodes() {
+		mouseHover(serverNodeElement);
+
+		String serverNodeToolTipText = serverNodeToolTip.getText();
+
+		serverNodeToolTipText.trim();
+
+		return serverNodeToolTipText;
+	}
+
+	public String get_Text_ToolTipserverPort() {
+		mouseHover(serverport);
+
+		String serverportToolTipText = serverportToolTip.getText();
+
+		serverportToolTipText.trim();
+
+		return serverportToolTipText;
 	}
 }

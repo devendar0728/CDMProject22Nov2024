@@ -4,11 +4,15 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.util.List;
 
 import org.junit.Assert;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
+import com.cdm.pages.AppgroupnewlistPage;
 import com.cdm.pages.EdgeGroupAddPage;
 import com.cdm.pages.EdgeGroupApplicationDeployment;
 import com.cdm.pages.EdgeGroupConfigurationPage;
@@ -26,12 +30,19 @@ public class EdgeGroupSteps extends BaseTest {
 	public void click_on_edge_group() throws Exception {
 
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
-		String strTitle = alldata.get(vTCName).get("EdgeGroupsTitle").toString();
+
 		egp.clickEdgeGroups();
 
 	}
 
-	
+	@Then("verify user is landing on Edge Group page")
+	public void verify_user_is_landing_on_edge_group_page() {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+
+		WebElement heading = driver.findElement(By.tagName("h2"));
+		Assert.assertEquals(heading.getText(), "EDGE Groups", "EDGE Groups");
+	}
+
 	@Then("enter invalid Edge group Id and check for the validation message")
 	public void enter_invalid_edge_group_id_and_check_for_the_validation_message() {
 		EdgeGroupAddPage egap = new EdgeGroupAddPage(driver, logger);
@@ -158,7 +169,8 @@ public class EdgeGroupSteps extends BaseTest {
 	}
 
 	@Then("Verification of tool tip text visibilty for EDIT button in Actions column")
-	public void verification_of_tool_tip_text_visibilty_for_edit_button_in_actions_column() {
+	public void verification_of_tool_tip_text_visibilty_for_edit_button_in_actions_column()
+			throws InterruptedException {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 
 		Assert.assertEquals("Tooltip of Edit", "Edit", egp.get_Text_ToolTipEdit());
@@ -182,6 +194,22 @@ public class EdgeGroupSteps extends BaseTest {
 		egap.saveButtonforEdgeGroup();
 		Assert.assertEquals("Edge Name validation for Server host id ", "Mandatory field - required !",
 				egap.validationMessageGroupNamewithout());
+	}
+
+	@Then("verify page should get refresh")
+	public void verify_page_should_get_refresh() throws InterruptedException {
+		EdgeGroupsPage edp = new EdgeGroupsPage(driver, logger);
+		Thread.sleep(2000);
+		// Capture the last row data before and after refresh
+		String lastRowBeforeRefresh = edp.lastRowBeforeRefresh();
+		String lastRowAfterRefresh = edp.lastRowDataAfterRefresh();
+
+		// Log the data for debugging purposes
+		System.out.println("Last row before refresh: " + lastRowBeforeRefresh);
+		System.out.println("Last row after refresh: " + lastRowAfterRefresh);
+
+		// Assert that the last row has changed
+		Assert.assertEquals("Refresh operation", lastRowBeforeRefresh, lastRowAfterRefresh);
 	}
 
 	@Then("verify error message below Server Host Address text field")
@@ -307,10 +335,9 @@ public class EdgeGroupSteps extends BaseTest {
 	@Then("Click on EDGE Group module from side menu bar")
 	public void click_on_edge_group_module_from_side_menu_bar() throws InterruptedException {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
-//		String strTitle = alldata.get(vTCName).get("EdgeGroupTitleList").toString();
-//		egp.clickEdgeGroups(strTitle);
+
 		egp.clickEdgeGroups();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 	}
 
 	@Then("Click on Add button to add Edge group value")
@@ -370,17 +397,6 @@ public class EdgeGroupSteps extends BaseTest {
 	}
 
 	@Then("enter the value for Minimum searchbox for alaram raised")
-	public void enter_the_value_for_minimum_searchbox_for_alaram_raised() {
-		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
-		egp.alaramRaisedThreeDotInputMin(alldata.get(vTCName).get("AlaramRaisedMinValue").toString());
-
-	}
-
-	@Then("enter the value for maximum searchbox for alaram raised")
-	public void enter_the_value_for_maximum_searchbox_for_alaram_raised() {
-		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
-		egp.alaramRaisedThreeDotInputMax(alldata.get(vTCName).get("AlaramRaisedMaxValue").toString());
-	}
 
 	@Then("Click on three dots on Device Connected functionality")
 	public void click_on_three_dots_on_device_connected_functionality() {
@@ -391,6 +407,7 @@ public class EdgeGroupSteps extends BaseTest {
 	@Then("Click on three dots on Device Active functionality")
 	public void click_on_three_dots_on_device_active_functionality() throws InterruptedException {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+
 		egp.deviceActiveThreeDot();
 
 	}
@@ -399,6 +416,14 @@ public class EdgeGroupSteps extends BaseTest {
 	public void enter_the_value_for_minimum_searchbox_for_device_active() {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 		egp.deviceActiveInputMin(alldata.get(vTCName).get("DeviceActiveMinValue").toString());
+	}
+
+	@Then("verify user is landing on Edit page")
+	public void verify_user_is_landing_on_edit_page() {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		// Assertion for Unique Element on Edit Page (e.g., Form Heading or Label)
+		WebElement formHeadingEdit = driver.findElement(By.xpath("//h4/span"));
+		Assert.assertEquals(formHeadingEdit.getText().trim(), "Update", "Update");
 	}
 
 	@Then("enter the value for maximum searchbox for device Active")
@@ -652,7 +677,8 @@ public class EdgeGroupSteps extends BaseTest {
 	}
 
 	@Then("Verification to check the tool tip text visibilty for Input text field Identity card in EDIT Screen")
-	public void verification_to_check_the_tool_tip_text_visibilty_for_input_text_field_identity_card_in_edit_screen() {
+	public void verification_to_check_the_tool_tip_text_visibilty_for_input_text_field_identity_card_in_edit_screen()
+			throws InterruptedException {
 		EdgeGroupAddPage egap = new EdgeGroupAddPage(driver, logger);
 
 		Assert.assertEquals("Tooltip of Group ID", "Unique ID assigned for the EDGE Group",
@@ -723,8 +749,6 @@ public class EdgeGroupSteps extends BaseTest {
 		Assert.assertEquals("Tooltip of Health", "EDGE Group is not communicating",
 				egap.get_Text_ToolTipHealthStatus());
 	}
-
-	
 
 	@Then("Save the certificates")
 	public void save_the_certificates() throws Exception {
@@ -1013,16 +1037,17 @@ public class EdgeGroupSteps extends BaseTest {
 	@Then("verify for App Name functionality")
 	public void verify_for_app_name_functionality() throws InterruptedException {
 		EdgeGroupConfigurationPage egcp = new EdgeGroupConfigurationPage(driver, logger);
-//		egcp.appNameDot();
-//
-//
-//		egcp.appNameInput(alldata.get(vTCName).get("Value4").toString());
-//
-//		egcp.backDropShowing_Div_Click();
-//
-//		egcp.checkboxEdgeNameStepFour();
-//
+		egcp.appNameDot();
+
+		egcp.appNameInput(alldata.get(vTCName).get("BulkAppNameSearch").toString());
+
+		egcp.backDropShowing_Div_Click();
+
+		egcp.checkboxEdgeNameStepFour();
+
 		egcp.NextButtonStep4();
+
+		Thread.sleep(2000);
 	}
 
 	@Then("select the single check box valid Application name with latest version tag column and click on NEXT button")
@@ -1066,15 +1091,18 @@ public class EdgeGroupSteps extends BaseTest {
 
 	}
 
-	@Then("select the single check box valid Application name with latest version tag column and click on NEXT button from Application page")
-	public void select_the_single_check_box_valid_application_name_with_latest_version_tag_column_and_click_on_next_button_from_application_page()
+	@Then("select the single check box valid Application name with App name column and click on NEXT button from Application page")
+	public void select_the_single_check_box_valid_application_name_with_app_name_column_and_click_on_next_button_from_application_page()
 			throws InterruptedException {
 		EdgeGroupConfigurationPage egcp = new EdgeGroupConfigurationPage(driver, logger);
-		egcp.edgeVersionDot();
 
-		egcp.edgeVersionNameInput(alldata.get(vTCName).get("BulkAppNameVersionSearch").toString());
+		egcp.appNameDot();
 
-		egcp.backDropShowing_Div_Click();
+		egcp.appNameConfigInput(alldata.get(vTCName).get("BulkAppNameSearch").toString());
+
+		// egcp.backDropShowing_Div_Click();
+
+		Thread.sleep(2000);
 
 	}
 
@@ -1123,8 +1151,8 @@ public class EdgeGroupSteps extends BaseTest {
 
 	}
 
-	@Then("Enter numeric values to check character strength into Group NAME text fields")
-	public void enter_numeric_values_to_check_character_strength_into_group_name_text_fields()
+	@Then("verify Enter numeric values to check character strength into Group NAME text fields")
+	public void verify_enter_numeric_values_to_check_character_strength_into_group_name_text_fields()
 			throws InterruptedException {
 		EdgeGroupAddPage egap = new EdgeGroupAddPage(driver, logger);
 		egap.edgeGroupNameAdd(alldata.get(vTCName).get("GroupNameAdd").toString());
@@ -1135,13 +1163,21 @@ public class EdgeGroupSteps extends BaseTest {
 
 	}
 
-	@Then("Enter numeric values to check character strength into Group ID text fields")
-	public void enter_numeric_values_to_check_character_strength_into_group_id_text_fields()
+	@Then("verify user is returned back to Edge Group list page")
+	public void verify_user_is_returned_back_to_edge_group_list_page() {
+
+		// Assertion for Unique Element on the Edge Group List Page
+		WebElement pageHeading = driver.findElement(By.tagName("h2")); // Replace with actual locator
+		Assert.assertEquals(pageHeading.getText().trim(), "EDGE Groups", "EDGE Groups");
+	}
+
+	@Then("verify Enter numeric values to check character strength into Group ID text fields")
+	public void verify_enter_numeric_values_to_check_character_strength_into_group_id_text_fields()
 			throws InterruptedException {
 		EdgeGroupAddPage egap = new EdgeGroupAddPage(driver, logger);
-		egap.edgeGroupIdAdd(alldata.get(vTCName).get("GroupIDAdd").toString());
+		egap.edgeGroupIdAdd(alldata.get(vTCName).get("GroupNameAdd").toString());
 		egap.headingTitleAdd();
-
+		Thread.sleep(2000);
 		Assert.assertEquals("Validation message not matching",
 				"Alphanumerics of length Min = 2, Max = 64 are allowed !", egap.verifyValidationMessageGroupID());
 	}
@@ -1347,22 +1383,22 @@ public class EdgeGroupSteps extends BaseTest {
 		Assert.assertEquals("Tooltip for close", "Close", egp.get_Text_ToolTipClose());
 	}
 
-	@When("I click on a Console button link that opens a popup window")
-	public void i_click_on_a_console_button_link_that_opens_a_popup_window() {
+	@When("user click on a Console button link that opens a popup window")
+	public void user_click_on_a_console_button_link_that_opens_a_popup_window() {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 		egp.consoleIcon();
 
 	}
 
-	@Then("I should switch to the popup window")
-	public void i_should_switch_to_the_popup_window() {
+	@Then("user should switch to the popup window")
+	public void user_should_switch_to_the_popup_window() {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 		System.out.println("Landing on popup of console icon");
 
 	}
 
-	@Then("I should see a tooltip on the popup window")
-	public void i_should_see_a_tooltip_on_the_popup_window() {
+	@Then("user should see a tooltip on the popup window")
+	public void user_should_see_a_tooltip_on_the_popup_window() {
 		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 		Assert.assertEquals("Tooltip for close", "Close", egp.get_Text_ToolTipClose());
 	}
@@ -1384,4 +1420,150 @@ public class EdgeGroupSteps extends BaseTest {
 
 	}
 
+	@Then("verify successful operation")
+	public void verify_successful_operation() {
+
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		String maximumValue = alldata.get(vTCName).get("DeviceConnectedMaxValue").toString();
+		String minimumValue = alldata.get(vTCName).get("DeviceConnectedMinValue").toString();
+
+		Assert.assertTrue(egp.resultTable().contains(maximumValue));
+		Assert.assertTrue(egp.resultTable().contains(minimumValue));
+	}
+
+	@Then("verify change in the colour of three dots")
+
+	@Then("verify success message appear on the screen for download")
+	public void verify_success_message_appear_on_the_screen_for_download() {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		WebElement bulkDownloadsuccessMessage = egp.downloadSuccessMessage();
+		Assert.assertTrue("Download success message is not displayed", bulkDownloadsuccessMessage.isDisplayed());
+	}
+
+	@Then("verify sorting on Group Name")
+	public void verify_sorting_on_group_name() throws InterruptedException {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		egp.sortingOnGroupName();
+	}
+
+	@Then("verify sorting on Device Active")
+	public void verify_sorting_on_device_active() throws InterruptedException {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		egp.sortingOnDeviceActive();
+	}
+
+	@Then("verify sorting on Status")
+	public void verify_sorting_on_status() throws InterruptedException {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		egp.sortingOnStatus();
+	}
+
+	@Then("verify sorting on Device Connected")
+	public void verify_sorting_on_device_connected() {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		egp.get_Text_ToolTipDeviceConnected();
+	}
+
+	@Then("verify all tooltips on Edge Group Add page")
+	public void verify_all_tooltips_on_edge_group_add_page() throws InterruptedException {
+		EdgeGroupAddPage egap = new EdgeGroupAddPage(driver, logger);
+		try {
+			Thread.sleep(3000);
+			Assert.assertEquals("Tooltip of Group ID", "Unique ID assigned for the EDGE Group",
+					egap.get_Text_ToolTipedgeGroupId());
+			Thread.sleep(3000);
+			Assert.assertEquals("Tooltip of Group Name", "Name assigned for the EDGE Group",
+					egap.get_Text_ToolTipedgeGroupName());
+			Thread.sleep(3000);
+			Assert.assertEquals("Tooltip of Location", "Site at which the EDGE Group is installed",
+					egap.get_Text_tooltipLocation());
+			Thread.sleep(3000);
+			Assert.assertEquals("Tooltip of Description", "Short specific information about the EDGE Group",
+					egap.get_Text_ToolTipedgeDescription());
+
+			Assert.assertEquals("Tooltip of Health if it is not communication", "EDGE Group is not communicating",
+					egap.get_Text_ToolTipedgeHealth());
+
+			egap.scrollingverticalAdd();
+
+			Assert.assertEquals("Tooltip of App Group under deployment",
+					"Application Group to which the EDGE Group is assigned", egap.get_Text_ToolTipAppGroup());
+
+			Assert.assertEquals("Tooltip of Maximum server nodes",
+					"The maximum number of server nodes in an EDGE Group.", egap.get_Text_ToolTipMaximumServerNodes());
+
+			Assert.assertEquals("Tooltip of Server Host Address", "Host address : URL/IP address of EDGE Group Cluster",
+					egap.get_Text_ToolTipserverHostAddress());
+
+			Assert.assertEquals("Tooltip of Server Port", "Port Used by EDGE Group Cluster",
+					egap.get_Text_ToolTipserverPort());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	@Then("the user clicks on the {string} option from the popup for Edge Group")
+	public void the_user_clicks_on_the_option_from_the_popup_for_edge_group(String string) throws InterruptedException {
+		
+			EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+			File uploadFile = new File(alldata.get(vTCName).get("UploadFilePath").toString());
+			WebElement fileInput = driver.findElement(By.xpath("//input[@formcontrolname='uploadfile']"));
+			fileInput.sendKeys(uploadFile.getAbsolutePath());
+
+			Thread.sleep(3000);
+	}
+
+@Then("verify confirmation message {string} should appear on the Edge Group List page")
+public void verify_confirmation_message_should_appear_on_the_edge_group_list_page(String string) {
+	EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+
+	Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForEdgeGroup");
+	if (toasterMessageObj == null) {
+	    throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+	}
+	String expectedMessage = toasterMessageObj.toString().trim();
+
+	String actualMessage = egp.getConfirmationMessage();
+
+	// Validate the expected and actual messages
+	Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+}
+
+	@Then("the user clicks on the {string} button for Edge Group")
+	public void the_user_clicks_on_the_button_for_edge_group(String string) throws InterruptedException {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		egp.uploadButton();
+		Thread.sleep(5000);
+	}
+
+
+
+
+	@Then("verify all tooltips on Edge Group Edit page")
+	public void verify_all_tooltips_on_edge_group_edit_page() {
+		EdgeGroupEditPage egep = new EdgeGroupEditPage(driver, logger);
+		try {
+			Thread.sleep(4000);
+
+			egep.scrollingverticalAdd();
+
+			Assert.assertEquals("Tooltip of App Group under deployment",
+					"Application Group to which the EDGE Group is assigned", egep.get_Text_ToolTipAppGroupEdit());
+
+			Assert.assertEquals("Tooltip of Maximum server nodes",
+					"The maximum number of server nodes in an EDGE Group.",
+					egep.get_Text_ToolTipMaximumServerNodesEdit());
+
+			Assert.assertEquals("Tooltip of Server Host Address", "Host address : URL/IP address of EDGE Group Cluster",
+					egep.get_Text_ToolTipserverHostAddressEdit());
+
+			Assert.assertEquals("Tooltip of Server Host Address", "Port Used by EDGE Group Cluster",
+					egep.get_Text_ToolTipserverPortEdit());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
 }
