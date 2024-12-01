@@ -1,6 +1,8 @@
 package com.cdm.pages;
 
 import java.awt.AWTException;
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +17,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.cdm.common.CommonActions;
@@ -25,6 +29,7 @@ public class EdgeGroupsPage extends CommonActions {
 		super(driver, logger);
 		PageFactory.initElements(driver, this);
 	}
+
 	@FindBy(css = ".cdk-overlay-container")
 	WebElement healthstatusToolTip;
 
@@ -33,8 +38,6 @@ public class EdgeGroupsPage extends CommonActions {
 
 	@FindBy(xpath = "//div/mat-tooltip-component/div[contains(text(),'Close')]")
 	WebElement closeTooltip;
-
-
 
 	@FindBy(xpath = "//div[contains(text(),'Devices Connected')]")
 	WebElement deviceConnectedlabel;
@@ -131,7 +134,6 @@ public class EdgeGroupsPage extends CommonActions {
 	@FindBy(xpath = "//span[@class='text-danger ng-star-inserted']")
 	WebElement validationMessageEdgeName;
 
-
 	@FindBy(xpath = "//tbody/tr[1]/td[5]/img[3]")
 	WebElement stopICon;
 
@@ -196,7 +198,7 @@ public class EdgeGroupsPage extends CommonActions {
 	@FindBy(xpath = "//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]")
 	WebElement groupNameArrow;
 
-	@FindBy(xpath = "//body/div[3]/div[1]/div[1]/mat-tooltip-component[1]/div[1]")
+	@FindBy(css =".cdk-overlay-container mat-tooltip-component div")
 	WebElement EditButtonToolTip;
 
 	@FindBy(xpath = "//body/div[3]/div[1]/div[1]/mat-tooltip-component[1]/div[1]")
@@ -219,7 +221,6 @@ public class EdgeGroupsPage extends CommonActions {
 
 	@FindBy(xpath = "//tbody/tr[1]/td[6]/img[3]")
 	WebElement stopIconEdgeGroup;
-
 
 	@FindBy(xpath = "//thead/tr[1]/th[4]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
 	WebElement devicesActiveThreeDot;
@@ -268,7 +269,7 @@ public class EdgeGroupsPage extends CommonActions {
 	WebElement statuslabel;
 
 	// DeviceActive
-	@FindBy(xpath = "//input[@id='mat-input-4']")
+	@FindBy(xpath = "//input[@data-placeholder='Minimum']")
 	WebElement deviceActiveInputMin;
 
 	@FindBy(xpath = "//input[@data-placeholder='Maximum']")
@@ -283,7 +284,7 @@ public class EdgeGroupsPage extends CommonActions {
 	@FindBy(xpath = "//thead/tr[1]/th[3]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
 	WebElement deviceConnectedThreeDot;
 
-	@FindBy(xpath = "//thead/tr[1]/th[4]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
+	@FindBy(xpath = "//thead/tr[1]/th[3]/div[1]/app-filter[1]/div[1]/a[1]/mat-icon[1]")
 	WebElement deviceActiveThreeDot;
 
 	@FindBy(xpath = "//body/div[3]/div[2]/div[1]/div[1]/div[1]/button[1]/div[1]/label[1]/input[1]")
@@ -555,30 +556,30 @@ public class EdgeGroupsPage extends CommonActions {
 	}
 
 	public void deleteEdgeGroupColumn() {
-clickElement(deleteEdgeGroupColumn, "");
-		//deleteEdgeGroupColumn.click();
+		clickElement(deleteEdgeGroupColumn, "");
+		// deleteEdgeGroupColumn.click();
 
 	}
 
 	public void confirmationYesMessage() {
 		clickElement(confirmationYesMessage, "");
-		//confirmationYesMessage.click();
+		// confirmationYesMessage.click();
 	}
 
 	public void confirmationNoMessage() {
 		clickElement(confirmationYesMessage, "");
-		//confirmationYesMessage.click();
+		// confirmationYesMessage.click();
 
 	}
 
 	public void stopButton() {
 		clickElement(stopButton, "");
-		//stopButton.click();
+		// stopButton.click();
 	}
 
 	public void consoleIcon() {
 		clickElement(consoleIcon, "");
-		//consoleIcon.click();
+		// consoleIcon.click();
 
 	}
 
@@ -596,7 +597,7 @@ clickElement(deleteEdgeGroupColumn, "");
 	public void submitButtonForAll() {
 		wait(submitButtonAll, logger);
 		clickElement(submitButtonAll, "");
-		//submitButtonAll.click();
+		// submitButtonAll.click();
 	}
 
 	public void deviceConnectedInputMin(String value) {
@@ -919,7 +920,7 @@ clickElement(deleteEdgeGroupColumn, "");
 
 	public void clickEdgeGroups() {
 		clickElement(EdgeGroupTab, "");
-		//EdgeGroupTab.click();
+		// EdgeGroupTab.click();
 	}
 
 	public void edgegroupstatusInactive() {
@@ -944,58 +945,58 @@ clickElement(deleteEdgeGroupColumn, "");
 	}
 
 	public void sortingGroupName() throws InterruptedException {
-	    // Fetch column data before sorting
-	    List<WebElement> columns = driver.findElements(By.xpath("//*[@id='matTable']/table/tbody/tr/td[1]")); // Adjusted XPath for specific column
-	    String[] beforeSort = new String[columns.size()];
-	    for (int i = 0; i < columns.size(); i++) {
-	        beforeSort[i] = columns.get(i).getText().trim();
-	        System.out.println("Before Sort: " + beforeSort[i]);
-	    }
+		// Fetch column data before sorting
+		List<WebElement> columns = driver.findElements(By.xpath("//*[@id='matTable']/table/tbody/tr/td[1]")); // Adjusted
+																												// XPath
+																												// for
+																												// specific
+																												// column
+		String[] beforeSort = new String[columns.size()];
+		for (int i = 0; i < columns.size(); i++) {
+			beforeSort[i] = columns.get(i).getText().trim();
+			System.out.println("Before Sort: " + beforeSort[i]);
+		}
 
-	    // Sort the data in ascending order locally for comparison
-	    String[] expectedAscending = Arrays.copyOf(beforeSort, beforeSort.length);
-	    Arrays.sort(expectedAscending);
-	    System.out.println("Expected Ascending Order: " + Arrays.toString(expectedAscending));
+		// Sort the data in ascending order locally for comparison
+		String[] expectedAscending = Arrays.copyOf(beforeSort, beforeSort.length);
+		Arrays.sort(expectedAscending);
+		System.out.println("Expected Ascending Order: " + Arrays.toString(expectedAscending));
 
-	    // Click the sorting icon for ascending order
-	    driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
-	    Thread.sleep(2000);
+		// Click the sorting icon for ascending order
+		driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
 
-	    // Fetch column data after sorting in ascending order
-	    columns = driver.findElements(By.xpath("//*[@id='matTable']/table/tbody/tr/td[1]"));
-	    String[] actualAscending = new String[columns.size()];
-	    for (int i = 0; i < columns.size(); i++) {
-	        actualAscending[i] = columns.get(i).getText().trim();
-	        System.out.println("After Ascending Sort: " + actualAscending[i]);
-	    }
+		// Fetch column data after sorting in ascending order
+		columns = driver.findElements(By.xpath("//*[@id='matTable']/table/tbody/tr/td[1]"));
+		String[] actualAscending = new String[columns.size()];
+		for (int i = 0; i < columns.size(); i++) {
+			actualAscending[i] = columns.get(i).getText().trim();
+			System.out.println("After Ascending Sort: " + actualAscending[i]);
+		}
 
-	    Assert.assertTrue(
-	            "Column data is not sorted in ascending order",
-	            Arrays.equals(expectedAscending, actualAscending)
-	    );
+		Assert.assertTrue("Column data is not sorted in ascending order",
+				Arrays.equals(expectedAscending, actualAscending));
 
-	    // Click the sorting icon for descending order
-	    driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
-	    Thread.sleep(2000);
+		// Click the sorting icon for descending order
+		driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
 
-	    // Reverse sort the data locally for comparison
-	    String[] expectedDescending = Arrays.copyOf(expectedAscending, expectedAscending.length);
-	    Collections.reverse(Arrays.asList(expectedDescending));
-	    System.out.println("Expected Descending Order: " + Arrays.toString(expectedDescending));
+		// Reverse sort the data locally for comparison
+		String[] expectedDescending = Arrays.copyOf(expectedAscending, expectedAscending.length);
+		Collections.reverse(Arrays.asList(expectedDescending));
+		System.out.println("Expected Descending Order: " + Arrays.toString(expectedDescending));
 
-	    // Fetch column data after sorting in descending order
-	    columns = driver.findElements(By.xpath("//*[@id='matTable']/table/tbody/tr/td[1]"));
-	    String[] actualDescending = new String[columns.size()];
-	    for (int i = 0; i < columns.size(); i++) {
-	        actualDescending[i] = columns.get(i).getText().trim();
-	        System.out.println("After Descending Sort: " + actualDescending[i]);
-	    }
+		// Fetch column data after sorting in descending order
+		columns = driver.findElements(By.xpath("//*[@id='matTable']/table/tbody/tr/td[1]"));
+		String[] actualDescending = new String[columns.size()];
+		for (int i = 0; i < columns.size(); i++) {
+			actualDescending[i] = columns.get(i).getText().trim();
+			System.out.println("After Descending Sort: " + actualDescending[i]);
+		}
 
-	    // Assert the data is sorted in descending order
-	    Assert.assertTrue(
-	            "Column data is not sorted in descending order",
-	            Arrays.equals(expectedDescending, actualDescending)
-	    );
+		// Assert the data is sorted in descending order
+		Assert.assertTrue("Column data is not sorted in descending order",
+				Arrays.equals(expectedDescending, actualDescending));
 
 	}
 
@@ -1029,6 +1030,7 @@ clickElement(deleteEdgeGroupColumn, "");
 			System.out.println("Column widths are not uniform.");
 		}
 	}
+
 	public String get_Text_ToolTipDeviceConnected() {
 		mouseHover(deviceConnectedlabel);
 
@@ -1059,24 +1061,25 @@ clickElement(deleteEdgeGroupColumn, "");
 		return statuslabelText;
 	}
 
-	public String get_Text_ToolTipEdit() {
+	public String get_Text_ToolTipEdit() throws InterruptedException {
 		mouseHover(groupNameEdit);
+		Thread.sleep(2000);
 
-		String deviceConnectedlabelText = editToolTip.getText();
+		String editToolTipText = editToolTip.getText();
 
-		deviceConnectedlabelText.trim();
+		editToolTipText.trim();
 
-		return deviceConnectedlabelText;
+		return editToolTipText;
 	}
 
 	public String get_Text_ToolTipDelete() {
 		mouseHover(groupNameDelete);
 
-		String deleteText = deleteToolTip.getText();
+		String deleteToolTipText = deleteToolTip.getText();
 
-		deleteText.trim();
+		deleteToolTipText.trim();
 
-		return deleteText;
+		return deleteToolTipText;
 	}
 
 	public String get_Text_ToolTipConsole() {
@@ -1092,7 +1095,7 @@ clickElement(deleteEdgeGroupColumn, "");
 	public String get_Text_ToolTipClose() {
 
 		mouseHover(closeIcon);
-		wait(closeTooltip,logger);
+		wait(closeTooltip, logger);
 
 		String closeToolTipIconText = closeTooltip.getText();
 
@@ -1111,4 +1114,159 @@ clickElement(deleteEdgeGroupColumn, "");
 		return stopIconText;
 	}
 
+	public String lastRowBeforeRefresh() {
+
+		WebElement tableGrid = driver.findElement(By.xpath("//table[@role='table']")); // Replace with your table
+																						// locator
+
+		// Locate the last row before the refresh
+		WebElement lastRowBeforeRefresh = tableGrid.findElement(By.xpath("//tbody/tr[last()]")); // Adjust XPath if
+																									// necessary
+		return lastRowBeforeRefresh.getText();
+
+	}
+
+	@FindBy(xpath = "/html/body/app-root/app-root/app-home/mat-sidenav-container/mat-sidenav-content/div[2]/div/app-controller/div/div[1]/div/img[1]")
+	WebElement refreshButtonfun;
+
+	@FindBy(xpath = "//table[@role='table']")
+	WebElement refreshedTableGrid;
+
+	public String lastRowDataAfterRefresh() throws InterruptedException {
+		refreshButtonfun.click();
+		Thread.sleep(2000);
+
+		WebElement lastRowAfterRefresh = refreshedTableGrid.findElement(By.xpath("//tbody/tr[last()]")); 
+		return lastRowAfterRefresh.getText();
+
+	}
+	@FindBy(xpath = "//table[@id='matTable']/tbody/tr")
+	List<WebElement> tableRows;
+	@FindBy(xpath = "//table/tbody/tr/td[1]")
+	WebElement ListDeploy;
+
+	public String resultTable() {
+		return ListDeploy.getText();
+
+	}
+
+	@FindBy(xpath = "(//div[@id='toast-container'])")
+	WebElement bulkdownloadsuccessmessage;
+		public WebElement downloadSuccessMessage() {
+			return bulkdownloadsuccessmessage;
+		}
+
+		public String get_Text_ToolTipedgeGroupName() throws InterruptedException {
+			mouseHover(groupNameAdd);
+			
+			Thread.sleep(500);
+
+			String groupNameToolTipText = getText(groupNameToolTip);
+
+			groupNameToolTipText.trim();
+
+			return groupNameToolTipText;
+		
+	}
+
+		public void sortingOnGroupName() throws InterruptedException {
+			driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[1]/div/span/div/div[contains(text(),'Group Name')][1]")).click();
+			Thread.sleep(2000);
+			try {
+		
+
+				// Fetch column data before sorting
+				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+				List<String> beforeSort = new ArrayList<String>();
+				List<String> afterSort = new ArrayList<String>();
+				for (int i = 0; i < columns.size(); i++) {
+					beforeSort.add(columns.get(i).getText().trim());
+					afterSort.add(columns.get(i).getText().trim());
+				}
+
+				afterSort.sort((a, b) -> a.compareTo(b));
+
+				for (int i = 0; i < afterSort.size(); i++) {
+					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+							beforeSort.get(i));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail("Test failed due to exception: " + e.getMessage());
+			}
+			
+			
+		}
+
+		public void sortingOnDeviceActive() throws InterruptedException {
+			driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[3]/div/span/div/div[1]")).click();
+			Thread.sleep(2000);
+			try {
+		
+
+				// Fetch column data before sorting
+				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+				List<String> beforeSort = new ArrayList<String>();
+				List<String> afterSort = new ArrayList<String>();
+				for (int i = 0; i < columns.size(); i++) {
+					beforeSort.add(columns.get(i).getText().trim());
+					afterSort.add(columns.get(i).getText().trim());
+				}
+
+				afterSort.sort((a, b) -> a.compareTo(b));
+
+				for (int i = 0; i < afterSort.size(); i++) {
+					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+							beforeSort.get(i));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail("Test failed due to exception: " + e.getMessage());
+			}
+			
+		}
+
+		public void sortingOnStatus() throws InterruptedException {
+			driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[4]/div/span/div/div[1]")).click();
+			Thread.sleep(2000);
+			try {
+		
+
+				// Fetch column data before sorting
+				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
+				List<String> beforeSort = new ArrayList<String>();
+				List<String> afterSort = new ArrayList<String>();
+				for (int i = 0; i < columns.size(); i++) {
+					beforeSort.add(columns.get(i).getText().trim());
+					afterSort.add(columns.get(i).getText().trim());
+				}
+
+				afterSort.sort((a, b) -> a.compareTo(b));
+
+				for (int i = 0; i < afterSort.size(); i++) {
+					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+							beforeSort.get(i));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail("Test failed due to exception: " + e.getMessage());
+			}
+			
+		}
+
+		
+		@FindBy(xpath = "//div[@id='toast-container']")
+
+		WebElement confirmationMessage;
+
+		
+	    // Method to get the confirmation message text
+	    public String getConfirmationMessage() {
+	        return confirmationMessage.getText();
+	    
+}
+	
 }

@@ -19,7 +19,8 @@ import io.cucumber.junit.CucumberOptions;
 						
 								//features = "src/test/resources/Features/Notifications.feature",
 								
-										features = "src/test/resources/Features/EdgeGroupsNew.feature",
+										//features = "src/test/resources/Features/EdgeGroupsNew.feature",
+												features = "src/test/resources/Features/Apps.feature",
 
 		glue = { "com.cdm.StepDefinations" }
 
