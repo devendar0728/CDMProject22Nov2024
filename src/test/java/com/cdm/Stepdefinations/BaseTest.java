@@ -43,7 +43,7 @@ public class BaseTest {
 		if (prop == null) {
 			prop = readproperties();
 
-			alldata = readdata(System.getProperty("user.dir") + "/src/test/resources/TestData/DataAman.xlsx", tagName);
+			alldata = readdata(System.getProperty("user.dir") + "/src/test/resources/TestData/DataCDM.xlsx", tagName);
 
 			createExtentReport();
 		}
