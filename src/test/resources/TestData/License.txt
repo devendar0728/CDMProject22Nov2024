@@ -1,1 +1,0 @@
-[{"edgeGroupId":2,"controllername":"EDGE_rBox_Devices","appgroupname":"App_Group_Name","scope":["Edge12123-app","Vol1-app","cdm-edge-cygnet_gateway-app","eclipse-mosquitto-app","emqx-nanomq-app","i123-app","some_volume-app"],"startdate":"2023-12-26T14:29:31.266Z","enddate":"2024-12-25T14:29:31.266Z","shakey":""}]
