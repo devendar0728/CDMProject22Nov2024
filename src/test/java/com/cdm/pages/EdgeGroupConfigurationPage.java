@@ -577,4 +577,11 @@ public class EdgeGroupConfigurationPage extends CommonActions {
 		}
 
 	}
+
+	@FindBy(xpath="//app-edgegroup-config/div/div/mat-horizontal-stepper/div[2]/div[5]/div[2]/button[1]/span[1]")
+	WebElement confirmButton;
+	public void confirmButton() {
+	
+		clickElement(confirmButton, "Clicking on confirm button");
+	}
 }

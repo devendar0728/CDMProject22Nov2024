@@ -357,11 +357,16 @@ public class EdgeGroupSteps extends BaseTest {
 
 	@Then("enter all fields under deployment")
 	public void enter_all_fields_under_deployment() throws InterruptedException {
-		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		EdgeGroupAddPage egp = new EdgeGroupAddPage(driver, logger);
 		egp.applicationGroupName(alldata.get(vTCName).get("AppGroupAdd").toString());
 		egp.serverNodes(alldata.get(vTCName).get("MaximumServerNodeAdd").toString());
 		egp.serverHostAddress(alldata.get(vTCName).get("ServerHostAddressAdd").toString());
 		egp.serverPort(alldata.get(vTCName).get("ServerPortAdd").toString());
+
+		egp.saveButtonforEdgeGroup();
+
+		Thread.sleep(2000);
+
 	}
 
 	@Then("Click on Delete Edge Group button")
@@ -606,17 +611,17 @@ public class EdgeGroupSteps extends BaseTest {
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
 		// imitate mouse events like ENTER, CTRL+C, CTRL+V
-		Robot robot = new Robot();
-		robot.delay(250);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.delay(1);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+//		Robot robot = new Robot();
+//		robot.delay(250);
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//		robot.keyRelease(KeyEvent.VK_ENTER);
+//		robot.keyPress(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//		robot.delay(1);
+//		robot.keyRelease(KeyEvent.VK_ENTER);
 
 		String str = alldata.get(vTCName).get("EdgeConfigurationUploadPath").toString();
 		egep.EdgeConfigurationUpload(str);
@@ -628,31 +633,44 @@ public class EdgeGroupSteps extends BaseTest {
 			throws InterruptedException, Exception {
 		EdgeGroupEditPage egep = new EdgeGroupEditPage(driver, logger);
 
-		egep.uploadfile();
+		try {
+			Robot robot = new Robot();
 
-		StringSelection ss = new StringSelection(
-				alldata.get(vTCName).get("OnboardingCertificateFileUpload").toString());
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+			String str = alldata.get(vTCName).get("OnboardingCertificateFileUpload").toString();
+			
+			StringSelection ss = new StringSelection(str);
+			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+			
+//			robot.delay(1000); // Increased delay
+//			robot.keyPress(KeyEvent.VK_ENTER);
+//			robot.keyRelease(KeyEvent.VK_ENTER);
+//			robot.delay(500); // Added delay
+//			robot.keyPress(KeyEvent.VK_CONTROL);
+//			robot.keyPress(KeyEvent.VK_V);
+//			robot.keyRelease(KeyEvent.VK_V);
+//			robot.keyRelease(KeyEvent.VK_CONTROL);
+//			robot.delay(500); // Added delay
+//			robot.keyPress(KeyEvent.VK_ENTER);
+//			robot.keyRelease(KeyEvent.VK_ENTER);
+			Thread.sleep(2000);
+			egep.onboardingCertificateUpload(str);
+			Thread.sleep(2000);
+			egep.saveButtonfinalonboarding();
+			Thread.sleep(3000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-		// imitate mouse events like ENTER, CTRL+C, CTRL+V
-		Robot robot = new Robot();
-		robot.delay(250);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.delay(90);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+		// egep.serialnumberAdd(alldata.get(vTCName).get("SerialNumberEdit").toString());
+		Thread.sleep(3000);
+	}
 
-		String str = alldata.get(vTCName).get("OnboardingCertificateFileUpload").toString();
-		egep.onboardingCertificateUpload(str);
+	@Then("click on download button beside EDGE configurations")
+	public void click_on_download_button_beside_edge_configurations() throws InterruptedException {
+		EdgeGroupEditPage egep = new EdgeGroupEditPage(driver, logger);
+		egep.edgeConfigurationDownload();
 
-		egep.saveButtonfinalonboarding();
-		egep.serialnumberAdd(alldata.get(vTCName).get("SerialNumberEdit").toString());
-
+		Thread.sleep(4000);
 	}
 
 	@Then("Verification to check the tool tip text visibilty for Input text field Health card in ADD Screen")
@@ -1100,9 +1118,24 @@ public class EdgeGroupSteps extends BaseTest {
 
 		egcp.appNameConfigInput(alldata.get(vTCName).get("BulkAppNameSearch").toString());
 
-		// egcp.backDropShowing_Div_Click();
-
 		Thread.sleep(2000);
+
+	}
+
+	@When("User clicks on the {string} button to approve the selections on Edge Group page")
+	public void user_clicks_on_the_button_to_approve_the_selections_on_edge_group_page(String string)
+			throws InterruptedException {
+		EdgeGroupConfigurationPage egcp = new EdgeGroupConfigurationPage(driver, logger);
+
+		egcp.confirmButton();
+		Thread.sleep(2000);
+		egcp.deployApp();
+		Thread.sleep(2000);
+
+	}
+
+	@Then("verify {string} button should become activated on Edge Group page")
+	public void verify_button_should_become_activated_on_edge_group_page(String string) {
 
 	}
 
@@ -1503,32 +1536,75 @@ public class EdgeGroupSteps extends BaseTest {
 		}
 
 	}
+
 	@Then("the user clicks on the {string} option from the popup for Edge Group")
 	public void the_user_clicks_on_the_option_from_the_popup_for_edge_group(String string) throws InterruptedException {
-		
-			EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
-			File uploadFile = new File(alldata.get(vTCName).get("UploadFilePath").toString());
-			WebElement fileInput = driver.findElement(By.xpath("//input[@formcontrolname='uploadfile']"));
-			fileInput.sendKeys(uploadFile.getAbsolutePath());
 
-			Thread.sleep(3000);
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		File uploadFile = new File(alldata.get(vTCName).get("UploadFilePath").toString());
+		WebElement fileInput = driver.findElement(By.xpath("//input[@formcontrolname='uploadfile']"));
+		fileInput.sendKeys(uploadFile.getAbsolutePath());
+
+		Thread.sleep(3000);
 	}
 
-@Then("verify confirmation message {string} should appear on the Edge Group List page")
-public void verify_confirmation_message_should_appear_on_the_edge_group_list_page(String string) {
-	EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+	@Then("Click on Onboarding Certificate icon of onboarding certificates")
+	public void click_on_onboarding_certificate_icon_of_onboarding_certificates() throws InterruptedException {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+		egp.onboardingcertificateIconClick();
 
-	Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForEdgeGroup");
-	if (toasterMessageObj == null) {
-	    throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		Thread.sleep(2000);
 	}
-	String expectedMessage = toasterMessageObj.toString().trim();
 
-	String actualMessage = egp.getConfirmationMessage();
+	@Then("verify confirmation message {string} should appear on the Edge Group List page")
+	public void verify_confirmation_message_should_appear_on_the_edge_group_list_page(String string) {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 
-	// Validate the expected and actual messages
-	Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
-}
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForEdgeGroupDeployment");
+		if (toasterMessageObj == null) {
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+
+		String actualMessage = egp.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
+
+	@Then("verify confirmation message {string} should appear for edge configuration download")
+	public void verify_confirmation_message_should_appear_for_edge_configuration_download(String string) {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageFordownloadEdgeConfigurations");
+		if (toasterMessageObj == null) {
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+
+		String actualMessage = egp.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
+	@Then("verify confirmation message {string} should appear for onboarding certificate")
+	public void verify_confirmation_message_should_appear_for_onboarding_certificate(String string) throws InterruptedException {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+Thread.sleep(2000);
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageFordownloadonboardingCertificates");
+		if (toasterMessageObj == null) {
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+
+		String actualMessage = egp.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
+
+
+
 
 	@Then("the user clicks on the {string} button for Edge Group")
 	public void the_user_clicks_on_the_button_for_edge_group(String string) throws InterruptedException {
@@ -1537,8 +1613,53 @@ public void verify_confirmation_message_should_appear_on_the_edge_group_list_pag
 		Thread.sleep(5000);
 	}
 
+	@Then("user should see a {string} message on Edge Group page")
+	public void user_should_see_a_message_on_edge_group_page(String string) throws InterruptedException {
+		Thread.sleep(2000);
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
 
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForEdgeGroupAdd");
+		if (toasterMessageObj == null) {
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
 
+		// Get the actual message from the page
+		String actualMessage = egp.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
+
+	@Then("user should see a {string} message appears on Edge Group page")
+	public void user_should_see_a_message_appears_on_edge_group_page(String string) {
+		EdgeGroupsPage egp = new EdgeGroupsPage(driver, logger);
+
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForEdge");
+		if (toasterMessageObj == null) {
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+
+		// Get the actual message from the page
+		String actualMessage = egp.getConfirmationMessage();
+
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
+
+	@Then("the user clicks on the {string} button to save onboarding certificated")
+	public void the_user_clicks_on_the_button_to_save_onboarding_certificated(String string)
+			throws InterruptedException {
+		EdgeGroupEditPage egep = new EdgeGroupEditPage(driver, logger);
+		egep.saveButtonfinalonboarding();
+		Thread.sleep(5000);
+	}
+
+	@Then("verify confirmation message {string} should appear on Edge group list page")
+	public void verify_confirmation_message_should_appear_on_edge_group_list_page(String string) {
+
+	}
 
 	@Then("verify all tooltips on Edge Group Edit page")
 	public void verify_all_tooltips_on_edge_group_edit_page() {

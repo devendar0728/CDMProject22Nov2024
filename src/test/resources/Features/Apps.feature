@@ -181,6 +181,7 @@ Then Click on Apps tab from right panel of the screen
 Then search for Application name
 Then cilck on Pencil icon i.e. EDIT button
 Then verify Edit functionality for Apps
+Then user should see a "Application updated successfully" message on Apps page
 
 
 

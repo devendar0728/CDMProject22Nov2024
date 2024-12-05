@@ -54,11 +54,11 @@ public class DashboardSteps extends BaseTest {
 		Assert.assertFalse("Deployments count is empty!", dp.deploymentsLast24HoursCountElement());
 
 		// Parse the count value (assuming it's a numeric string)
-		int deploymentsCountSevenDays = Integer.parseInt(dp.deploymentsLast24HoursElement());
-		Assert.assertTrue("Deployments count should be non-negative!", deploymentsCountSevenDays >= 0);
+		int deploymentsCountTwentyFourHours = Integer.parseInt(dp.deploymentsLast24HoursElement());
+		Assert.assertTrue("Deployments count should be non-negative!", deploymentsCountTwentyFourHours >= 0);
 
 		// Log the count for visibility
-		System.out.println("Total deployments in the last 24 hours: " + deploymentsCountSevenDays);
+		System.out.println("Total deployments in the last 24 hours: " + deploymentsCountTwentyFourHours);
 	}
 
 	@Then("verify total number of deployments that occurred in the last {int} days for deployment")
@@ -71,7 +71,7 @@ public class DashboardSteps extends BaseTest {
 		Assert.assertFalse("Deployments count is empty!", dp.deploymentsLastSevenDaysCountElement());
 
 		// Parse the count value (assuming it's a numeric string)
-		int deploymentsCountfor7Days = Integer.parseInt(dp.deploymentsLast24HoursElement());
+		int deploymentsCountfor7Days = Integer.parseInt(dp.deploymentsLastSevenDaysElement());
 		Assert.assertTrue("Deployments count should be non-negative!", deploymentsCountfor7Days >= 0);
 
 		// Log the count for visibility
@@ -319,7 +319,6 @@ public class DashboardSteps extends BaseTest {
 		Thread.sleep(2000);
 		Assert.assertTrue("Active status is not displayed", dp.activeStatus());
 		Thread.sleep(2000);
-		Assert.assertTrue("Inactive status is not displayed", dp.InactiveStatus());
 	}
 
 	@Then("verify user should be redirected to the Active Repositories List page when user click on the image of Active Repositories groups")

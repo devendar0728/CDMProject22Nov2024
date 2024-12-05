@@ -94,7 +94,6 @@ Feature: EDGEGROUPS
 #Then Click on submit button
 #Then verify successful operation
 #
-#
 #@Test
 #Scenario: TC010_Verification of Bulk download button functionality in the EDGE Group List screen by Super admin/Admin user
 #Given User launch application in chrome browser
@@ -103,6 +102,7 @@ Feature: EDGEGROUPS
 #Then Click on EDGE Group module from side menu bar
 #Then Click on Download icon button on the top right side
 #Then verify success message appear on the screen for download
+
 #
 #@Test
 #Scenario: TC011_Verification of Search button functionality for Device Active in the EDGE Group List screen by Super admin/Admin user
@@ -115,7 +115,7 @@ Feature: EDGEGROUPS
 #Then enter the value for maximum searchbox for device Active
 #Then Click on submit button
 #Then verify successful operation
-#
+
 #@Test
 #Scenario: TC012_Verification of displaying the Edit screen in the EDGE Group module by Super admin/Admin user
 #Given User launch application in chrome browser
@@ -126,9 +126,7 @@ Feature: EDGEGROUPS
 #Then enter text in the field of GroupName
 #Then Click on Edit Edge Group button
 #Then verify user is landing on Edit page
-#
-#
-#
+
 #@Test
 #Scenario: TC013_Verification of Bulk Application Deploy  functionality in the EDGE Group List screen by Super admin/Admin user
 #Given User launch application in chrome browser
@@ -141,9 +139,11 @@ Feature: EDGEGROUPS
 #Then verify for Edge Name functionality
 #Then verify for App Name functionality
 #Then select the single check box valid Application name with App name column and click on NEXT button from Application page
-#
-#
-#
+#When User clicks on the "Confirm" button to approve the selections on Edge Group page
+#Then verify "Deploy" button should become activated on Edge Group page
+#Then verify confirmation message "Deployment request sent" should appear on the Edge Group List page
+
+
 #@Test
 #Scenario: TC014_Verification of the search functionality for Group Name column (Valid Group Name) in the EDGE Group List screen by Super admin/Admin user
 #Given User launch application in chrome browser
@@ -292,18 +292,19 @@ Feature: EDGEGROUPS
 #
 #
 #
-#@Test
-#Scenario: TC027_Verification of upload of onboarding EDGE Configuration in Registration section in Edit screen of EDGE Group Edit module by Super admin/Admin user
-#Given User launch application in chrome browser
-#Then click on login button on home page
-#When user enters credentials and click on login button
-#And click on EDGE Group
-#Then Click on the three dots of GroupName
-#And enter text in the field of GroupName
-#Then Click on Edit Edge Group button
-#Then Click on Onboarding Certificate icon of Edge Configurations
-#Then browse the upload document and upload for Registration section for OnBoarding Certificate
-#Then Save the certificates
+@Test
+Scenario: TC027_Verification of upload of onboarding  certificate in Registration section in Edit screen of EDGE Group Edit module by Super admin/Admin user
+Given User launch application in chrome browser
+Then click on login button on home page
+When user enters credentials and click on login button
+And click on EDGE Group
+Then Click on the three dots of GroupName
+And enter text in the field of GroupName
+Then Click on Edit Edge Group button
+Then Click on Onboarding Certificate icon of onboarding certificates
+Then browse the upload document and upload for Registration section for OnBoarding Certificate
+Then verify confirmation message "Onboarding certificate added successfully" should appear for onboarding certificate
+
 #
 #
 #
@@ -322,16 +323,16 @@ Feature: EDGEGROUPS
 
 #
 #
-@Test
-Scenario: TC029_Verification of Check bulk Upload button functionality in the EDGE Group
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-Then Click on EDGE Group module from side menu bar
-And click on bulk Upload button EDGE Group
-Then the user clicks on the "Choose File" option from the popup for Edge Group
-Then the user clicks on the "Upload" button for Edge Group
-Then verify confirmation message "Edge Group added successfully" should appear on the Edge Group List page
+#@Test
+#Scenario: TC029_Verification of Check bulk Upload button functionality in the EDGE Group
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Group module from side menu bar
+#And click on bulk Upload button EDGE Group
+#Then the user clicks on the "Choose File" option from the popup for Edge Group
+#Then the user clicks on the "Upload" button for Edge Group
+#Then verify confirmation message "Edge Group added successfully" should appear on the Edge Group List page
 #
 #
 #@Test
@@ -400,9 +401,8 @@ Then verify confirmation message "Edge Group added successfully" should appear o
 #Then Verification to check the tool tip text visibilty for Input text field Identity card in EDIT Screen
 #Then Verification to check the tool tip text visibilty for Input text field Registration card in EDIT Screen
 #Then Verification to check the tool tip text visibilty for Input text field Deployment card in EDIT Screen
-#
-#
-#
+
+
 #@Test
 #Scenario: TC037_Verification of tool tip text visibilty for Close button in Console screen
 #Given User launch application in chrome browser
@@ -424,8 +424,10 @@ Then verify confirmation message "Edge Group added successfully" should appear o
 #Then Click on Stop button
 #
 #
+#
+
 #@Test
-#Scenario: TC039_Verification of Add button functionality in the EDGE Group List screen by Super admin/Admin user
+#Scenario: TC039_Verification of Add functionality in the EDGE Group List screen by Super admin/Admin user
 #Given User launch application in chrome browser
 #Then click on login button on home page
 #When user enters credentials and click on login button
@@ -434,10 +436,8 @@ Then verify confirmation message "Edge Group added successfully" should appear o
 #Then enter all mandatory field under identity section
 #Then scroll down page
 #Then enter all fields under deployment
-#Then Click on Save button to save Edge group
-#Then verify success message appear on the screen
-#
-#
+#Then user should see a "Edge Group Added successfully" message on Edge Group page
+
 #@Test
 #Scenario: TC040_Verify Edit functionality of Edge Group
 #Given User launch application in chrome browser
@@ -456,6 +456,8 @@ Then verify confirmation message "Edge Group added successfully" should appear o
 #Then remove the text for Server Host Address and fill with new entry
 #Then remove the text for Server Port and fill with new entry
 #Then Click on save data for Edge Group
+#Then user should see a "Edge Group updated successfully" message on Edge Group page
+
 
 #@Test
 #Scenario: TC041_Verification of Delete functionality in the EDGE Group List screen by Super admin/Admin user
@@ -467,8 +469,9 @@ Then verify confirmation message "Edge Group added successfully" should appear o
 #And enter text in the field of GroupName
 #Then Click on Delete Edge Group button
 #Then confirmation message appeared for confirm delete Click on Yes to delete and No to Cancel
+#Then user should see a "EDGE Group deleted successfully" message appears on Edge Group page
 
-#
+
 #@Test
 #Scenario: TC042_Verification of all Tooltips on Edge Group List page 
 #Given User launch application in chrome browser
@@ -533,5 +536,29 @@ Then verify confirmation message "Edge Group added successfully" should appear o
 #Then enter text in the field of GroupName
 #Then Click on Edit Edge Group button
 #Then verify all tooltips on Edge Group Edit page
+
+#
+#
+#@Test
+#Scenario: TC049_Downloading a registration certificate for EDGE devices.
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Group module from side menu bar
+#Then Click on the three dots of GroupName
+#Then enter text in the field of GroupName
+#Then Click on Edit Edge Group button
+#Then scroll down page
+#Then click on download button beside EDGE configurations
+#Then verify confirmation message "Downloading Successful" should appear for edge configuration download
+
+
+
+
+
+
+
+
+
 
 

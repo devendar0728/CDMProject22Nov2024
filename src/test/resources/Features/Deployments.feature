@@ -1083,4 +1083,16 @@ Feature: DEPLOYMENTS
 #When User checks the "DELETED" checkbox
 #Then The "DELETED" status should appear in the status column
 
+@Test
+Scenario: TC089_Verification of deleting Old/Orphaned Deployments
+Given User launch application in chrome browser
+Then click on login button on home page
+When user enters credentials and click on login button
+Then Click on Deployments module from side menu bar
+Then Click on the History View button
+Then Click on EDGE ID search icon of deployment page i.e. three dots & enter Valid inputs into search text field
+Then scroll horizontal
+Then click on delete button for removing old deploymnet
+Then provide confirmation to delete old deployment by clicking on Yes button 
+Then verify EDGE ID "12345" should no longer be visible in the deployment list
 

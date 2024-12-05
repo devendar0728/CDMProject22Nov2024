@@ -439,7 +439,8 @@ public class UserSettingsAddPage extends CommonActions {
 		return organizationAddToolTipText;
 	}
 
-	public Object get_Text_ToolTipdashboardDropdown() {
+	public Object get_Text_ToolTipdashboardDropdown() throws InterruptedException {
+		Thread.sleep(3000);
 		mouseHover(dashboardAdd);
 
 		String dashboardAddToolTipText = dashboardAddToolTip.getText();

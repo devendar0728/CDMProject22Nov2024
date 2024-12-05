@@ -1857,6 +1857,13 @@ public class EdgeDevicesPage extends CommonActions {
 		
 	}
 
+	@FindBy(xpath="//ul[@class='nav']/li[4]/a")
+	WebElement edgeDeviceLogs;
+	public void edgeDeviceLogsTab() {
+		clickElement(edgeDeviceLogs, "clicking on config app button");
+		
+	}
+
 	
 	}
 

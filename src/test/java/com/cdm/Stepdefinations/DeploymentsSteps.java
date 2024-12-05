@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Assume;
+import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
@@ -1473,6 +1474,28 @@ public class DeploymentsSteps extends BaseTest {
 		Assert.assertTrue("Expected status not found in the column", dmp.statusColumn_GetText().contains("DELETED"));
 		Thread.sleep(2000);
 	}
+	@Then("click on delete button for removing old deploymnet")
+	public void click_on_delete_button_for_removing_old_deploymnet() {
+		DeploymentsmodulePage dmp = new DeploymentsmodulePage(driver, logger);
+		dmp.deletebutton();
+	}
+	@Then("provide confirmation to delete old deployment by clicking on Yes button")
+	public void provide_confirmation_to_delete_old_deployment_by_clicking_on_yes_button() {
+		DeploymentsmodulePage dmp = new DeploymentsmodulePage(driver, logger);
+		dmp.confirmationYesButton();
+	}
+	@Then("verify EDGE ID {string} should no longer be visible in the deployment list")
+	public void verify_edge_id_should_no_longer_be_visible_in_the_deployment_list(String edgeId) {
+		DeploymentsmodulePage dmp = new DeploymentsmodulePage(driver, logger);
+		 List<WebElement> edgeRows = driver.findElements(By.xpath("//table//tr[td[text()='" + edgeId + "']]"));
+		    
+		    // Assert that the list is empty, meaning the EDGE ID has been successfully deleted
+		    Assert.assertTrue("EDGE ID is still present in the deployment list",edgeRows.isEmpty());
+		 
+	}
+
+
+
 
 
 }

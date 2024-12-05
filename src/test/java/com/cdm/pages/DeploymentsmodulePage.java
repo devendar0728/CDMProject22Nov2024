@@ -1792,4 +1792,21 @@ public class DeploymentsmodulePage extends CommonActions {
 	        return columnText;
 		
 	}
+	
+	@FindBy(xpath="//app-deployement-app/div/div[2]/div[1]/div/div/table/tbody/tr[2]/td[9]/span/img")
+	WebElement deleteButtonElement;
+
+	public void deletebutton() {
+		
+		clickElement(deleteButtonElement, "Clicking on delete button");
+		
+	}
+
+	@FindBy(xpath="/html/body/div[3]/div[2]/div/mat-dialog-container/app-confirmationdelete/div/mat-dialog-actions/button[1]")
+	WebElement confirmationYesButtonElement;
+	
+	public void confirmationYesButton() {
+		clickElement(confirmationYesButtonElement, "Clicking on confirmationyes button");
+		
+	}
 }

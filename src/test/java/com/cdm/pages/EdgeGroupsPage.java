@@ -198,7 +198,7 @@ public class EdgeGroupsPage extends CommonActions {
 	@FindBy(xpath = "//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]")
 	WebElement groupNameArrow;
 
-	@FindBy(css =".cdk-overlay-container mat-tooltip-component div")
+	@FindBy(css = ".cdk-overlay-container mat-tooltip-component div")
 	WebElement EditButtonToolTip;
 
 	@FindBy(xpath = "//body/div[3]/div[1]/div[1]/mat-tooltip-component[1]/div[1]")
@@ -1136,10 +1136,11 @@ public class EdgeGroupsPage extends CommonActions {
 		refreshButtonfun.click();
 		Thread.sleep(2000);
 
-		WebElement lastRowAfterRefresh = refreshedTableGrid.findElement(By.xpath("//tbody/tr[last()]")); 
+		WebElement lastRowAfterRefresh = refreshedTableGrid.findElement(By.xpath("//tbody/tr[last()]"));
 		return lastRowAfterRefresh.getText();
 
 	}
+
 	@FindBy(xpath = "//table[@id='matTable']/tbody/tr")
 	List<WebElement> tableRows;
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
@@ -1152,121 +1153,123 @@ public class EdgeGroupsPage extends CommonActions {
 
 	@FindBy(xpath = "(//div[@id='toast-container'])")
 	WebElement bulkdownloadsuccessmessage;
-		public WebElement downloadSuccessMessage() {
-			return bulkdownloadsuccessmessage;
-		}
 
-		public String get_Text_ToolTipedgeGroupName() throws InterruptedException {
-			mouseHover(groupNameAdd);
-			
-			Thread.sleep(500);
-
-			String groupNameToolTipText = getText(groupNameToolTip);
-
-			groupNameToolTipText.trim();
-
-			return groupNameToolTipText;
-		
+	public WebElement downloadSuccessMessage() {
+		return bulkdownloadsuccessmessage;
 	}
 
-		public void sortingOnGroupName() throws InterruptedException {
-			driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[1]/div/span/div/div[contains(text(),'Group Name')][1]")).click();
-			Thread.sleep(2000);
-			try {
-		
+	public String get_Text_ToolTipedgeGroupName() throws InterruptedException {
+		mouseHover(groupNameAdd);
 
-				// Fetch column data before sorting
-				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
-				List<String> beforeSort = new ArrayList<String>();
-				List<String> afterSort = new ArrayList<String>();
-				for (int i = 0; i < columns.size(); i++) {
-					beforeSort.add(columns.get(i).getText().trim());
-					afterSort.add(columns.get(i).getText().trim());
-				}
+		Thread.sleep(500);
 
-				afterSort.sort((a, b) -> a.compareTo(b));
+		String groupNameToolTipText = getText(groupNameToolTip);
 
-				for (int i = 0; i < afterSort.size(); i++) {
-					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
-							beforeSort.get(i));
-				}
+		groupNameToolTipText.trim();
 
-			} catch (Exception e) {
-				e.printStackTrace();
-				Assert.fail("Test failed due to exception: " + e.getMessage());
+		return groupNameToolTipText;
+
+	}
+
+	public void sortingOnGroupName() throws InterruptedException {
+		driver.findElement(By
+				.xpath("//div[@id='matTable']/table/thead/tr/th[1]/div/span/div/div[contains(text(),'Group Name')][1]"))
+				.click();
+		Thread.sleep(2000);
+		try {
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
 			}
-			
-			
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
 		}
 
-		public void sortingOnDeviceActive() throws InterruptedException {
-			driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[3]/div/span/div/div[1]")).click();
-			Thread.sleep(2000);
-			try {
-		
+	}
 
-				// Fetch column data before sorting
-				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
-				List<String> beforeSort = new ArrayList<String>();
-				List<String> afterSort = new ArrayList<String>();
-				for (int i = 0; i < columns.size(); i++) {
-					beforeSort.add(columns.get(i).getText().trim());
-					afterSort.add(columns.get(i).getText().trim());
-				}
+	public void sortingOnDeviceActive() throws InterruptedException {
+		driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[3]/div/span/div/div[1]")).click();
+		Thread.sleep(2000);
+		try {
 
-				afterSort.sort((a, b) -> a.compareTo(b));
-
-				for (int i = 0; i < afterSort.size(); i++) {
-					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
-							beforeSort.get(i));
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				Assert.fail("Test failed due to exception: " + e.getMessage());
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
 			}
-			
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
 		}
 
-		public void sortingOnStatus() throws InterruptedException {
-			driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[4]/div/span/div/div[1]")).click();
-			Thread.sleep(2000);
-			try {
-		
+	}
 
-				// Fetch column data before sorting
-				List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
-				List<String> beforeSort = new ArrayList<String>();
-				List<String> afterSort = new ArrayList<String>();
-				for (int i = 0; i < columns.size(); i++) {
-					beforeSort.add(columns.get(i).getText().trim());
-					afterSort.add(columns.get(i).getText().trim());
-				}
+	public void sortingOnStatus() throws InterruptedException {
+		driver.findElement(By.xpath("//div[@id='matTable']/table/thead/tr/th[4]/div/span/div/div[1]")).click();
+		Thread.sleep(2000);
+		try {
 
-				afterSort.sort((a, b) -> a.compareTo(b));
-
-				for (int i = 0; i < afterSort.size(); i++) {
-					Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
-							beforeSort.get(i));
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				Assert.fail("Test failed due to exception: " + e.getMessage());
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
 			}
-			
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
 		}
 
-		
-		@FindBy(xpath = "//div[@id='toast-container']")
+	}
 
-		WebElement confirmationMessage;
+	@FindBy(xpath = "//div[@id='toast-container']")
 
-		
-	    // Method to get the confirmation message text
-	    public String getConfirmationMessage() {
-	        return confirmationMessage.getText();
-	    
-}
-	
+	WebElement confirmationMessage;
+
+	public String getConfirmationMessage() {
+		return confirmationMessage.getText();
+
+	}
+
+	public void onboardingcertificateIconClick() {
+
+		clickElement(onboardingCertificateIcon, "Clicking on icon of Onboarding certificates");
+
+	}
+
 }

@@ -8,10 +8,10 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 
-//features = "src/test/resources/Features/EDGEDevicesLatest.feature",
-		// features = "src/test/resources/Features/Dashboard.feature",
+features = "src/test/resources/Features/EDGEDevicesLatest.feature",
+		//features = "src/test/resources/Features/Dashboard.feature",
 		// features = "src/test/resources/Features/Reports.feature",
-		// features = "src/test/resources/Features/Deployments.feature",
+		//features = "src/test/resources/Features/Deployments.feature",
 		// features = "src/test/resources/Features/AppGroups.feature",
 		//features = "src/test/resources/Features/Configurations.feature",
 				//features = "src/test/resources/Features/About.feature",
@@ -20,7 +20,12 @@ import io.cucumber.junit.CucumberOptions;
 								//features = "src/test/resources/Features/Notifications.feature",
 								
 										//features = "src/test/resources/Features/EdgeGroupsNew.feature",
-												features = "src/test/resources/Features/Apps.feature",
+												//features = "src/test/resources/Features/Apps.feature",
+												//features = "src/test/resources/Features/UserRoles.feature",
+														//features = "src/test/resources/Features/UserGroups.feature",
+																//features = "src/test/resources/Features/License.feature",
+																		//features = "src/test/resources/Features/Users.feature",
+																				//features = "src/test/resources/Features/Volumes.feature",
 
 		glue = { "com.cdm.StepDefinations" }
 

@@ -563,4 +563,43 @@ public class EdgeGroupAddPage extends CommonActions {
 
 		return serverportToolTipText;
 	}
+
+	@FindBy(css = "mat-select[formcontrolname='appgroupid'] span")
+	WebElement applicationGroupName;
+
+	public void applicationGroupName(String value) throws InterruptedException {
+		SelectMatOption(applicationGroupName, value);
+	}
+	@FindBy(xpath = "//input[@formcontrolname='maxservernode']")
+	WebElement serverNodes;
+
+	public void serverNodes(String value) {
+		SetInputENterKey(serverNodes, "");
+		SetInput(serverNodes, value, value);
+		// serverNodes.sendKeys(value);
+
+	}
+	@FindBy(xpath = "//input[@formcontrolname='serverhostaddress']")
+	WebElement serverHostAddressInput;
+
+	// serverport
+
+	@FindBy(xpath = "//input[@formcontrolname='serverport']")
+	WebElement serverPortInput;
+	
+	public void serverHostAddress(String value) {
+		serverHostAddressInput.sendKeys(Keys.ENTER);
+		serverHostAddressInput.sendKeys(value);
+	}
+
+	public void serverPort(String value) {
+		serverPortInput.sendKeys(Keys.ENTER);
+		serverPortInput.sendKeys(value);
+	}
+
+	public void saveButtononEdgeGroupEdit() {
+	
+		clickElement(saveButtonforEdgeGroup, "Saving data");
+		
+	}
 }

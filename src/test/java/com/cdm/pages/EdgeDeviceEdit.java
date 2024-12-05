@@ -1,10 +1,12 @@
 package com.cdm.pages;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -494,4 +496,272 @@ public class EdgeDeviceEdit extends CommonActions {
 		clickElement(EditListpageVerification, "");
 		//EditListpageVerification.click();
 	}
-}
+	@FindBy(xpath = "//app-device-add-edit-detail-page/div/div/div/div/div/app-deviceloglist/div/div[2]/div/div/table/thead/tr/th[1]/div/app-filter/div/a/mat-icon")
+	WebElement TimeStampThreedDotElement;
+
+	@FindBy(xpath = "//app-device-add-edit-detail-page/div/div/div/div/div/app-deviceloglist/div/div[2]/div/div/table/thead/tr/th[2]/div/app-filter/div/a/mat-icon")
+	WebElement severityElement;
+	
+	@FindBy(xpath = "//app-device-add-edit-detail-page/div/div/div/div/div/app-deviceloglist/div/div[2]/div/div/table/thead/tr/th[3]/div/app-filter/div/a/mat-icon")
+	WebElement sourceElement;
+	
+	@FindBy(xpath = "//app-device-add-edit-detail-page/div/div/div/div/div/app-deviceloglist/div/div[2]/div/div/table/thead/tr/th[4]/div/app-filter/div/a/mat-icon")
+	WebElement message;
+	public void TimeStampThreeDot() {
+		
+		clickElement(TimeStampThreedDotElement, "Clicking on three dots of timeStamp");
+	}
+	
+	public void severity() {
+		
+		clickElement(severityElement, "Clicking on three dots of severity");
+	}
+	
+	public void source() {
+		
+		clickElement(sourceElement, "Clicking on three dots of source");
+	}
+	
+	@FindBy(xpath = "//app-device-add-edit-detail-page/div/div/div/div/div/app-deviceloglist/div/div[2]/div/div/table/thead/tr/th[4]/div/app-filter/div/a/mat-icon")
+	WebElement timeStampInput;
+	@FindBy(xpath = "//input[@name='severity']")
+	WebElement severityInput;
+	@FindBy(xpath = "//input[@name='source']")
+	WebElement sourceInput;
+	
+	@FindBy(xpath = "//input[@name='message']")
+	WebElement messageInput;
+	
+	public void sendTimeStampValue(String value) {
+		
+			SetInputENterKey(timeStampInput, "");
+			SetInput(timeStampInput, value, value);
+
+		}
+	public void sendTimeSeverity(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", severityInput);
+		SetInputENterKey(severityInput, "");
+		SetInput(severityInput, value, value);
+
+	}
+	public void sourceValue(String value) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].focus();", sourceInput);
+		SetInputENterKey(sourceInput, "");
+		SetInput(sourceInput, value, value);
+
+	}
+	@FindBy(css = ".cdk-overlay-backdrop-showing")
+	WebElement backDropShowing;
+
+	public void backDropShowing_Div_Click() {
+		if (backDropShowing != null) {
+			backDropShowing.click();
+		}
+	}
+
+	@FindBy(xpath = "//*[@id='matTable']/table/thead/tr/th[4]/div/app-filter/div/a/mat-icon")
+	WebElement messageElement;
+	
+	@FindBy(xpath = "//span[contains(text(),' Apply ')]")
+	public WebElement applybuttoncalender;
+
+	public void message() {
+	
+			
+			clickElement(messageElement, "Clicking on three dots of source");
+		}
+		
+	
+
+	public void sendMessage(String value) {
+		SetInputENterKey(messageInput, "");
+		SetInput(messageInput, value, value);
+	}
+
+	public void applybuttoncalender() {
+		clickElement(applybuttoncalender, "");	
+	}
+	@FindBy(xpath = "//button[@aria-label='Open calendar']")
+	WebElement calenderIcon;
+
+	public void calenderIcon() {
+		clickElement(calenderIcon, "");
+		
+	}
+
+	public void sortingOnTimeStamp() throws InterruptedException {
+		// Click the sorting icon for ascending order
+		driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+		
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingOnSeverity() throws InterruptedException {
+		// Click the sorting icon for ascending order
+		driver.findElement(By.xpath("//thead/tr[1]/th[2]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingOnSource() throws InterruptedException {
+		// Click the sorting icon for ascending order
+		driver.findElement(By.xpath("//thead/tr[1]/th[3]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingOnMessage() throws InterruptedException {
+		// Click the sorting icon for ascending order
+		driver.findElement(By.xpath("//thead/tr[1]/th[4]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[4]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+	@FindBy(css = ".cdk-overlay-container")
+	WebElement outerlayerclick;
+	public void outerlayerclick() {
+		clickElement(outerlayerclick, "");
+		
+	}
+
+	@FindBy(xpath="//ul[@class='nav']/li[5]/a")
+	WebElement configurationTabElement;
+	public void configurationsTab() {
+		
+		clickElement(configurationTabElement,"Clicking on tab of configurations under Edit");
+		
+	}
+
+	@FindBy(xpath="//ul/li[5]")
+	WebElement viewResponseBodyElement;
+	public void viewResponseBody() {
+		
+		clickElement(viewResponseBodyElement, "Clicking on View Response Body");
+		
+	}
+
+	public void sortingonEdgeName() {
+		
+		
+	}
+
+	public void sortingonConfigName() {
+		
+		
+	}
+
+	public void sortingonLastUpdated() {
+		
+		
+	}
+
+	public void sortingonAppName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+		
+	
+		
+	
+		
+	}
+
+	
+
+		
+	
+

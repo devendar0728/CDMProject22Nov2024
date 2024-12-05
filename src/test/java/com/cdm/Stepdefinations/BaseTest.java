@@ -79,7 +79,7 @@ public class BaseTest {
 //				options.addArguments("--remote-allow-origins=*");
 //				// options.addArguments("--disable notifications");
 				// options.addArguments("--headless");
-				options.addArguments("--disable-gpu");
+				//options.addArguments("--disable-gpu");
 				options.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" });
 //				options.addArguments("start-maximized");
 //				options.setExperimentalOption("credentials_enable_service", false);
