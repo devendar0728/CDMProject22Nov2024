@@ -377,9 +377,10 @@ public class UserSettingsEditPage extends CommonActions {
 		return organizationEditToolTipText;
 	}
 
-	public Object get_Text_ToolTipdashboardDropdown() {
+	public String get_Text_ToolTipdashboardDropdown() throws InterruptedException {
+		Thread.sleep(3000);
 		mouseHover(dashboardEdit);
-
+		Thread.sleep(3000);
 		String dashboardEditToolTipText = dashboardEditToolTip.getText();
 
 		dashboardEditToolTipText.trim();

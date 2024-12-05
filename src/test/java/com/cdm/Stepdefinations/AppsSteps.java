@@ -16,27 +16,26 @@ public class AppsSteps extends BaseTest {
 		AppsPage ap = new AppsPage(driver, logger);
 		ap.Apps_tab();
 	}
+
 	@Then("verify tool tip text visibilty for Root volume Input text field in Edit Screen")
 	public void verify_tool_tip_text_visibilty_for_root_volume_input_text_field_in_edit_screen() {
-	    AppsEditPage appsEdit = new AppsEditPage(driver, logger);
-		Assert.assertEquals("Tooltip of Root Volume", "Name assigned for core Application Volume",	appsEdit.get_Text_ToolTipRootVolume());
+		AppsEditPage appsEdit = new AppsEditPage(driver, logger);
+		Assert.assertEquals("Tooltip of Root Volume", "Name assigned for core Application Volume",
+				appsEdit.get_Text_ToolTipRootVolume());
 	}
+
 	@Then("verify tooltip text visibilty for Application Name")
 	public void verify_tooltip_text_visibilty_for_application_name() {
-		 AppsEditPage appsEdit = new AppsEditPage(driver, logger);
-			Assert.assertEquals("Tooltip of Application Name", "Unique Name assigned for the app",	appsEdit.get_Text_ToolTipAppName());
+		AppsEditPage appsEdit = new AppsEditPage(driver, logger);
+		Assert.assertEquals("Tooltip of Application Name", "Unique Name assigned for the app",
+				appsEdit.get_Text_ToolTipAppName());
 	}
+
 	@Then("verify tool tip text visibilty for Version\\/Tag")
 	public void verify_tool_tip_text_visibilty_for_version_tag() {
-		 AppsEditPage appsEdit = new AppsEditPage(driver, logger);
-			Assert.assertEquals("Tooltip of Version", "Version number of the Application",	appsEdit.get_Text_ToolTiptag());
+		AppsEditPage appsEdit = new AppsEditPage(driver, logger);
+		Assert.assertEquals("Tooltip of Version", "Version number of the Application", appsEdit.get_Text_ToolTiptag());
 	}
-
-
-
-
-
-
 
 	@Then("verify page with resize option for App page")
 	public void verify_page_with_resize_option_for_app_page() {
@@ -50,6 +49,7 @@ public class AppsSteps extends BaseTest {
 		Assert.assertEquals("Tooltip of License Type", "Type of License supported by Application",
 				aep.get_Text_ToolTiplicenseTypeToolTip());
 	}
+
 	@Then("search for Application name")
 	public void search_for_application_name() {
 		AppsPage ap = new AppsPage(driver, logger);
@@ -58,8 +58,23 @@ public class AppsSteps extends BaseTest {
 		ap.outerlayerclick();
 	}
 
+	@Then("user should see a {string} message on Apps page")
+	public void user_should_see_a_message_on_apps_page(String string) throws InterruptedException {
+		AppsPage ap = new AppsPage(driver, logger);
+		Thread.sleep(3000);
+		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForApps");
+		if (toasterMessageObj == null) {
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+		}
+		String expectedMessage = toasterMessageObj.toString().trim();
+		Thread.sleep(2000);
 
+		// Get the actual message from the page
+		String actualMessage = ap.getConfirmationMessage();
 
+		// Validate the expected and actual messages
+		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
+	}
 
 	@Then("verify search for application name , architecture, Version")
 	public void verify_serach_for_application_name_architecture_version() {
@@ -354,9 +369,9 @@ public class AppsSteps extends BaseTest {
 	}
 
 	@Then("verify Edit functionality for Apps")
-	public void verify_edit_functionality_for_Apps() {
+	public void verify_edit_functionality_for_Apps() throws InterruptedException {
 		AppsEditPage aep = new AppsEditPage(driver, logger);
-	
+
 		aep.removalofEnteredTextForappName();
 		aep.applicationName(alldata.get(vTCName).get("AppNameEdit"));
 
@@ -380,6 +395,11 @@ public class AppsSteps extends BaseTest {
 
 		aep.removalofEnteredTextForRootVolume();
 		aep.rootVolume(alldata.get(vTCName).get("RootVolumeEdit"));
+		
+		aep.saveapp();
+		
+		Thread.sleep(2000);
+		
 	}
 
 	@Then("check the tool tip text visibilty for status in Enviroment Varioables tab")

@@ -214,6 +214,14 @@ public class UsersSteps extends BaseTest {
 		//usap.verifyValidationMessagepasswordnotentered();
 		Assert.assertEquals("Mandatory field - required !", usap.verifyValidationMessagepasswordnotentered());
 	}
+	@Then("click on save button")
+	public void click_on_save_button() throws InterruptedException {
+		UserSettingsAddPage usap = new UserSettingsAddPage(driver, logger);
+		usap.saveButtonAdd();
+	}
+
+
+
 
 	@Then("Verification of the acceptance of alphabet values in First Name Text field in User Add screen")
 	public void verification_of_the_acceptance_of_alphabet_values_in_first_name_text_field_in_user_add_screen()
@@ -387,6 +395,7 @@ public class UsersSteps extends BaseTest {
 		UserSettingsAddPage usap = new UserSettingsAddPage(driver, logger);
 
 		usap.saveButtonAdd();
+		Thread.sleep(3000);
 	}
 
 	@Then("Verification of copy pasting numeric digits in Contact Number field  of User Add screen by Super Admin\\/Admin user")
@@ -823,7 +832,7 @@ public void verify_switching_between_inputs_fields_using_tab_for_users() {
 	}
 
 	@Then("verify to check the tool tip text visibilty for Role Name  Input text field in Edit Screen")
-	public void verify_to_check_the_tool_tip_text_visibilty_for_role_name_input_text_field_in_edit_screen() {
+	public void verify_to_check_the_tool_tip_text_visibilty_for_role_name_input_text_field_in_edit_screen() throws InterruptedException {
 		UserSettingsEditPage use = new UserSettingsEditPage(driver, logger);
 		Assert.assertEquals("Tooltip for Dashboard",
 				"Dropdown to select from a list of various dashboards available to the user",
@@ -915,7 +924,7 @@ public void verify_switching_between_inputs_fields_using_tab_for_users() {
 	}
 
 	@Then("verify to check the tool tip text visibilty for Dashboard  Input text field in Add Screen")
-	public void verify_to_check_the_tool_tip_text_visibilty_for_dashboard_input_text_field_in_add_screen() {
+	public void verify_to_check_the_tool_tip_text_visibilty_for_dashboard_input_text_field_in_add_screen() throws InterruptedException {
 		UserSettingsAddPage usa = new UserSettingsAddPage(driver, logger);
 		Assert.assertEquals("Tooltip for dashboard",
 				"Dropdown to select from a list of various dashboards available to the user",

@@ -314,7 +314,7 @@ public class ConfigurationSteps extends BaseTest {
 	public void verify_download_functionality_for_response_body() {
 		ConfigurationsModulePage config = new ConfigurationsModulePage(driver, logger);
 		config.downloadAction();
-		;
+		
 	}
 
 	@Then("click on view response button")

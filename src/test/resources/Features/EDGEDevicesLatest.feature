@@ -779,22 +779,220 @@ Feature: EDGEDEVICES
 #Then select the app which user want to configure
 #Then click on Next button
 #Then verify pagination on Stepper Four
+#
+#@Test
+#Scenario: TC062_Verify bulk application configuration functionality
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then click on icon of Bulk Application configuration which is placed at top corner of the page
+#Then select App group and click on Next button
+#Then select all the Edge Device and click on Next button
+#Then select application which user want to proceed for configuration
+#Then upload configuration file icon at the corner of the page
+#Then the user clicks on the Choose File option from the popup for ConfiguringApps
+#Then add information about fqdn information  and Proxy app details
+#Then click on save button to upload configuration file
+#Then user should see a "Bulk configuration save successfully" message on application configuration page
 
+
+#@Test
+#Scenario: TC063_Verification of EDGE Device logs
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device
+#Then click on EDGE Device Logs tab
+#Then verify search functionality of all column placed on EDGE Device logs
+#Then verify sorting on TimeStamp
+#Then verify sorting on severity
+#Then verify sorting on source
+#Then verify sorting on message
+#
 @Test
-Scenario: TC062_Verify bulk application configuration functionality
+Scenario: TC064_Verification of sorting on configurations tab when modifying an EDGE device
 Given User launch application in chrome browser
 Then click on login button on home page
 When user enters credentials and click on login button
 Then Click on EDGE Device module from side menu bar
-Then click on icon of Bulk Application configuration which is placed at top corner of the page
-Then select App group and click on Next button
-Then select all the Edge Device and click on Next button
-Then select application which user want to proceed for configuration
-Then upload configuration file icon at the corner of the page
-Then the user clicks on the Choose File option from the popup for ConfiguringApps
-Then add information about fqdn information  and Proxy app details
-Then click on save button to upload configuration file
-Then user should see a "Bulk configuration save successfully" message on application configuration page
+Then search Edge Name from existing Edge device
+Then click on configurations tab
+Then verify sorting on EDGEName
+Then verify sorting on AppName
+Then verify sorting on ConfigName
+Then verify sorting on TimeStamp
+Then verify sorting on LastUpdated
+
+
+#@Test
+#Scenario: TC065_Verification of view response body under configurations tab when modifying an EDGE device
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device
+#Then click on configurations tab
+#Then verify view response body functionality
+#Then verify title on the poup of view response body
+
+
+#Scenario: TC066_Verification of view response body under configurations tab when modifying an EDGE device
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device and click on Edit button from the action column
+#Then click on configurations tab
+#Then click on download button under configurations tab when modifying an EDGE device
+#Then verify user see download successful message and file should get downloaded for configurations
+#
+#
+#Scenario: TC067_Verification of Add new Environmental variable under configurations tab when modifying an EDGE device
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device and click on Edit button from the action column
+#Then click on Environmental variable tab
+#Then Click on Add new button
+#Then Enter details for Config Name and Config Value
+#Then Click on save button for environmental variable
+#Then verify user should see a message saying "Configuration saved"
+#
+#
+#Scenario: TC068_Verification of Environmental variable delete Functionality
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device and click on Edit button from the action column
+#Then click on Environmental variable tab
+#Then Click on search icon of configName
+#Then Click on Delete button
+#Then verify user should see a message saying "EDGE Environment variable successfully get deleted" under environmental variable tab 
+#
+#Scenario: TC069_Verification of Environmental variable search Functionality
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then Click on search icon of configName 
+#Then Click on search icon of configValue 
+#Then verify search result found for environmental variable
+#
+#Scenario: TC069_Adding Multiple Environment Variables
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then Click on upload button for Environment variable Bulk Upload in the upper-right corner above the EDGE Devices
+#Then upload file and click on upload button to add the data to the table 
+#Then verify table will show with latest uploaded data
+#
+#
+#
+#Scenario: TC070_Downloading Environment Variables in Bulk
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then Click on download button for Environment variable Bulk download in the upper-right corner above the EDGE Devices
+#Then verify user should see a message saying "Downloading successful" under environmental variable tab  for bulk download
+#
+#
+#Scenario: TC071_Verification of update new Environmental variable under configurations tab when modifying an EDGE device
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device and click on Edit button from the action column
+#Then click on Environmental variable tab
+#Then search config name and click on edit button
+#Then Enter details for Config Name and Config Value
+#Then Click on save button for environmental variable
+#Then verify user should see a message saying "Configuration updated" on Edit mode
+#
+#
+#
+#@Test
+#Scenario: TC072_To verify that user is able to map well which is searched using Well Name
+#Given User launch application in chrome browser
+#And user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then Click on EDGE ID search icon i.e. three dots & enter Valid inputs into search text field
+#Then After landing on EDGE Device List screen scroll horizontal and Click on EDIT icon button
+#Then Click on Well mapping tab module
+#Then Click on the three dots of well and search for Well Name
+#Then Check the checkbox to well map
+#Then Click on Save button For Well
+#Then verify user should see a message saying "Well successfully mapped with EDGE Device" on Edit mode
+#
+#
+#Scenario: TC073_Verification of tooltips on EDGE Device logs
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#And After landing on EDGE Device List screen
+#Then search Edge Name from existing Edge device and click on Edit button from the action column
+#Then click on EDGE Device Logs tab
+#Then verify all tooltip for the columns of EDGE Device logs
+#
+#
+#Scenario: TC073_Verification of tooltips on Configurations
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then Click on EDGE ID search icon i.e. three dots & enter Valid inputs into search text field
+#Then After landing on EDGE Device List screen scroll horizontal and Click on EDIT icon button
+#Then click on configurations tab
+#Then verify all tooltip for the columns of configurations
+#
+#
+#@Test
+#Scenario: TC074_To verify all tooltips exist on the well map page
+#Given User launch application in chrome browser
+#And user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then Click on EDGE ID search icon i.e. three dots & enter Valid inputs into search text field
+#Then After landing on EDGE Device List screen scroll horizontal and Click on EDIT icon button
+#Then Click on Well mapping tab module
+#Then verify all tooltip for the columns of well map
+#
+#
+#Scenario: TC075_Verification of all tootltips belongs to Environmental variable
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then Click on EDGE ID search icon i.e. three dots & enter Valid inputs into search text field
+#Then After landing on EDGE Device List screen scroll horizontal and Click on EDIT icon button
+#Then click on Environmental variable tab
+#Then verify all tooltip for the columns of environmental variable
+#
+#
+#Scenario: TC076_Verification of all tootltips belongs to deployments
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then Click on EDGE ID search icon i.e. three dots & enter Valid inputs into search text field
+#Then After landing on EDGE Device List screen scroll horizontal and Click on EDIT icon button
+#Then click on deployment tab
+#Then verify all tooltip for the columns of deployments
+
 
 
 

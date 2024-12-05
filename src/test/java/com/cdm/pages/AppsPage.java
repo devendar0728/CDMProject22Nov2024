@@ -331,4 +331,15 @@ public class AppsPage extends CommonActions {
 
 			}
 
+		@FindBy(xpath = "//div[@id='toast-container']")
+
+		WebElement confirmationMessage;
+
+		public String getConfirmationMessage() throws InterruptedException {
+			Thread.sleep(2000);
+
+			return confirmationMessage.getText();
+		}
+
+
 		}

@@ -95,7 +95,7 @@ public class EdgeGroupEditPage extends CommonActions {
 	@FindBy(xpath = "//mat-select[@formcontrolname='appgroupid']")
 	WebElement applicationGroupName;
 
-	@FindBy(xpath = "//button[contains(text(),'Save')]")
+	@FindBy(xpath = "//html/body/div[3]/div[2]/div/mat-dialog-container/app-edgeconfigupload/div[3]/button[2]")
 	WebElement saveButtonfinalonboarding;
 
 	@FindBy(xpath = "//input[@type='file']")
@@ -113,14 +113,15 @@ public class EdgeGroupEditPage extends CommonActions {
 	}
 
 	public void onboardingCertificateUpload(String value) {
-		SetInputENterKey(onboardingCertificateUpload, "");
-		SetInput(onboardingCertificateUpload, value, value);
+		//SetInputENterKey(onboardingCertificateUpload, "");
+		//SetInput(onboardingCertificateUpload, value, value);
+		onboardingCertificateUpload.sendKeys(value);
 		// onboardingCertificateUpload.sendKeys(Keys.ENTER);
 		// onboardingCertificateUpload.sendKeys(value);
 	}
 
 	public void EdgeConfigurationUpload(String value) {
-		SetInputENterKey(EdgeConfigurationUpload, "");
+		//SetInputENterKey(EdgeConfigurationUpload, "");
 		SetInput(EdgeConfigurationUpload, value, value);
 
 //	EdgeConfigurationUpload.sendKeys(Keys.ENTER);
@@ -378,4 +379,21 @@ public class EdgeGroupEditPage extends CommonActions {
 		return groupNameToolTipText;
 	}
 
+	@FindBy(xpath = "//app-add-edit-edgegroup/div/div/div/div/div[1]/form/mat-nav-list/mat-expansion-panel[3]/div/div/div/div[2]/div/div/div[2]/img")
+	WebElement onBoardingCertificateDownloadElement;
+	
+	public void onBoardingCertificateDownload() {
+		clickElement(onBoardingCertificateDownloadElement, "Click on the download button of onboardingcertificate");
+		
+	}
+	@FindBy(xpath = "//app-add-edit-edgegroup/div/div/div/div/div[1]/form/mat-nav-list/mat-expansion-panel[3]/div/div/div/div[1]/div/div/div[2]/img[2]")
+	WebElement edgeConfigurationDownloadElement;
+	
+	public void edgeConfigurationDownload() {
+		
+		clickElement(edgeConfigurationDownloadElement, "Click on the download button of edgeConfiguration");
+	}
+
+
+	
 }

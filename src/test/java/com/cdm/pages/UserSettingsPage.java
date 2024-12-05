@@ -318,8 +318,9 @@ public class UserSettingsPage extends CommonActions {
 
 	}
 
-	public String get_Text_ToolTipDelete() {
+	public String get_Text_ToolTipDelete() throws InterruptedException {
 
+		Thread.sleep(3000);
 		mouseHover(deleteButton);
 
 		String deleteButtonDisplayNameText = deleteButtonNameToolTip.getText();
@@ -329,8 +330,9 @@ public class UserSettingsPage extends CommonActions {
 		return deleteButtonDisplayNameText;
 	}
 
-	public String get_Text_ToolTipEdit() {
+	public String get_Text_ToolTipEdit() throws InterruptedException {
 
+		Thread.sleep(3000);
 		mouseHover(edituserbutton);
 
 		String editButtonNameDisplayNameText = editButtonNameToolTip.getText();

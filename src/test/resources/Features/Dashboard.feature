@@ -15,7 +15,7 @@ Feature: DASHBOARD
 #Then verify total number of Active Edge Devices in CDM on card widget
 #Then verify total number of Active Applications in CDM on card widget
 #Then verify total number of Active Volumes in CDM on card widget
-
+#
 #
 #@Test
 #Scenario: TC002_Verify the total number of deployments that occurred in the last 24 hours
@@ -33,7 +33,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify total number of deployments that occurred in the last 7 days for deployment
-
+#
 #
 #
 #@Test
@@ -77,7 +77,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify total number of failed deployments that occurred in the last 24 hours
-
+#
 #
 #@Test
 #Scenario: TC009_Verify the failed deployments that occurred in the last 7 days
@@ -86,7 +86,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify total number of failed deployments that occurred in the last 7 days
-
+#
 #@Test
 #Scenario: TC010_Verify the deleted deployments that occurred in the last last 24 hours
 #Given User launch application in chrome browser
@@ -94,7 +94,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify total number of deleted deployments that occurred in the last 24 hours
-
+#
 #@Test
 #Scenario: TC011_Verify the deleted deployments that occurred in the last 7 days
 #Given User launch application in chrome browser
@@ -104,17 +104,17 @@ Feature: DASHBOARD
 #Then verify total number of deleted deployments that occurred in the last 7 days
 
 
-#@Test    
-#Scenario: TC012_Redirect to Total Edge Group page when clicking on the image of Total Edge Groups
-#Given User launch application in chrome browser
-#Then click on login button on home page
-#When user enters credentials and click on login button
-#Given the user on the dashboard page
-#When the user clicks on the "Total EDGE Groups" image
-#Then the user should be redirected to the Edge Group List page
-#And verify the page should display both Active and Inactive status
-#
-#
+@Test    
+Scenario: TC012_Redirect to Total Edge Group page when clicking on the image of Total Edge Groups
+Given User launch application in chrome browser
+Then click on login button on home page
+When user enters credentials and click on login button
+Given the user on the dashboard page
+When the user clicks on the "Total EDGE Groups" image
+Then the user should be redirected to the Edge Group List page
+And verify the page should display both Active and Inactive status
+
+
 #@Test
 #Scenario: TC013_Redirect to Total Edge Devices page when clicking on the image of Total Edge Devices
 #Given User launch application in chrome browser
@@ -141,8 +141,8 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should be redirected to the Active Repositories List page when user click on the image of Active Repositories groups
-
-
+#
+#
 #@Test    
 #Scenario: TC016_Redirect to Active Application page when clicking on the image of Active Application
 #Given User launch application in chrome browser
@@ -167,7 +167,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should be redirected to the Active Edge groups
-
+#
 #@Test    
 #Scenario: TC019_Redirect to Active Application page when clicking on the image of Active Edge Devices
 #Given User launch application in chrome browser
@@ -175,7 +175,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should be redirected to the Active Edge Devices
-
+#
 #
 #@Test    
 #Scenario: TC020_Redirect to Total Edge Group page when clicking on the number of Edge Groups and Verify the total number of EDGE groups
@@ -184,7 +184,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should see the total EDGE groups count
-
+#
 #
 #@Test    
 #Scenario: TC021_Verify the total number of EDGE Devices
@@ -193,7 +193,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should see the total EDGE Devices count
-
+#
 #
 #@Test    
 #Scenario: TC022_Verify the total number of Active App Groups
@@ -202,7 +202,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should see the Active App Groups
-
+#
 #@Test    
 #Scenario: TC023_Verify the total number of Active Repositories
 #Given User launch application in chrome browser
@@ -229,8 +229,8 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should see the Active Edge Devices
-
-
+#
+#
 #@Test    
 #Scenario: TC026_Verify the total number of Active Applications
 #Given User launch application in chrome browser
@@ -238,7 +238,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should see the Active Applications
-
+#
 #@Test    
 #Scenario: TC027_Verify the total number of Active Volumes
 #Given User launch application in chrome browser
@@ -246,7 +246,7 @@ Feature: DASHBOARD
 #When user enters credentials and click on login button
 #Given the user on the dashboard page
 #Then verify user should see the Active Active Volumes
-
+#
 #@Test    
 #Scenario: TC028_Verify colours on deployment Report table
 #Given User launch application in chrome browser
@@ -258,8 +258,8 @@ Feature: DASHBOARD
 #Then verify the "Successful" column should have "green" color
 #Then verify the "Failed" column should have "red" color
 #Then verify the "Deleted" column should have "brown" color
-
-
+#
+#
 #@Test 
 #Scenario: TC029_Deployment Report table should be printed on the console
 #Given User launch application in chrome browser
@@ -283,6 +283,5 @@ Then click on login button on home page
 When user enters credentials and click on login button
 Given the user on the dashboard page
 Then verify the "Will Expire" column should have "red" color
-
 
     

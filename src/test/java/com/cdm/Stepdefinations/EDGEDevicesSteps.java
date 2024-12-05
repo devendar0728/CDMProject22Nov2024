@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.cdm.pages.AppgroupnewlistPage;
+import com.cdm.pages.CalenderPage;
 import com.cdm.pages.EdgeDeviceAdd;
 import com.cdm.pages.EdgeDeviceEdit;
 import com.cdm.pages.EdgeDevicesPage;
@@ -3033,7 +3034,7 @@ public class EDGEDevicesSteps extends BaseTest {
 		egc.sendvalueAppName(alldata.get(vTCName).get("AppnameSearchconfig").toString());
 
 		egc.backDropShowing_Div_Click();
-		
+
 		Thread.sleep(3000);
 		egc.selectCheckboxesForApplications(alldata.get(vTCName).get("checkApp").toString());
 		Thread.sleep(3000);
@@ -3051,10 +3052,9 @@ public class EDGEDevicesSteps extends BaseTest {
 		egc.addconfigurationFileButton();
 	}
 
-
 	@Then("the user clicks on the Choose File option from the popup for ConfiguringApps")
 	public void the_user_clicks_on_the_choose_file_option_from_the_popup_for_configuring_apps() {
-    
+
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
 		File uploadFile = new File(alldata.get(vTCName).get("UploadFilePathForConfig").toString());
 		WebElement fileInput = driver.findElement(By.xpath("//input[@type='file']"));
@@ -3071,30 +3071,28 @@ public class EDGEDevicesSteps extends BaseTest {
 	@Then("click on save button to upload configuration file")
 	public void click_on_save_button_to_upload_configuration_file() {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
-egc.saveConfigFile();
-
-
+		egc.saveConfigFile();
 
 	}
+
 	@Then("user should see a {string} message on application configuration page")
-	public void user_should_see_a_message_on_application_configuration_page(String expectedmessage) throws InterruptedException {
+	public void user_should_see_a_message_on_application_configuration_page(String expectedmessage)
+			throws InterruptedException {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
-Thread.sleep(3000);
+		Thread.sleep(3000);
 		Object toasterMessageObj = alldata.get(vTCName).get("toastermessageForBulkAppConfig");
 		if (toasterMessageObj == null) {
-		    throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
+			throw new IllegalArgumentException("No toaster message found for test case: " + vTCName);
 		}
 		String expectedMessage = toasterMessageObj.toString().trim();
- Thread.sleep(2000);
-		
+		Thread.sleep(2000);
+
 		// Get the actual message from the page
 		String actualMessage = egc.getConfirmationMessage();
 
 		// Validate the expected and actual messages
 		Assert.assertEquals("Confirmation message did not match", expectedMessage, actualMessage);
 	}
-
-
 
 	@Then("verify tooltips on stepper three\\(application)")
 	public void verify_tooltips_on_stepper_three_application() {
@@ -3136,11 +3134,13 @@ Thread.sleep(3000);
 		String value = alldata.get(vTCName).get("ItemsPerPage").toString();
 		edp.SelectPageMatOption(value);
 		int rowPerPage = Integer.parseInt(value);
-		//Assert.assertTrue("Row count match for last page", edp.LastPageClickAndCount(rowPerPage));
+		// Assert.assertTrue("Row count match for last page",
+		// edp.LastPageClickAndCount(rowPerPage));
 
-		//Assert.assertTrue("Row count match for last page", edp.nextPageClickAndCountOnLastPage(rowPerPage));
+		// Assert.assertTrue("Row count match for last page",
+		// edp.nextPageClickAndCountOnLastPage(rowPerPage));
 	}
-	
+
 	@Then("verify search functionality on config App and proxy App")
 	public void verify_search_functionality_on_config_app_and_proxy_app() throws InterruptedException {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
@@ -3151,15 +3151,17 @@ Thread.sleep(3000);
 		egc.searchProxyApp();
 		egc.sendvalueProxyAppName(alldata.get(vTCName).get("ProxyApp").toString());
 		egc.backDropShowing_Div_Click();
-		
+
 	}
 
 	@Then("click on icon of Bulk Application configuration which is placed at top corner of the page")
-	public void click_on_icon_of_bulk_application_configuration_which_is_placed_at_top_corner_of_the_page() throws InterruptedException {
+	public void click_on_icon_of_bulk_application_configuration_which_is_placed_at_top_corner_of_the_page()
+			throws InterruptedException {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
 		egc.bulkApplicationConfigurationIcon();
 		Thread.sleep(2000);
 	}
+
 	@Then("select App group and click on Next button")
 	public void select_app_group_and_click_on_next_button() throws InterruptedException {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
@@ -3171,6 +3173,7 @@ Thread.sleep(3000);
 		egc.nextButtonOne();
 		Thread.sleep(2000);
 	}
+
 	@Then("select all the Edge Device and click on Next button")
 	public void select_all_the_edge_device_and_click_on_next_button() throws InterruptedException {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
@@ -3178,6 +3181,7 @@ Thread.sleep(3000);
 		egc.nextButtonTwo();
 		Thread.sleep(3000);
 	}
+
 	@Then("select application which user want to proceed for configuration")
 	public void select_application_which_user_want_to_proceed_for_configuration() throws InterruptedException {
 		Edgegroupconfiguration egc = new Edgegroupconfiguration(driver, logger);
@@ -3189,6 +3193,108 @@ Thread.sleep(3000);
 		egc.nextButtonThree();
 		Thread.sleep(3000);
 	}
+
+
+	@Then("click on EDGE Device Logs tab")
+	public void click_on_edge_device_logs_tab() {
+		EdgeDevicesPage edp = new EdgeDevicesPage(driver, logger);
+		edp.edgeDeviceLogsTab();
+	}
+
+	@Then("verify search functionality of all column placed on EDGE Device logs")
+	public void verify_search_functionality_of_all_column_placed_on_edge_device_logs() throws InterruptedException {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.TimeStampThreeDot();
+		Thread.sleep(2000);
+		CalenderPage cal = new CalenderPage(driver, logger);
+		edep.calenderIcon();
+		Thread.sleep(2000);
+		String year = alldata.get(vTCName).get("TimeStampYear").toString();
+		String month = alldata.get(vTCName).get("TimeStampMonth").toString();
+		Thread.sleep(3000);
+		String day = alldata.get(vTCName).get("TimeStampFromDate").toString();
+		String day2 = alldata.get(vTCName).get("TimeStampToDate").toString();
+		cal.SelectDDDashMMDashYYYDay(year, month, day);
+		Thread.sleep(3000);
+		cal.SelectDirectDDDashMMDashYYYDay(year, month, day2);
+		Thread.sleep(2000);
+		edep.applybuttoncalender();
+		
+		Thread.sleep(2000);
+		edep.TimeStampThreeDot();
+		edep.outerlayerclick();
+		edep.severity();
+		edep.sendTimeSeverity(alldata.get(vTCName).get("SeverityInput").toString());
+		edep.outerlayerclick();
+		Thread.sleep(2000);
+		edep.source();
+		edep.sourceValue(alldata.get(vTCName).get("sourcevalue").toString());
+		edep.outerlayerclick();
+		Thread.sleep(2000);
+		edep.message();
+		edep.sendMessage(alldata.get(vTCName).get("sendMessagevalue").toString());
+		edep.outerlayerclick();
+		Thread.sleep(2000);
+
+	}
+	@Then("click on configurations tab")
+	public void click_on_configurations_tab() throws InterruptedException {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.configurationsTab();
+		Thread.sleep(5000);
+	}
+	@Then("verify view response body functionality")
+	public void verify_view_response_body_functionality() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.viewResponseBody();
+	}
+
+	@Then("verify sorting on TimeStamp")
+	public void verify_sorting_on_time_stamp() throws InterruptedException {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingOnTimeStamp();
+	}
+
+	@Then("verify sorting on severity")
+	public void verify_sorting_on_severity() throws InterruptedException {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingOnSeverity();
+	}
+
+	@Then("verify sorting on source")
+	public void verify_sorting_on_source() throws InterruptedException {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingOnSource();
+	}
+
+	@Then("verify sorting on message")
+	public void verify_sorting_on_message() throws InterruptedException {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingOnMessage();
+	}
+	
+	@Then("verify sorting on EDGEName")
+	public void verify_sorting_on_edge_name() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingonEdgeName();
+	}
+	
+	@Then("verify sorting on AppName")
+	public void verify_sorting_on_app_name() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingonAppName();
+	}
+	@Then("verify sorting on ConfigName")
+	public void verify_sorting_on_config_name() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingonConfigName();
+	}
+	@Then("verify sorting on LastUpdated")
+	public void verify_sorting_on_last_updated() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.sortingonLastUpdated();
+	}
+
 
 
 
