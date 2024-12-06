@@ -37,8 +37,6 @@ public class EdgeDevicesPage extends CommonActions {
 	@FindBy(css = "//input[@value='1']")
 	WebElement requiredFields;
 
-
-
 	@FindBy(xpath = "//tbody/tr")
 	List<WebElement> gridRows;
 
@@ -742,12 +740,12 @@ public class EdgeDevicesPage extends CommonActions {
 	public void status() {
 		wait(status, logger);
 		clickElement(status, "");
-//		status.click();
+
 	}
 
 	public void saveEdgeDeviceButton() {
 		clickElement(saveEdgeDeviceButton, "");
-		// saveEdgeDeviceButton.click();
+		
 
 	}
 

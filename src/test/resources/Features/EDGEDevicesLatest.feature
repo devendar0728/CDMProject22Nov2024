@@ -2,7 +2,7 @@
 Feature: EDGEDEVICES
 #
 #@Test
-#Scenario: TC001_Verify Add New Edge Device page
+#Scenario: TC001_Verify labels on Add New Edge Device page
 #Given User launch application in chrome browser
 #Then click on login button on home page
 #When user enters credentials and click on login button
@@ -812,19 +812,20 @@ Feature: EDGEDEVICES
 #Then verify sorting on source
 #Then verify sorting on message
 #
-@Test
-Scenario: TC064_Verification of sorting on configurations tab when modifying an EDGE device
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-Then Click on EDGE Device module from side menu bar
-Then search Edge Name from existing Edge device
-Then click on configurations tab
-Then verify sorting on EDGEName
-Then verify sorting on AppName
-Then verify sorting on ConfigName
-Then verify sorting on TimeStamp
-Then verify sorting on LastUpdated
+#@Test
+#Scenario: TC064_Verification of sorting on configurations tab when modifying an EDGE device
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on EDGE Device module from side menu bar
+#Then search Edge Name from existing Edge device
+#Then click on configurations tab
+#Then click on History view button
+#Then verify sorting on EDGEName
+#Then verify sorting on AppName
+#Then verify sorting on ConfigName
+#Then verify sorting on TimeStamp
+#Then verify sorting on LastUpdated
 
 
 #@Test
@@ -833,37 +834,39 @@ Then verify sorting on LastUpdated
 #Then click on login button on home page
 #When user enters credentials and click on login button
 #Then Click on EDGE Device module from side menu bar
-#And After landing on EDGE Device List screen
 #Then search Edge Name from existing Edge device
 #Then click on configurations tab
+#Then click on History view button
+#Then scroll horizontal
 #Then verify view response body functionality
-#Then verify title on the poup of view response body
+#Then verify "title" on the poup of view response body
 
-
-#Scenario: TC066_Verification of view response body under configurations tab when modifying an EDGE device
+#
+#Scenario: TC066_Verification of downloading file under configurations tab when modifying an EDGE device
 #Given User launch application in chrome browser
 #Then click on login button on home page
 #When user enters credentials and click on login button
 #Then Click on EDGE Device module from side menu bar
-#And After landing on EDGE Device List screen
-#Then search Edge Name from existing Edge device and click on Edit button from the action column
+#Then search Edge Name from existing Edge device
 #Then click on configurations tab
+#Then click on History view button
+#Then scroll horizontal
 #Then click on download button under configurations tab when modifying an EDGE device
 #Then verify user see download successful message and file should get downloaded for configurations
 #
 #
-#Scenario: TC067_Verification of Add new Environmental variable under configurations tab when modifying an EDGE device
-#Given User launch application in chrome browser
-#Then click on login button on home page
-#When user enters credentials and click on login button
-#Then Click on EDGE Device module from side menu bar
-#And After landing on EDGE Device List screen
-#Then search Edge Name from existing Edge device and click on Edit button from the action column
-#Then click on Environmental variable tab
-#Then Click on Add new button
-#Then Enter details for Config Name and Config Value
-#Then Click on save button for environmental variable
-#Then verify user should see a message saying "Configuration saved"
+Scenario: TC067_Verification of Add new Environmental variable under configurations tab when modifying an EDGE device
+Given User launch application in chrome browser
+Then click on login button on home page
+When user enters credentials and click on login button
+Then Click on EDGE Device module from side menu bar
+And After landing on EDGE Device List screen
+Then search Edge Name from existing Edge device
+Then click on Environmental variable tab
+Then Click on Add new button
+Then Enter details for Config Name and Config Value
+Then Click on save button for environmental variable
+Then verify user should see a message saying "Configuration saved"
 #
 #
 #Scenario: TC068_Verification of Environmental variable delete Functionality

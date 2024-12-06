@@ -6,16 +6,18 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.cdm.pages.AppgroupnewlistPage;
 import com.cdm.pages.CalenderPage;
 import com.cdm.pages.EdgeDeviceAdd;
 import com.cdm.pages.EdgeDeviceEdit;
@@ -2580,17 +2582,7 @@ public class EDGEDevicesSteps extends BaseTest {
 		edp.ToasterMessageShouldBeDisplayed(alldata.get(vTCName).get("toastermessage").toString());
 	}
 
-	@Then("search Edge Name from existing Edge device")
-	public void search_edge_name_from_existing_edge_device_and_click_on_edit_button_from_the_action_column()
-			throws InterruptedException {
-		EdgeDevicesPage edp = new EdgeDevicesPage(driver, logger);
-		edp.edgeNameSearch_Button();
-		edp.sendValueSearchIconByEdgeName(alldata.get(vTCName).get("EDGENameSearch").toString());
-		edp.backDropShowing_Div_Click();
-		Thread.sleep(2000);
-		edp.clickEditButton();
 
-	}
 
 	@Then("search Edge Name from existing Edge device to deply app")
 	public void search_edge_name_from_existing_edge_device_to_deply_app() throws InterruptedException {
@@ -3274,26 +3266,125 @@ public class EDGEDevicesSteps extends BaseTest {
 	}
 	
 	@Then("verify sorting on EDGEName")
-	public void verify_sorting_on_edge_name() {
+	public void verify_sorting_on_edge_name() throws InterruptedException {
 		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
 		edep.sortingonEdgeName();
+		edep.outerlayerclick();
+		Thread.sleep(2000);
 	}
 	
 	@Then("verify sorting on AppName")
-	public void verify_sorting_on_app_name() {
+	public void verify_sorting_on_app_name() throws InterruptedException {
 		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
 		edep.sortingonAppName();
+		edep.outerlayerclick();
+		Thread.sleep(2000);
 	}
+	@Then("click on History view button")
+	public void click_on_history_view_button() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.historyViewButton();
+	}
+
+	@Then("verify {string} on the poup of view response body")
+	public void verify_on_the_poup_of_view_response_body(String expectedTitle) throws InterruptedException {
+	EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+	
+	Thread.sleep(2000);
+	
+	String mainWindowHandle = driver.getWindowHandle(); // Save the main window handle
+
+	// Wait for the popup to open
+	new WebDriverWait(driver, Duration.ofSeconds(20))
+	        .until(driver -> driver.getWindowHandles().size() >= 1);
+
+	// Get all window handles
+	Set<String> allWindowHandles = driver.getWindowHandles();
+
+	// Switch to the popup window
+	for (String handle : allWindowHandles) {
+	    if (!handle.equals(mainWindowHandle)) {
+	        driver.switchTo().window(handle); // Switch focus to the popup
+	        break;
+	    }
+	}
+
+	// Wait for the popup title to match the expected title
+	new WebDriverWait(driver, Duration.ofSeconds(10))
+	        .until(ExpectedConditions.titleIs("Configuration Response Body"));
+
+	// Get the title of the popup window
+	String popupTitle = driver.getTitle();
+	System.out.println("Popup Title: " + popupTitle);
+
+	// Assert the popup title
+	assert popupTitle.equals("Configuration Response Body") : "Popup title does not match the expected value.";
+
+	// Close the popup window
+	driver.close();
+
+	// Switch back to the main window
+	driver.switchTo().window(mainWindowHandle);
+
+    
+}
+
+
+
+
+
 	@Then("verify sorting on ConfigName")
-	public void verify_sorting_on_config_name() {
+	public void verify_sorting_on_config_name() throws InterruptedException {
 		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
 		edep.sortingonConfigName();
+		edep.outerlayerclick();
+		Thread.sleep(2000);
 	}
 	@Then("verify sorting on LastUpdated")
-	public void verify_sorting_on_last_updated() {
+	public void verify_sorting_on_last_updated() throws InterruptedException {
 		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
 		edep.sortingonLastUpdated();
+		edep.outerlayerclick();
+		Thread.sleep(2000);
 	}
+	@Then("click on download button under configurations tab when modifying an EDGE device")
+	public void click_on_download_button_under_configurations_tab_when_modifying_an_edge_device() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		edep.downloadButton();
+	}
+	@Then("verify user see download successful message and file should get downloaded for configurations")
+	public void verify_user_see_download_successful_message_and_file_should_get_downloaded_for_configurations() {
+		EdgeDeviceEdit edep = new EdgeDeviceEdit(driver, logger);
+		WebElement downloadMessage = edep.downloadPopupmessageText();
+		Assert.assertTrue("Bulk upload popup is not displayed", downloadMessage.isDisplayed());
+	}
+
+	@Then("search Edge Name from existing Edge device and click on Edit button from the action column")
+	public void search_edge_name_from_existing_edge_device_and_click_on_edit_button_from_the_action_column() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("click on Environmental variable tab")
+	public void click_on_environmental_variable_tab() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Click on Add new button")
+	public void click_on_add_new_button() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Enter details for Config Name and Config Value")
+	public void enter_details_for_config_name_and_config_value() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+	@Then("Click on save button for environmental variable")
+	public void click_on_save_button_for_environmental_variable() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
 
 
 
