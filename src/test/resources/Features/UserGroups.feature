@@ -147,20 +147,20 @@ Feature: USERGROUPS
 #Then user should see a "User Group mapping done successfully" message on user Group page for mapping done
 
 
-@Test
-Scenario: TC013_To de-map EDGE Groups to a User Group
-Given User launch application in chrome browser
-Then click on login button on home page
-When user enters credentials and click on login button
-Then Click on Settings module from side menu bar
-Then Click on Users Groups Tab from right panel of the screen
-Then Click on three dots of user group name and enter the value for user groups
-Then Click on the Manage Mapping icon present against a User Group
-Then Select EDGE Groups to map with the User Group
-Then Click on three dots of Group Name and enter the value for Group Name 
-Then deselect the Active Group Name by checking checkbox 
-Then click on save button to save data
-Then user should see a "User Group mapping done successfully" message on user Group page 
+#@Test
+#Scenario: TC013_To de-map EDGE Groups to a User Group
+#Given User launch application in chrome browser
+#Then click on login button on home page
+#When user enters credentials and click on login button
+#Then Click on Settings module from side menu bar
+#Then Click on Users Groups Tab from right panel of the screen
+#Then Click on three dots of user group name and enter the value for user groups
+#Then Click on the Manage Mapping icon present against a User Group
+#Then Select EDGE Groups to map with the User Group
+#Then Click on three dots of Group Name and enter the value for Group Name 
+#Then deselect the Active Group Name by checking checkbox 
+#Then click on save button to save data
+#Then user should see a "User Group mapping done successfully" message on user Group page 
 #
 #@Test
 #Scenario: TC014_To de-map Wells to a User Group

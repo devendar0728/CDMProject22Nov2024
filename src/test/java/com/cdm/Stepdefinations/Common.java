@@ -50,8 +50,8 @@ public class Common extends BaseTest {
 	public void user_launch_application_in_chrome_browser() {
 
 		driver.get(prop.getProperty("AppUrl") + alldata.get(vTCName).get("Url"));
-		HomePage home = new HomePage(driver, logger); // object creation()
-//		home.loginbuttonHomeFun();
+		//HomePage home = new HomePage(driver, logger);
+
 
 	}
 

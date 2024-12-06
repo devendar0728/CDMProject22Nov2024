@@ -723,7 +723,7 @@ public class EdgeDeviceEdit extends CommonActions {
 		
 	}
 
-	@FindBy(xpath="//ul/li[5]")
+	@FindBy(xpath="//*[@id='matTable']/table/tbody/tr/td[7]/div/img[1]")
 	WebElement viewResponseBodyElement;
 	public void viewResponseBody() {
 		
@@ -731,22 +731,169 @@ public class EdgeDeviceEdit extends CommonActions {
 		
 	}
 
-	public void sortingonEdgeName() {
+	public void sortingonEdgeName() throws InterruptedException {
+		
+		driver.findElement(By.xpath("//thead/tr[1]/th[1]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		
+try {
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingonConfigName() throws InterruptedException {
+		
+		driver.findElement(By.xpath("//thead/tr[1]/th[3]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[3]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+	}
+
+	public void sortingonLastUpdated() throws InterruptedException {
+		driver.findElement(By.xpath("//thead/tr[1]/th[6]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[6]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+		
+	}
+
+	public void sortingonAppName() throws InterruptedException {
+		driver.findElement(By.xpath("//thead/tr[1]/th[2]/div[1]/span[1]/div[1]/div[2]/div[2]/div[1]")).click();
+		Thread.sleep(2000);
+		try {
+			
+			// Fetch column data before sorting
+			List<WebElement> columns = driver.findElements(By.xpath("//table/tbody/tr/td[2]"));
+			List<String> beforeSort = new ArrayList<String>();
+			List<String> afterSort = new ArrayList<String>();
+			for (int i = 0; i < columns.size(); i++) {
+				beforeSort.add(columns.get(i).getText().trim());
+				afterSort.add(columns.get(i).getText().trim());
+			}
+
+			afterSort.sort((a, b) -> a.compareTo(b));
+
+			for (int i = 0; i < afterSort.size(); i++) {
+				Assert.assertEquals("Column data is not sorted in ascending order", afterSort.get(i),
+						beforeSort.get(i));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Test failed due to exception: " + e.getMessage());
+		}
+
+		
+	}
+@FindBy(xpath= "//*[@id='nav-application']/div/app-config-deploy-history/div/div[1]/div/img[2]")
+	WebElement historyviewButtonElement;
+	public void historyViewButton() {
+		
+		clickElement(historyviewButtonElement, "Clicking on history view button");
+		
+	}
+	@FindBy(xpath= "//h3[@class='profileheading']")
+	WebElement headerTitlePopupElement;
+	public WebElement headerTitlepoup() {
+		headerTitlePopupElement.getText().trim();
+		
+		return headerTitlePopupElement;
 		
 		
 	}
 
-	public void sortingonConfigName() {
+	@FindBy(xpath= "//*[@id='matTable']/table/tbody/tr/td[7]/div/img[2]")
+	WebElement downloadButtonElement;
+	public void downloadButton() {
+		
+		clickElement(downloadButtonElement, "Clicking on download button");
+		
+	}
+	@FindBy(xpath = "//div[@id='toast-container']")
+	WebElement bulkUploadsuccessmessage;
+
+
+	public WebElement downloadPopupmessageText() {
+		
+		return bulkUploadsuccessmessage;
+	}
+	
+	@FindBy(xpath="//div[@class='devicepagefooter2']")
+	WebElement environmentalVariableTabElement;
+
+	public void environmentalVariableTab() {
+		clickElement(environmentalVariableTabElement, "Click on Environmental Tab element");
 		
 		
 	}
 
-	public void sortingonLastUpdated() {
-		
+	public void environmentalAdd() {
+		// TODO Auto-generated method stub
 		
 	}
 
-	public void sortingonAppName() {
+	public void configAddTopButton() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -25,8 +25,7 @@ Feature: HARDWARE
 #Then Click on Settings module from side menu bar
 #Then Click on Hardware tab from right panel of the screen
 #Then search for all fields for hardware
-#
-#
+
 #@Test
 #
 #Scenario: TC04_Verification of Expand button functionality in the Hardware List screen by Super admin
